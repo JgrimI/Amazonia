@@ -84,13 +84,13 @@ class UserDAO implements DAO
 	}
 	/**
 	 * Crea una nuevo user en la base de datos
-	 * @param  user $newAdmin
+	 * @param  user $newUser
 	 * @return void
 	 */
-	public function create ($newAdmin){
-		$password = password_hash($newAdmin->getPassword(), PASSWORD_BCRYPT);
+	public function create ($newUser){
+		$password = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
 
-		$query="INSERT INTO user VALUES(0,'".$newAdmin->getName()."','".$password."','".$newAdmin->getStatus()."','".$newAdmin->getEmail()."','".$newAdmin->getPermits()."');";
+		$query="INSERT INTO user VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."','".$newUser->getPermits()."');";
 		mysqli_query($this->connection, $query);
 
 	}
