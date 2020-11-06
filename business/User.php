@@ -2,7 +2,7 @@
 /*
 clase que representa a la entidad Usuario
 */
-abstract class User{
+class User{
 
     //-------------------------
     //Atributos

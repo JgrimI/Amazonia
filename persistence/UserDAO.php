@@ -68,7 +68,7 @@ class UserDAO implements DAO
 	 * @return [user]         user encontrado
 	 */
 	public function consultByMail($email){
-		$query="SELECT * FROM user WHERE email_user=".$email;
+		$query="SELECT * FROM user WHERE email_user='".$email."'";
 		if(!$result=mysqli_query($this->connection,$query))die();
 		$row=mysqli_fetch_array($result);
 		$user = new User();
@@ -88,7 +88,7 @@ class UserDAO implements DAO
 	 * @return void
 	 */
 	public function create ($newAdmin){
-		$password = password_hash($newAdmin->getContrasena(), PASSWORD_BCRYPT);
+		$password = password_hash($newAdmin->getPassword(), PASSWORD_BCRYPT);
 
 		$query="INSERT INTO user VALUES(0,'".$newAdmin->getName()."','".$password."','".$newAdmin->getStatus()."','".$newAdmin->getEmail()."','".$newAdmin->getPermits()."');";
 		mysqli_query($this->connection, $query);

@@ -35,7 +35,6 @@
         * @return [useristrador] useristrador encontrado
         */
         public static function consultByMail($email){
-
             $userDAO=UserDAO::getUserDAO(self::$connection);
             $user=$userDAO->consultByMail($email);
             return $user;
@@ -56,12 +55,11 @@
             $userDAO = userDAO::getUserDAO(self::$connection);
             $user=$userDAO->consultByMail($email);
             $pass=$user->getPassword();
-            $arrayRta[]=$user;
 
-            if (password_verify($password, $password)) {
-                return $arrayRta;
+            if (password_verify($password,$pass)) {
+                return $user;
             } else {
-                return false;
+                return '';
             }
         }
         /**
@@ -90,10 +88,10 @@
         /**
          * Cambia la conexión
          */
-        public static function setConnection($connection)
-            {
-                self::$connection = $connection;
-            }
+        public static function setConnectionBD($connection)
+        {
+            self::$connection = $connection;
+        }
     }
 
 ?>
