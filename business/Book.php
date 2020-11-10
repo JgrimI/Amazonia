@@ -2,7 +2,9 @@
 /*
 clase que representa a la entidad Usuario
 */
-class Book{
+require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/business/Document.php';
+
+class Book extends Document{
 
     //-------------------------
     //Atributos

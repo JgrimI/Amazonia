@@ -2,7 +2,8 @@
 /*
 clase que representa a la entidad Usuario
 */
-class ScienceArticle{
+require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/business/Document.php';
+class ScienceArticle extends Document{
 
     //-------------------------
     //Atributos
