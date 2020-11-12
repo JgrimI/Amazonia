@@ -18,7 +18,7 @@
         <div class="breadcrumb">
             <ul>
                 <li><a href="?menu=home">Home</a></li>
-                <li><a href="?menu=home">Books & Media</a></li>
+                <li><a href="?menu=books">Books & Media</a></li>
                 <li>Register New Book</li>
             </ul>
         </div>
