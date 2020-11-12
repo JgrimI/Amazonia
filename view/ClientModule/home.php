@@ -1,3 +1,11 @@
+<style>
+    .navbar-default .navbar-nav>.home>a,
+    .navbar-default .navbar-nav>.home>a:hover,
+    .navbar-default .navbar-nav>.home>a:focus {
+        color: #ff7236;
+        background-color: transparent;
+    }
+</style>
 <div data-ride="carousel" class="carousel slide" id="home-v1-header-carousel">
 
     <!-- Carousel slides -->
