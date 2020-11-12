@@ -27,12 +27,6 @@ class User{
     Representa el nombre del Usuario
     */
     private $name;
-    /*
-    Representa el nombre del Usuario
-    */
-    private $permits;
-
-
     //----------------------------
     //Constructor
     //----------------------------
@@ -111,20 +105,6 @@ class User{
     */
     public function setName($name){
         $this->name = $name;
-    }
-    /**
-     * Método para obtener  el name del Usuario
-     * @return [String] name del Usuario
-     */
-    public function getPermits(){
-        return $this->permits;
-    }
-    /**
-     * Método para cambiar  el Name del Usuario
-    * @param [String] Name del Usuario
-    */
-    public function setPermits($permits){
-        $this->permits = $permits;
     }
 }
 ?>

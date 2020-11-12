@@ -20,7 +20,14 @@
 
     <!-- Stylesheet -->
     <link href="style.css" rel="stylesheet" type="text/css" />
-
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="dropify/dropify.min.js"></script>
+    <link rel="stylesheet" href="dropify/dropify.min.css">
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,6 +45,13 @@
         ?>
 
     </header>
+    <style>
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #1cc88a;
+            color: #fff;
+        }
+        
+    </style>
     <!-- End: Header Section -->
 
     <!-- Start: Slider Section -->
@@ -58,54 +72,6 @@
         </footer>
         <!-- End: Footer -->
     </div>
-
-    <!-- jQuery Latest Version 1.x -->
-    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-
-    <!-- jQuery UI -->
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-
-    <!-- jQuery Easing -->
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-
-    <!-- Bootstrap -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-    <!-- Harvey - State manager for media queries -->
-    <script type="text/javascript" src="js/harvey.min.js"></script>
-
-    <!-- Waypoints - Load Elements on View -->
-    <script type="text/javascript" src="js/waypoints.min.js"></script>
-
-    <!-- Facts Counter -->
-    <script type="text/javascript" src="js/facts.counter.min.js"></script>
-
-    <!-- MixItUp - Category Filter -->
-    <script type="text/javascript" src="js/mixitup.min.js"></script>
-
-    <!-- Owl Carousel -->
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-
-    <!-- Accordion -->
-    <script type="text/javascript" src="js/accordion.min.js"></script>
-
-    <!-- Responsive Tabs -->
-    <script type="text/javascript" src="js/responsive.tabs.min.js"></script>
-
-    <!-- Responsive Table -->
-    <script type="text/javascript" src="js/responsive.table.min.js"></script>
-
-    <!-- Masonry -->
-    <script type="text/javascript" src="js/masonry.min.js"></script>
-
-    <!-- Carousel Swipe -->
-    <script type="text/javascript" src="js/carousel.swipe.min.js"></script>
-
-    <!-- bxSlider -->
-    <script type="text/javascript" src="js/bxslider.min.js"></script>
-
-    <!-- Custom Scripts -->
-    <script type="text/javascript" src="js/main.js"></script>
 
 </body>
 

@@ -56,7 +56,6 @@ class UserDAO implements DAO
 		$user->setEmail($row['email_user']);
 		$user->setStatus($row['status_user']);
 		$user->setName($row['name_user']);
-		$user->setPermits($row['permits_user']);
 
 		return $user;
 
@@ -77,7 +76,6 @@ class UserDAO implements DAO
 		$user->setEmail($row['email_user']);
 		$user->setStatus($row['status_user']);
 		$user->setName($row['name_user']);
-		$user->setPermits($row['permits_user']);
 
 		return $user;
 
@@ -102,7 +100,7 @@ class UserDAO implements DAO
 	 */
 	public function modify ($user){
 		$password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
-		$query="UPDATE user SET name_user='".$user->getName()."', email_user ='".$user->getEmail()."', pass_user='".$password."', status_user='".$user->getStatus()."', permits_user='".$user->getPermits()."' WHERE cod_user= ".$user->getId();
+		$query="UPDATE user SET name_user='".$user->getName()."', email_user ='".$user->getEmail()."', pass_user='".$password."', status_user='".$user->getStatus()."' WHERE cod_user= ".$user->getId();
 		mysqli_query($this->connection,$query);
 	}
 
@@ -123,7 +121,6 @@ class UserDAO implements DAO
 			$user->setEmail($row["email_user"]);
 			$user->setPassword($row["pass_user"]);
 			$user->setStatus($row["status_user"]);
-			$user->setPermits($row["permits_user"]);
 
 			array_push($users,$user);
 		}

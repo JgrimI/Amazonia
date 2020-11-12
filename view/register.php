@@ -25,7 +25,6 @@ if($validUser->getId()!=''){
 	$user->setEmail($email);
 	$user->setPassword($password);
 	$user->setName($name);
-	$user->setPermits('read');
 	$user->setStatus('activo');
 	
 	ManageUser::createUser($user);
