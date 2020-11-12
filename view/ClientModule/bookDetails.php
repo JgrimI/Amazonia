@@ -1,3 +1,11 @@
+<?php
+require_once('../business/ManageUser.php');
+require_once('../business/ManageAdmin.php');
+require_once('../persistence/util/Connection.php');
+
+
+
+?>
 <style>
     .navbar-default .navbar-nav>.books>a,
     .navbar-default .navbar-nav>.books>a:hover,
@@ -74,6 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-7 col-md-6">
+                                
                                 <div class="post-center-content">
                                     <h2>The Great Gatsby</h2>
                                     <p><strong>Author:</strong> F. Scott Fitzgerald</p>

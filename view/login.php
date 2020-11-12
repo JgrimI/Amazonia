@@ -8,7 +8,7 @@
         </div>
         <div class="breadcrumb">
             <ul>
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li>Signin</li>
             </ul>
         </div>

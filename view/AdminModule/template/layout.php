@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+include_once('../persistence/util/Connection.php');
+if (!isset($_SESSION['redirect'])) {
+    header('Location: index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 

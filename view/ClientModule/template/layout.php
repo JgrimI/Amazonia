@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+include_once('../persistence/util/Connection.php');
+if (!isset($_SESSION['redirect'])) {
+    header('Location: index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -22,9 +30,6 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="dropify/dropify.min.js"></script>
     <link rel="stylesheet" href="dropify/dropify.min.css">
     
@@ -47,10 +52,12 @@
     </header>
     <style>
         .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #1cc88a;
+            background-color: #1cc88a!important;
             color: #fff;
         }
-        
+        .select-styled {
+         display: none;
+        }
     </style>
     <!-- End: Header Section -->
 
@@ -73,6 +80,31 @@
         <!-- End: Footer -->
     </div>
 
+
+    <!-- Facts Counter -->
+    <script type="text/javascript" src="js/facts.counter.min.js"></script>
+
+    <!-- MixItUp - Category Filter -->
+    <script type="text/javascript" src="js/mixitup.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- Harvey - State manager for media queries -->
+    <script type="text/javascript" src="js/harvey.min.js"></script>
+
+    <!-- Accordion -->
+    <script type="text/javascript" src="js/accordion.min.js"></script>
+
+    <!-- Owl Carousel -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="js/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
 </body>
 
 

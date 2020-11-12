@@ -10,6 +10,10 @@ abstract class Document{
     /*
     Representa la clave de acceso del Usuario
     */
+    protected $id;
+    /*
+    Representa la clave de acceso del Usuario
+    */
     protected $title;
     /*
     Representa la clave de acceso del Usuario
@@ -20,17 +24,9 @@ abstract class Document{
     */
     protected $ISBN;
     /*
-    Representa el status del Usuario: activo/inactivo
-    */
-    protected $monthPublished;
-    /*
     Representa el nombre del Usuario
     */
-    protected $dayPublished;
-    /*
-    Representa el nombre del Usuario
-    */
-    protected $yearPublished;
+    protected $datePublished;
         /*
     Representa el nombre del Usuario
     */
@@ -42,11 +38,11 @@ abstract class Document{
         /*
     Representa el nombre del Usuario
     */
-    protected $registry;
+    protected $url;
     /*
     Representa el nombre del Usuario
     */
-    protected $fileDoc;
+    protected $description;
     /*
     Representa el nombre del Usuario
     */
@@ -62,6 +58,20 @@ abstract class Document{
     */
     function __construct(){
 
+    }
+    /**
+    * Método para obtener la clave de acceso del Usuario
+    * @return [String] clave de acceso del Usuario
+    */
+    public function getId(){
+        return $this->id;
+    }
+    /**
+    * Método para cambiar la clave de acceso del Usuario
+    * @param [String] clave de acceso del Usuario
+    */
+    public function setId($id){
+        $this->id = $id;
     }
     /**
     * Método para obtener la clave de acceso del Usuario
@@ -106,46 +116,18 @@ abstract class Document{
         $this->ISBN = $ISBN;
     }
     /**
-     * Método para obtener el status del Usuario (1:Activo/0:Inactivo)
-     * @return [integer] status del Usuario
-     */
-    public function getMonthPublished(){
-        return $this->monthPublished;
-    }
-    /**
-     * Método para cambiar el status del Usuario 
-    * @param [integer] status del Usuario
-    */
-    public function setMonthPublished($monthPublished){
-        $this->monthPublished = $monthPublished;
-    }
-    /**
      * Método para obtener  el name del Usuario
      * @return [String] name del Usuario
      */
-    public function getDayPublished(){
-        return $this->dayPublished;
-    }
-    /**
-     * Método para cambiar  el Name del Usuario
-    * @param [String] Name del Usuario
-    */
-    public function setDayPublished($dayPublished){
-        $this->dayPublished = $dayPublished;
-    }
-    /**
-     * Método para obtener  el name del Usuario
-     * @return [String] name del Usuario
-     */
-    public function getYearPublished(){
+    public function getDatePublished(){
         return $this->yearPublished;
     }
     /**
      * Método para cambiar  el Name del Usuario
     * @param [String] Name del Usuario
     */
-    public function setYearPublished($yearPublished){
-        $this->yearPublished = $yearPublished;
+    public function setDatePublished($datePublished){
+        $this->datePublished = $datePublished;
     }
         /**
      * Método para obtener  el name del Usuario
@@ -179,31 +161,31 @@ abstract class Document{
      * Método para obtener  el name del Usuario
      * @return [String] name del Usuario
      */
-    public function getRegistry(){
-        return $this->registry;
+    public function getUrl(){
+        return $this->url;
     }
     /**
      * Método para cambiar  el Name del Usuario
     * @param [String] Name del Usuario
     */
-    public function setRegistry($registry){
-        $this->registry = $registry;
+    public function setUrl($url){
+        $this->url = $url;
     }
         /**
      * Método para obtener  el name del Usuario
      * @return [String] name del Usuario
      */
-    public function getFileDoc(){
-        return $this->fileDoc;
+    public function getDescription(){
+        return $this->description;
     }
     /**
      * Método para cambiar  el Name del Usuario
     * @param [String] Name del Usuario
     */
-    public function setFileDoc($fileDoc){
-        $this->fileDoc = $fileDoc;
-    }
-        /**
+    public function setDescription($description){
+        $this->description = $description;
+    } 
+    /**
      * Método para obtener  el name del Usuario
      * @return [String] name del Usuario
      */
