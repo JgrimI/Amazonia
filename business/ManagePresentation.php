@@ -34,7 +34,7 @@
          * @param presentation presentationistrador a ingresar
          * @return void
          */
-        public static function createPresentation($presentation){
+        public static function create($presentation){
             $presentationDAO=presentationDAO::getPresentationDAO(self::$connection);
             $presentationDAO->create($presentation);
 

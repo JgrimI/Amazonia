@@ -99,7 +99,7 @@ class ScienceArticleDAO implements DAO
 			$scienceArticle=new scienceArticle();
 			$scienceArticle->setId($row["id_book"]);
 			$scienceArticle->setTitle($row["title"]);
-			$scienceArticle->setSSN($row["isbn"]);
+			$scienceArticle->setSSN($row["ssn"]);
 			$scienceArticle->setDatePublished($row["datePublished"]);
 			$scienceArticle->setEditorial($row["editorial"]);
 			$scienceArticle->setAvailable($row["available"]);

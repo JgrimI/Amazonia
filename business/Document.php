@@ -120,7 +120,7 @@ abstract class Document{
      * @return [String] name del Usuario
      */
     public function getDatePublished(){
-        return $this->yearPublished;
+        return $this->datePublished;
     }
     /**
      * Método para cambiar  el Name del Usuario

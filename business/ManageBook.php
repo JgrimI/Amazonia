@@ -34,7 +34,7 @@
          * @param book bookistrador a ingresar
          * @return void
          */
-        public static function createBook($book){
+        public static function create($book){
             $bookDAO=bookDAO::getBookDAO(self::$connection);
             $bookDAO->create($book);
 

@@ -3,7 +3,7 @@
      * Importe de clases
      */
     require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/util/Connection.php';
-    require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/ScienceArticle.php';
+    require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/ScienceArticleDAO.php';
 
     class ManageScienceArticle{
 
@@ -34,8 +34,8 @@
          * @param scienceArticle bookistrador a ingresar
          * @return void
          */
-        public static function createScienceArticle($scienceArticle){
-            $scienceArticleDAO=scienceArticleDAO::getScienceArticleDAO(self::$connection);
+        public static function create($scienceArticle){
+            $scienceArticleDAO=ScienceArticleDAO::getScienceArticleDAO(self::$connection);
             $scienceArticleDAO->create($scienceArticle);
 
         }
@@ -45,7 +45,7 @@
          * @return scienceArticle[] Lista de todos los bookistradores de la base de datos
          */
         public  static function listAll(){
-            $scienceArticleDAO = scienceArticleDAO::getScienceArticleDAO(self::$connection);
+            $scienceArticleDAO = ScienceArticleDAO::getScienceArticleDAO(self::$connection);
             $articles=$scienceArticleDAO->listAll();
             return $articles;
         }
@@ -57,7 +57,7 @@
          * @return void
          */
         public static function modify($scienceArticle){
-            $scienceArticleDAO=scienceArticleDAO::getScienceArticleDAO(self::$connection);
+            $scienceArticleDAO=ScienceArticleDAO::getScienceArticleDAO(self::$connection);
             $scienceArticleDAO->modify($scienceArticle);
         }
 

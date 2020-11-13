@@ -1,6 +1,76 @@
 <?php
 if(isset($_POST['upload'])){
+    $document=$_POST['dc'];
+    require_once('../persistence/util/Connection.php');
+    require_once('util.php');
 
+    $con= new Connection;
+    $connection=$con->conectBD();
+    if($connection->connect_error){
+        die("Problema de conexión con la base de datos: ".$connection->connect_error);
+    }
+    $url='';
+    if($_FILES["logo"]["tmp_name"]){
+        $url=saveImage($_POST["title"],$_FILES["logo"]["tmp_name"]);
+    }
+    switch ($document) {
+        case 'book':
+            require_once('../business/ManageBook.php');
+            require_once('../business/Book.php');
+            ManageBook::setConnectionBD($connection);
+            $book=new Book();
+            $book->setId(0);
+            $book->setTitle($_POST["title"]);
+            $book->setIsbn($_POST["isbn"]);
+            $book->setDatePublished($_POST["date"]);
+            $book->setEditorial($_POST["editorial"]);
+            $book->setAvailable('N');
+            $book->setUrl($url);
+            $book->setAuthors($_POST["authors"]);
+            $book->setDescription($_POST["description"]);
+            $book->setIdUser(1);
+            $book->setNumPages($_POST["numPages"]);
+            ManageBook::create($book);
+            echo printMessage("Congratulations!!","Your book was uploaded to the platform, now it is waiting for an administrator to validate it","success");
+            break;
+        case 'sa':
+            require_once('../business/ManageScienceArticle.php');
+            require_once('../business/ScienceArticle.php');
+            ManageScienceArticle::setConnectionBD($connection);
+            $scienceArticle=new scienceArticle();
+			$scienceArticle->setId(0);
+			$scienceArticle->setTitle($_POST["title"]);
+			$scienceArticle->setSSN($_POST["ssn"]);
+			$scienceArticle->setDatePublished($_POST["date"]);
+			$scienceArticle->setEditorial($_POST["editorial"]);
+			$scienceArticle->setAvailable('N');
+			$scienceArticle->setUrl($url);
+			$scienceArticle->setAuthors($_POST["authors"]);
+			$scienceArticle->setDescription($_POST["description"]);
+            $scienceArticle->setIdUser(1);
+            ManageScienceArticle::create($scienceArticle);
+            echo printMessage("Congratulations!!","Your article was uploaded to the platform, now it is waiting for an administrator to validate it","success");
+            break;
+        case 'presentation':
+            require_once('../business/ManagePresentation.php');
+            require_once('../business/Presentation.php');
+            ManagePresentation::setConnectionBD($connection);
+            $presentation = new Presentation();
+            $presentation->setId(0);
+            $presentation->setTitle($_POST["title"]);
+            $presentation->setIsbn($_POST["isbn"]);
+            $presentation->setDatePublished($_POST["date"]);
+            $presentation->setEditorial($_POST["editorial"]);
+            $presentation->setAvailable('N');
+            $presentation->setUrl($url);
+            $presentation->setAuthors($_POST["authors"]);
+            $presentation->setDescription($_POST["description"]);
+            $presentation->setIdUser(1);
+            $presentation->setCongressName($_POST["congressName"]);
+            ManagePresentation::create($presentation);
+            echo printMessage("Congratulations!!","Your presentation was uploaded to the platform, now it is waiting for an administrator to validate it","success");
+            break;
+    }
 }
 ?>
 <style>
@@ -13,6 +83,9 @@ if(isset($_POST['upload'])){
     .select-styled {
          display: none;
         }
+    .select{
+        display: none;
+    }
 </style>
 <script>
     window.onload=function(){
@@ -22,43 +95,30 @@ if(isset($_POST['upload'])){
   function changer(val){
       var div=''
       if(val=='book'){
-          div='<p class="form-row form-row-first input-required">'+
-                '<label>'+
-                    '<span class="first-letter">Number of pages</span>'+
-                    '<span class="second-letter">*</span>'+
+          div='<label style="color:grey;">'+
+                    'Number of pages'+
                 '</label>'+
-                '<input type="text" id="numPages" name="numPages" class="input-text">'+
-            '</p>'+
-            '<p class="form-row form-row-first input-required">'+
-                '<label>'+
-                    '<span class="first-letter">ISBN</span>'+
-                    '<span class="second-letter">*</span>'+
+                '<input type="text" id="numPages" name="numPages" class="input-text" required>'+
+                '<label style="color:grey;">'+
+                    'ISBN'+
                 '</label>'+
-                '<input type="text" id="isbn" name="isbn" class="input-text">'+
+                '<input type="text" id="isbn" name="isbn" class="input-text" required>'+
             '</p>';
       }else if(val=='presentation'){
-          div='<p class="form-row form-row-first input-required">'+
-                '<label>'+
-                    '<span class="first-letter">Congress Name</span>'+
-                    '<span class="second-letter">*</span>'+
+          div='<label style="color:grey;">'+
+                    'Congress Name'+
                 '</label>'+
-                '<input type="text" id="congress" name="congress" class="input-text">'+
-            '</p>'+
-            '<p class="form-row form-row-first input-required">'+
-                '<label>'+
-                    '<span class="first-letter">ISBN</span>'+
-                    '<span class="second-letter">*</span>'+
+                '<input type="text" id="congressName" name="congressName" class="input-text" required>'+
+                '<label style="color:grey;">'+
+                    'ISBN'+
                 '</label>'+
-                '<input type="text" id="isbn" name="isbn" class="input-text">'+
+                '<input type="text" id="isbn" name="isbn" class="input-text" required>'+
             '</p>';
       }else if(val=='sa'){
-          div='<p class="form-row form-row-first input-required">'+
-                '<label>'+
-                    '<span class="first-letter">SSN</span>'+
-                    '<span class="second-letter">*</span>'+
+          div='<label style="color:grey;">'+
+                    'SSN'+
                 '</label>'+
-                '<input type="text" id="ssn" name="ssn" class="input-text">'+
-            '</p>';
+                '<input type="text" id="ssn" name="ssn" class="input-text" required>';
       }
       $("#changer").html(div);
   }
@@ -67,7 +127,7 @@ if(isset($_POST['upload'])){
 <section class="page-banner services-banner">
     <div class="container">
         <div class="banner-header">
-            <h2>New Book</h2>
+            <h2>New Document</h2>
             <span class="underline center"></span>
             <p class="lead"></p>
         </div>
@@ -75,7 +135,7 @@ if(isset($_POST['upload'])){
             <ul>
                 <li><a href="?menu=home">Home</a></li>
                 <li><a href="?menu=books">Books & Media</a></li>
-                <li>Register New Book</li>
+                <li>Register New Document</li>
             </ul>
         </div>
     </div>
@@ -96,57 +156,43 @@ if(isset($_POST['upload'])){
                                             <div class="text-center" style="margin: 80px -40px 80px 40px;">
                                                 <div class="company-detail new-account bg-light ">
                                                     <div class="new-user-head">
-                                                        <h2>Register New Book</h2>
+                                                        <h2>Register New Document</h2>
                                                         <br>
                                                     </div>
-                                                    <form class="login" method="post">
-                                                        <p class="form-row form-row-first input-required">
-                                                            <label>
-                                                                <span class="first-letter">Title</span>
-                                                                <span class="second-letter">*</span>
-                                                            </label>
-                                                            <input type="text" id="name" name="name" class="input-text">
-                                                        </p>
-                                                        <p class="form-row form-row-first input-required">
-                                                            <label>
-                                                                <span class="first-letter">Editorial</span>
-                                                                <span class="second-letter">*</span>
-                                                            </label>
-                                                            <input type="text" id="name" name="name" class="input-text">
-                                                        </p>
-                                                        <p class="form-row form-row-first input-required">
-                                                            <label>
-                                                                <span class="first-letter">Authors</span>
-                                                                <span class="second-letter">*</span>
-                                                            </label>
-                                                            <input type="text" id="name" name="name" class="input-text">
-                                                        </p>
-                                                        <p>
-                                                            <label>
-                                                                <span class="first-letter">Date published</span>
-                                                                <span class="second-letter">*</span>
-                                                            </label>
-                                                            <input type="date" id="name" name="name" style="background-color: #fff; border-color: #F4F4F4;">
-                                                        </p>
+                                                    <form class="login" method="post" enctype="multipart/form-data">
+                                                        <label style="color:grey;">
+                                                            Title
+                                                        </label>
+                                                        <input type="text" id="title" name="title" class="input-text" required>
+                                                        <label style="color:grey;">
+                                                            Editorial
+                                                        </label>
+                                                        <input type="text" id="editorial" name="editorial" class="input-text" required>
+                                                        <label style="color:grey;">
+                                                            Authors
+                                                        </label>
+                                                        <input type="text" id="authors" name="authors" class="input-text" required>
+                                                        
+                                                        <label style="color:grey;">
+                                                            Date published
+                                                        </label>
+                                                        <input type="date" id="date" name="date" style="background-color: #fff; border-color: #F4F4F4;">
                                                         <label style="color:grey;" style="text-align:left;">Description*</label>
-                                                        <textarea style="width:100%;" rows="5">
-                                                        </textarea>
-                                                        <br><br>
-                                                        <label style="color:grey;">Type Document*</label>
+                                                        <textarea style="width:100%;" rows="5" name="description" id="description" required></textarea>
+                                                        <label style="color:grey;">Type Document</label>
                                                         <select id="dc" name="dc" class="dc" style="width:100%;" required onchange="changer(this.value)">
                                                             <option value="">Choose one</option>
                                                             <option value="book">Book</option>
                                                             <option value="sa">Science article</option>
                                                             <option value="presentation">Presentation</option>
                                                         </select><br><br>
-                                                        <label style="color:grey;" style="margin-top:10%;">Photo*</label>
-                                                        <p class="form-row input-required">
-                                                            <input type="file" class="form-control-file dropify" name="photo" id="photo" accept=".png" data-allowed-file-extensions="png" required>
-                                                        </p>
+                                                        <label style="color:grey;" style="margin-top:10%;">Photo</label>
+                                                        <input type="file" class="form-control-file dropify" name="logo" id="logo" accept=".png,.jpeg,.jpg" data-allowed-file-extensions="png jpeg jpg" required>
                                                         <div id="changer">
                                                             
                                                         </div>
                                                         <div class="clear"></div>
+                                                        <br>
                                                         <button type="submit" name="upload" id="upload" class="button btn btn-default">Upload <i class="fa fa-upload"></i></button>
                                                         <div class="clear"></div>
                                                     </form>
