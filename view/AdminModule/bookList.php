@@ -1,6 +1,8 @@
 <?php
 
 require_once('../business/ManageBook.php');
+require_once('../business/ManagePresentation.php');
+require_once('../business/ManageScienceArticle.php');
 require_once('../persistence/util/Connection.php');
 
 $con = new Connection();
@@ -8,6 +10,12 @@ $connection = $con->conectBD();
 
 ManageBook::setConnectionBD($connection);
 $books = ManageBook::listAll();
+
+ManagePresentation::setConnectionBD($connection);
+$papers = ManagePresentation::listAll();
+
+ManageScienceArticle::setConnectionBD($connection);
+$articles = ManageScienceArticle::listAll();
 
 ?>
 <style>
@@ -133,21 +141,24 @@ $books = ManageBook::listAll();
                             } else {
                                 $no = 0;
                                 foreach ($books as $b) {
-                                    echo '<li class="paginate">
-                                                <div class="book-list-icon red-icon"></div>
+                                    if ($b->getAvailable()=="Y") {
+                                        echo '<li class="paginate">
+                                                <div class="book-list-icon yellow-icon"></div>
                                                 <figure>
-                                                <form id="form' . $no . '" target="_blank" action="?menu=details" method="post">
-                                                    <a href="javascript:;" onclick="document.getElementById(' . "'form$no'" . ').submit();">
+                                                <form id="formB' . $no . '" target="_blank" action="?menu=details" method="post">
+                                                    <a href="javascript:;" onclick="document.getElementById(' . "'formB$no'" . ').submit();">
                                                      <img src="' . $b->getUrl() . '" alt="Book"></a>
                                                     <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                    <input type="hidden" name="type" value="0"/>
                                                 </form>
                                                     <figcaption>
                                                         <header>
                                                             <h4>
-                                                            <form id="form1' . $no . '" target="_blank" action="?menu=details" method="post">
-                                                                <a href="javascript:;" onclick="document.getElementById(' . "'form1$no'" . ').submit();">
+                                                            <form id="form1B' . $no . '" target="_blank" action="?menu=details" method="post">
+                                                                <a href="javascript:;" onclick="document.getElementById(' . "'form1B$no'" . ').submit();">
                                                                 ' . $b->getTitle() . '</a>
                                                                 <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                                <input type="hidden" name="type" value="0"/>
                                                             </form>
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
@@ -158,7 +169,80 @@ $books = ManageBook::listAll();
                                                     </figcaption>
                                                 </figure>
                                             </li>';
-                                    $no += 1;
+                                        $no += 1;
+                                    }
+                                }
+                            }
+                            if (count($papers) == 0) {
+                            } else {
+                                $no = 0;
+                                foreach ($papers as $b) {
+                                    if($b->getAvailable()=="Y"){
+                                        echo '<li class="paginate">
+                                                <div class="book-list-icon red-icon"></div>
+                                                <figure>
+                                                <form id="formP' . $no . '" target="_blank" action="?menu=details" method="post">
+                                                    <a href="javascript:;" onclick="document.getElementById(' . "'formP$no'" . ').submit();">
+                                                     <img src="' . $b->getUrl() . '" alt="Book"></a>
+                                                    <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                    <input type="hidden" name="type" value="1"/>
+                                                </form>
+                                                    <figcaption>
+                                                        <header>
+                                                            <h4>
+                                                            <form id="formP1' . $no . '" target="_blank" action="?menu=details" method="post">
+                                                                <a href="javascript:;" onclick="document.getElementById(' . "'formP1$no'" . ').submit();">
+                                                                ' . $b->getTitle() . '</a>
+                                                                <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                                <input type="hidden" name="type" value="1"/>
+                                                            </form>
+                                                            </h4>
+                                                            <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
+                                                            <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
+                                                        </header>
+                                                        <p>' . $b->getDescription() . '</p>
+                                                        
+                                                    </figcaption>
+                                                </figure>
+                                            </li>';
+                                        $no += 1;
+                                    }
+                                }
+                            }
+                            if (count($articles) == 0) {
+                            } else {
+                                $no = 0;
+                                foreach ($articles as $a) {
+                                    if ($a->getAvailable()=="Y") {
+                                        echo '<li class="paginate">
+                                                <div class="book-list-icon light-green-icon"></div>
+                                                <figure>
+                                                <form id="formA' . $no . '" target="_blank" action="?menu=details" method="post">
+                                                    <a href="javascript:;" onclick="document.getElementById(' . "'formA$no'" . ').submit();">
+                                                     <img src="' . $a->getUrl() . '" alt="Book"></a>
+                                                    <input type="hidden" name="mess" value="' . $a->getId() . '"/>
+                                                    <input type="hidden" name="type" value="2"/>
+                                                </form>
+                                                    <figcaption>
+                                                        <header>
+                                                            <h4>
+                                                            <form id="formA1' . $no . '" target="_blank" action="?menu=details" method="post">
+                                                                <a href="javascript:;" onclick="document.getElementById(' . "'formA1$no'" . ').submit();">
+                                                                ' . $a->getTitle() . '</a>
+                                                                <input type="hidden" name="mess" value="' . $a->getId() . '"/>
+                                                                <input type="hidden" name="type" value="2"/>
+                                                            </form>
+                                                            </h4>
+                                                            <p><strong>Author:</strong> ' . $a->getAuthors() . '</p>
+                                                            <p><strong>SNN:</strong>' . $a->getSSN() . '</p>
+                                                        </header>
+                                                        <p>' . $a->getDescription() . '</p>
+                                                        
+                                                    </figcaption>
+                                                </figure>
+                                            </li>';
+                                        $no += 1;
+                                    }
                                 }
                             }
                             ?>
@@ -187,7 +271,7 @@ $books = ManageBook::listAll();
         // How many parts do we have?
         var numPages = pageParts.length;
         // How many parts do we want per page?
-        var perPage = 8;
+        var perPage = 12;
 
         // When the document loads we're on page 1
         // So to start with... hide everything else
