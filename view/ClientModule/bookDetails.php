@@ -1,10 +1,22 @@
 <?php
-require_once('../business/ManageUser.php');
-require_once('../business/ManageAdmin.php');
+require_once('../business/ManageBook.php');
 require_once('../persistence/util/Connection.php');
 
+$cod = $_POST["mess"];
 
+$con = new Connection();
+$connection = $con->conectBD();
 
+ManageBook::setConnectionBD($connection);
+$book = ManageBook::consult($cod);
+
+$name = $book->getTitle();
+$author = $book->getAuthors();
+$isbn = $book->getIsbn();
+$publisher = $book->getEditorial();
+$pages = $book->getNumPages();
+$desciption = $book->getDescription();
+$cover = $book->getUrl();
 ?>
 <style>
     .navbar-default .navbar-nav>.books>a,
@@ -26,7 +38,8 @@ require_once('../persistence/util/Connection.php');
             <ul>
                 <li><a href="?menu=home">Home</a></li>
                 <li><a href="?menu=home">Books & Media</a></li>
-                <li>THE GREAT GATSBY Details</li>
+
+                <li><?php echo $name; ?></li>
             </ul>
         </div>
     </div>
@@ -78,23 +91,17 @@ require_once('../persistence/util/Connection.php');
                             <div class="col-xs-12 col-sm-5 col-md-3">
                                 <div class="post-thumbnail">
                                     <div class="book-list-icon red-icon"></div>
-                                    <img src="images/books-media/detail-page/detail-page-image.jpg" alt="Book Image">
+                                    <img src="<?php echo $cover; ?>" alt="Book Image">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-7 col-md-6">
-                                
+
                                 <div class="post-center-content">
-                                    <h2>The Great Gatsby</h2>
-                                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                    <p><strong>ISBN:</strong> 9781581573268, 9780062419385</p>
-                                    <p><strong>Rating:</strong> </p>
-                                    <p><strong>Edition:</strong> First edition</p>
-                                    <p><strong>Publisher:</strong> New York : Shaye Areheart Books, c2008</p>
-                                    <p><strong>Length:</strong> 518 pages.</p>
-                                    <p><strong>Format:</strong> DVD</p>
-                                    <p><strong>Language Note:</strong> Icelandic dialogue; English subtitles.</p>
-                                    <p><strong>Genre :</strong> Feature films, Fiction films, Drama</p>
-                                    <p><strong>Topics:</strong> Friendship, Bullies, Pranks, School</p>
+                                    <h2><?php echo $name; ?></h2>
+                                    <p><strong>Author:</strong><?php echo $author; ?> </p>
+                                    <p><strong>ISBN:</strong> <?php echo $isbn; ?></p>
+                                    <p><strong>Publisher:</strong><?php echo $publisher; ?></p>
+                                    <p><strong>Length:</strong><?php echo $pages; ?></p>
                                     <div class="actions">
                                         <ul>
                                             <li>
@@ -123,118 +130,9 @@ require_once('../persistence/util/Connection.php');
                             <div class="clearfix"></div>
                         </div>
                         <div class="clearfix"></div>
-                        <p><strong>Summary:</strong> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                            If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-                            making this the first true generator on the Internet. </p>
+                        <p><strong>Summary:</strong><?php echo $desciption; ?> </p>
 
-                        <div class="table-tabs" id="responsiveTabs">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><b class="arrow-up"></b><a data-toggle="tab" href="#sectionA">Copies: 05</a></li>
-                                <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionB">Reviews (12)</a></li>
-                                <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionC">Table of Contents</a></li>
-                                <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionD">Novelist Recommendations</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="sectionA" class="tab-pane fade in active">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Library Name</th>
-                                                <th>Shelf Number</th>
-                                                <th>Material Type</th>
-                                                <th>Status </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Oak Park Public Library Main Branch</td>
-                                                <td>B PURMORT</td>
-                                                <td>Book</td>
-                                                <td>In Processing</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bedford Park Public Library District</td>
-                                                <td>616.99 PUR</td>
-                                                <td>Book</td>
-                                                <td>Due 8/24/16</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Blue Island Public Library</td>
-                                                <td>BIO PUR</td>
-                                                <td>eBook</td>
-                                                <td>Due 8/24/16</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bridgeview Public Library</td>
-                                                <td>B PUR</td>
-                                                <td>DVD</td>
-                                                <td>In Processing</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Eisenhower Public Library District</td>
-                                                <td>616.994 PUR</td>
-                                                <td>Magazine</td>
-                                                <td>Checked In</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Forest Park Public Library</td>
-                                                <td>BIO PURMORT</td>
-                                                <td>Magazine</td>
-                                                <td>Checked In</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hinsdale Public Library</td>
-                                                <td>B PUR</td>
-                                                <td>Audio</td>
-                                                <td>Checked In</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Oak Park Public Library Maze Branch</td>
-                                                <td>616.99 PUR</td>
-                                                <td>Audio</td>
-                                                <td>Due 9/10/16</td>
-                                            </tr>
-                                            <tr>
-                                                <td>River Grove Public Library District</td>
-                                                <td>616.994 PURMORT</td>
-                                                <td>Book</td>
-                                                <td>Due 9/10/16</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="sectionB" class="tab-pane fade in">
-                                    <h5>Lorem Ipsum Dolor</h5>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-                                        going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-                                        making this the first true generator on the Internet.</p>
-                                </div>
-                                <div id="sectionC" class="tab-pane fade in">
-                                    <h5>Lorem Ipsum Dolor</h5>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-                                        going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-                                        making this the first true generator on the Internet.</p>
-                                </div>
-                                <div id="sectionD" class="tab-pane fade in">
-                                    <h5>Lorem Ipsum Dolor</h5>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-                                        going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-                                        making this the first true generator on the Internet.</p>
-                                </div>
-                                <div id="sectionE" class="tab-pane fade in">
-                                    <h5>Lorem Ipsum Dolor</h5>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-                                        going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-                                        making this the first true generator on the Internet.</p>
-                                </div>
-                                <div id="sectionF" class="tab-pane fade in">
-                                    <h5>Lorem Ipsum Dolor</h5>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-                                        going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-                                        making this the first true generator on the Internet.</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

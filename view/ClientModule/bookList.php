@@ -19,22 +19,25 @@ $books = ManageBook::listAll();
     }
 
     .pagination {
-    margin: 20px 0;
-    overflow: hidden;
-    position: relative;
-}
-.pagination li {
-    float: left;
-}
-.pagination ul {
-    float: left;
-    left: 50%;
-    position: relative;
-}
-.pagination ul > li {
-    left: -50%;
-    position: relative;
-}
+        margin: 20px 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .pagination li {
+        float: left;
+    }
+
+    .pagination ul {
+        float: left;
+        left: 50%;
+        position: relative;
+    }
+
+    .pagination ul>li {
+        left: -50%;
+        position: relative;
+    }
 
     .light-theme .current {
         background: #ff7236;
@@ -80,7 +83,7 @@ $books = ManageBook::listAll();
                     <section class="search-filters">
                         <div class="filter-box">
                             <h3>What are you looking for at the library?</h3>
-                            <form action="http://libraria.demo.presstigers.com/index.html" method="get">
+                            <form action="bookList.php" method="get">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
@@ -112,126 +115,7 @@ $books = ManageBook::listAll();
                     <div class="booksmedia-fullwidth">
                         <ul>
                             <?php
-                            if (count($books) == 0) {
-                            } else {
-                                $no = 1;
-                                foreach ($books as $b) {
-                                    echo '<li class="paginate">
-                                        <div class="book-list-icon red-icon"></div>
-                                        <figure>
-                                            <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
-                                            <figcaption>
-                                                <header>
-                                                    <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
-                                                    <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
-                                                    <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
-                                                </header>
-                                                <p>' . $b->getDescription() . '</p>
-                                                <div class="actions">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                                <i class="fa fa-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </li>';
-                                }
-                            }
-                            if (count($books) == 0) {
-                            } else {
-                                $no = 1;
-                                foreach ($books as $b) {
-                                    echo '<li class="paginate">
-                                            <div class="book-list-icon red-icon"></div>
-                                            <figure>
-                                                <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
-                                                <figcaption>
-                                                    <header>
-                                                        <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
-                                                        <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
-                                                        <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
-                                                    </header>
-                                                    <p>' . $b->getDescription() . '</p>
-                                                    <div class="actions">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </li>
-    
-                                                        </ul>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>';
-                                }
-                            }
-                            if (count($books) == 0) {
-                            } else {
-                                $no = 1;
-                                foreach ($books as $b) {
-                                    echo '<li class="paginate">
-                                            <div class="book-list-icon red-icon"></div>
-                                            <figure>
-                                                <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
-                                                <figcaption>
-                                                    <header>
-                                                        <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
-                                                        <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
-                                                        <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
-                                                    </header>
-                                                    <p>' . $b->getDescription() . '</p>
-                                                    <div class="actions">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </li>
-    
-                                                        </ul>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>';
-                                }
-                            }
-                            if (count($books) == 0) {
-                            } else {
-                                $no = 1;
-                                foreach ($books as $b) {
-                                    echo '<li class="paginate">
-                                            <div class="book-list-icon red-icon"></div>
-                                            <figure>
-                                                <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
-                                                <figcaption>
-                                                    <header>
-                                                        <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
-                                                        <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
-                                                        <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
-                                                    </header>
-                                                    <p>' . $b->getDescription() . '</p>
-                                                    <div class="actions">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </li>
-    
-                                                        </ul>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>';
-                                }
-                            }
+                          
                             if (count($books) == 0) {
                             } else {
                                 $no = 1;
@@ -239,7 +123,12 @@ $books = ManageBook::listAll();
                                     echo '<li class="paginate">
                                                 <div class="book-list-icon red-icon"></div>
                                                 <figure>
-                                                    <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
+                                                <form id="form1" target="_blank" action="?menu=details" method="post">
+                                                    <a href="javascript:;" onclick="document.getElementById('."'form1'".').submit();">
+                                                     <img src="' . $b->getUrl() . '" alt="Book"></a>
+                                                    <input type="hidden" name="mess" value="'.$b->getId().'"/>
+                                                   
+                                                </form>
                                                     <figcaption>
                                                         <header>
                                                             <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
@@ -265,7 +154,7 @@ $books = ManageBook::listAll();
                             ?>
                         </ul>
                     </div>
-                    
+
                     <div class="pagination">
                         <div id="page-nav" class="page-nav"></div>
                     </div>
