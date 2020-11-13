@@ -100,21 +100,20 @@ $books = ManageBook::listAll();
                         <ul>
                             <?php
                             if (count($books) == 0) {
-                               
                             } else {
                                 $no = 1;
                                 foreach ($books as $b) {
                                     echo '<li class="paginate">
                                         <div class="book-list-icon red-icon"></div>
                                         <figure>
-                                            <a href="books-media-detail-v2.html"><img src="'.$b->getUrl().'" alt="Book"></a>
+                                            <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
                                             <figcaption>
                                                 <header>
-                                                    <h4><a href="books-media-detail-v2.html">'.$b->getTitle().'</a></h4>
-                                                    <p><strong>Author:</strong> '.$b->getAuthors().'</p>
-                                                    <p><strong>ISBN:</strong>'.$b->getISBN().'</p>
+                                                    <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
+                                                    <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
+                                                    <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
                                                 </header>
-                                                <p>'.$b->getDescription().'</p>
+                                                <p>' . $b->getDescription() . '</p>
                                                 <div class="actions">
                                                     <ul>
                                                         <li>
@@ -129,22 +128,22 @@ $books = ManageBook::listAll();
                                         </figure>
                                     </li>';
                                 }
-                                if (count($books) == 0) {
-                               
-                                } else {
-                                    $no = 1;
-                                    foreach ($books as $b) {
-                                        echo '<li class="paginate">
+                            }
+                            if (count($books) == 0) {
+                            } else {
+                                $no = 1;
+                                foreach ($books as $b) {
+                                    echo '<li class="paginate">
                                             <div class="book-list-icon red-icon"></div>
                                             <figure>
-                                                <a href="books-media-detail-v2.html"><img src="'.$b->getUrl().'" alt="Book"></a>
+                                                <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
                                                 <figcaption>
                                                     <header>
-                                                        <h4><a href="books-media-detail-v2.html">'.$b->getTitle().'</a></h4>
-                                                        <p><strong>Author:</strong> '.$b->getAuthors().'</p>
-                                                        <p><strong>ISBN:</strong>'.$b->getISBN().'</p>
+                                                        <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
+                                                        <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
+                                                        <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
                                                     </header>
-                                                    <p>'.$b->getDescription().'</p>
+                                                    <p>' . $b->getDescription() . '</p>
                                                     <div class="actions">
                                                         <ul>
                                                             <li>
@@ -158,23 +157,23 @@ $books = ManageBook::listAll();
                                                 </figcaption>
                                             </figure>
                                         </li>';
-                                    }
-                                    if (count($books) == 0) {
-                               
-                                    } else {
-                                        $no = 1;
-                                        foreach ($books as $b) {
-                                            echo '<li class="paginate">
+                                }
+                            }
+                            if (count($books) == 0) {
+                            } else {
+                                $no = 1;
+                                foreach ($books as $b) {
+                                    echo '<li class="paginate">
                                                 <div class="book-list-icon red-icon"></div>
                                                 <figure>
-                                                    <a href="books-media-detail-v2.html"><img src="'.$b->getUrl().'" alt="Book"></a>
+                                                    <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
                                                     <figcaption>
                                                         <header>
-                                                            <h4><a href="books-media-detail-v2.html">'.$b->getTitle().'</a></h4>
-                                                            <p><strong>Author:</strong> '.$b->getAuthors().'</p>
-                                                            <p><strong>ISBN:</strong>'.$b->getISBN().'</p>
+                                                            <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
+                                                            <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
+                                                            <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
                                                         </header>
-                                                        <p>'.$b->getDescription().'</p>
+                                                        <p>' . $b->getDescription() . '</p>
                                                         <div class="actions">
                                                             <ul>
                                                                 <li>
@@ -188,7 +187,7 @@ $books = ManageBook::listAll();
                                                     </figcaption>
                                                 </figure>
                                             </li>';
-                                        }
+                                }
                             }
                             ?>
                         </ul>
