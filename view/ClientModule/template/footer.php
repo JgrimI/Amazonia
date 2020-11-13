@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 widget-container">
                 <div id="text-2" class="widget widget_text">
-                    <h3 class="footer-widget-title">About Libraria</h3>
+                    <h3 class="footer-widget-title">About Amazonia</h3>
                     <span class="underline left"></span>
                     <div class="textwidget">
                         It is a long established fact that a reader will be distracted by the readable
@@ -16,7 +16,7 @@
                         </div>
                         <div class="info">
                             <i class="fa fa-envelope"></i>
-                            <span><a href="mailto:support@amazonia.com">support@libraria.com</a></span>
+                            <span><a href="mailto:support@amazonia.com">support@amazonia.com</a></span>
                         </div>
                         <div class="info">
                             <i class="fa fa-phone"></i>

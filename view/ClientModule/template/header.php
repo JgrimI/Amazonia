@@ -43,7 +43,6 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="?menu=books">Books &amp; Media</a></li>
                                     <li><a href="?menu=newBook">Register New Document</a></li>
-                                    <li><a href="?menu=details">Books &amp; Media Detail</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

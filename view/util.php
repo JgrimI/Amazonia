@@ -16,6 +16,8 @@ function removeAccents($input){
     $output = str_replace("Ú", "u", $output);
     $output = str_replace("Ñ", "n", $output);
     $output = str_replace("ü", "u", $output);
+    $output = str_replace(":", "", $output);
+    $output = str_replace(".", "", $output);
     return $output;
 }
 function saveImage($name,$temporalName){
