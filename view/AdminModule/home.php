@@ -67,7 +67,7 @@
                         <select name="catalog" id="catalog" class="form-control">
                             <option>Search the Catalog</option>
                             <option>Books</option>
-                            <option>Lectures</option>
+                            <option>Paper</option>
                             <option>Scientific Articles</option>
                         </select>
                     </div>
@@ -92,7 +92,7 @@
                     <div class="welcome-text">
                         <h2 class="section-title">Welcome to Amazonía en Linea</h2>
                         <span class="underline left"></span>
-                        <p class="lead">The standard chunk of Lorem Ipsum used since</p>
+                        <p class="lead">Celebrating Words, Ideas and Community</p>
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority
                             have suffered alteration in some form, by injected humor, or randomized words
                             which don't look even slightly believable. If you are going to use

@@ -97,7 +97,7 @@ class ScienceArticleDAO implements DAO
 		$articles = array();
 		while ($row = mysqli_fetch_array($result)) {
 			$scienceArticle=new scienceArticle();
-			$scienceArticle->setId($row["id_book"]);
+			$scienceArticle->setId($row["id_sa"]);
 			$scienceArticle->setTitle($row["title"]);
 			$scienceArticle->setSSN($row["ssn"]);
 			$scienceArticle->setDatePublished($row["datePublished"]);

@@ -31,9 +31,9 @@ ManageAdmin::setConnectionBD($connection);
 $validUser=ManageAdmin::login($email, $password);
 
 if ($validUser != '') {
-	$_SESSION['email_admin']=$email;
-	$_SESSION['cod_admin'] = $validUser->getId();
-	$_SESSION['name_admin'] = $validUser->getName();
+	$_SESSION['email_user']=$email;
+	$_SESSION['cod_user'] = $validUser->getId();
+	$_SESSION['name_user'] = $validUser->getName();
 	$_SESSION['redirect']='admin.php';
 	echo '<script language="javascript">alert("Welcome to Amazonia en Linea");
 			window.location.href="admin.php"

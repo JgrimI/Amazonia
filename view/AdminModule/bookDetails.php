@@ -1,65 +1,22 @@
 <?php
 require_once('../business/ManageBook.php');
-require_once('../business/ManagePresentation.php');
-require_once('../business/ManageScienceArticle.php');
 require_once('../persistence/util/Connection.php');
 
+$cod = $_POST["mess"];
 
-if ($_POST["mess"]) {
-    $cod = $_POST["mess"];
-    $type = $_POST["type"];
-    $con = new Connection();
-    $connection = $con->conectBD();
-    if ($type == 0) {
-        ManageBook::setConnectionBD($connection);
-        $book = ManageBook::consult($cod);
+$con = new Connection();
+$connection = $con->conectBD();
 
-        $name = $book->getTitle();
-        $author = $book->getAuthors();
-        $date = $book->getDatePublished();
-        $isbn = $book->getIsbn();
-        $publisher = $book->getEditorial();
-        $pages = $book->getNumPages();
-        $desciption = $book->getDescription();
-        $cover = $book->getUrl();
-        $lenght = "<p><strong>Lenght:</strong>$pages</p>";
-        $isnn = "ISBN:";
-        $icon = "yellow-icon";
-    } elseif ($type == 1) {
-        ManagePresentation::setConnectionBD($connection);
-        $book = ManagePresentation::consult($cod);
+ManageBook::setConnectionBD($connection);
+$book = ManageBook::consult($cod);
 
-        $name = $book->getTitle();
-        $author = $book->getAuthors();
-        $isbn = $book->getIsbn();
-        $publisher = $book->getEditorial();
-        $date = $book->getDatePublished();
-        $congress = $book->getCongressName();
-        $desciption = $book->getDescription();
-        $cover = $book->getUrl();
-        $lenght = "<p><strong>Congress Name:</strong>$congress</p>";
-        $isnn = "ISBN:";
-        $icon = "red-icon";
-    } elseif ($type == 2) {
-        ManageScienceArticle::setConnectionBD($connection);
-        $book = ManageScienceArticle::consult($cod);
-
-        $name = $book->getTitle();
-        $author = $book->getAuthors();
-        $date = $book->getDatePublished();
-        $isbn = $book->getSSN();
-        $publisher = $book->getEditorial();
-        $desciption = $book->getDescription();
-        $cover = $book->getUrl();
-
-        $icon = "light-green-icon";
-        $lenght = "";
-        $isnn = "SNN:";
-    }
-} else {
-    header('Location: user.php');
-}
-
+$name = $book->getTitle();
+$author = $book->getAuthors();
+$isbn = $book->getIsbn();
+$publisher = $book->getEditorial();
+$pages = $book->getNumPages();
+$desciption = $book->getDescription();
+$cover = $book->getUrl();
 ?>
 <style>
     .navbar-default .navbar-nav>.books>a,
@@ -67,19 +24,6 @@ if ($_POST["mess"]) {
     .navbar-default .navbar-nav>.books>a:focus {
         color: #ff7236;
         background-color: transparent;
-    }
-
-    .detailed-box .post-thumbnail {
-        display: inline-block;
-        float: left;
-        margin: 0px -15px 0px -15px;
-        position: relative;
-        padding: 0px;
-        vertical-align: top;
-    }
-
-    .col-md-3 {
-        width: 22%;
     }
 </style>
 <!-- Start: Page Banner -->
@@ -93,7 +37,7 @@ if ($_POST["mess"]) {
         <div class="breadcrumb">
             <ul>
                 <li><a href="?menu=home">Home</a></li>
-                <li><a href="?menu=books">Books & Media</a></li>
+                <li><a href="?menu=home">Books & Media</a></li>
 
                 <li><?php echo $name; ?></li>
             </ul>
@@ -146,7 +90,7 @@ if ($_POST["mess"]) {
                         <div class="detailed-box">
                             <div class="col-xs-12 col-sm-5 col-md-3">
                                 <div class="post-thumbnail">
-                                    <div class="book-list-icon <?php echo $icon; ?>"></div>
+                                    <div class="book-list-icon red-icon"></div>
                                     <img src="<?php echo $cover; ?>" alt="Book Image">
                                 </div>
                             </div>
@@ -154,15 +98,16 @@ if ($_POST["mess"]) {
 
                                 <div class="post-center-content">
                                     <h2><?php echo $name; ?></h2>
-                                    <p><strong>Author: </strong><?php echo $author; ?> </p>
-                                    <p><strong>Date Published: </strong><?php echo $date; ?> </p>
-                                    <p><strong> <?php echo $isnn; ?></strong> <?php echo $isbn; ?></p>
-                                    <p><strong>Publisher: </strong><?php echo $publisher; ?></p>
-                                    <?php echo $lenght; ?>
+                                    <p><strong>Author:</strong><?php echo $author; ?> </p>
+                                    <p><strong>ISBN:</strong> <?php echo $isbn; ?></p>
+                                    <p><strong>Publisher:</strong><?php echo $publisher; ?></p>
+                                    <p><strong>Length:</strong><?php echo $pages; ?></p>
                                     <div class="actions">
                                         <ul>
                                             <li>
-
+                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Add To Cart">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </a>
 
                                         </ul>
                                     </div>
@@ -171,16 +116,23 @@ if ($_POST["mess"]) {
                             <div class="col-xs-12 col-sm-12 col-md-3 ">
                                 <div class="post-right-content">
                                     <h4>Available now</h4>
+                                    <p><strong>Total Copies:</strong> 01</p>
+                                    <p><strong>Available:</strong> 019780062419385</p>
                                     <p><strong>Holds:</strong> 01</p>
                                     <p><strong>On the shelves now at:</strong> Lawrence Public Library</p>
                                     <p><strong>Call #:</strong> 747 STRUTT C</p>
+                                    <a href="#." class="available-location">Availability by Location <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                     <a href="#." class="btn btn-dark-gray">Place a Hold</a>
+                                    <a href="#." class="btn btn-dark-gray">View sample</a>
+                                    <a href="#." class="btn btn-dark-gray">Find Similar Titles</a>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="clearfix"></div>
                         <p><strong>Summary:</strong><?php echo $desciption; ?> </p>
+
+
                     </div>
                 </div>
             </div>
