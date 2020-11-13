@@ -88,7 +88,7 @@ class UserDAO implements DAO
 	public function create ($newUser){
 		$password = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
 
-		$query="INSERT INTO user VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."','".$newUser->getPermits()."');";
+		$query="INSERT INTO user VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."');";
 		mysqli_query($this->connection, $query);
 
 	}

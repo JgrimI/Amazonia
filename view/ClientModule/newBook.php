@@ -10,6 +10,9 @@ if(isset($_POST['upload'])){
         color: #ff7236;
         background-color: transparent;
     }
+    .select-styled {
+         display: none;
+        }
 </style>
 <script>
     window.onload=function(){

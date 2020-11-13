@@ -1,3 +1,15 @@
+<?php
+
+require_once('../business/ManageBook.php');
+require_once('../persistence/util/Connection.php');
+
+$con = new Connection();
+$connection = $con->conectBD();
+
+ManageBook::setConnectionBD($connection);
+$books = ManageBook::listAll();
+
+?>
 <style>
     .navbar-default .navbar-nav>.books>a,
     .navbar-default .navbar-nav>.books>a:hover,
@@ -5,8 +17,30 @@
         color: #ff7236;
         background-color: transparent;
     }
-</style>
 
+    .simple-pagination {
+        display: block;
+        overflow: hidden;
+        padding: 0px 5px 5px 45%;
+        margin: 0;
+    }
+
+    .light-theme .current {
+        background: #ff7236;
+        color: #FFF;
+        border-color: #ff7236;
+    }
+
+    .light-theme a,
+    .light-theme span {
+        float: left;
+        color: #666;
+        font-size: 20px;
+        line-height: 34px;
+        font-weight: bolder;
+        text-align: center;
+    }
+</style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
     <div class="container">
@@ -62,277 +96,105 @@
                     </section>
                     <!-- End: Search Section -->
 
-                    <div class="filter-options margin-list">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-3">
-                                <select name="orderby">
-                                    <option selected="selected">Sort by Title</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by rating</option>
-                                    <option>Sort by newness</option>
-                                    <option>Sort by price</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 col-sm-3">
-                                <select name="orderby">
-                                    <option selected="selected">Sort by Author</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by rating</option>
-                                    <option>Sort by newness</option>
-                                    <option>Sort by price</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 col-sm-3">
-                                <select name="orderby">
-                                    <option selected="selected">Language</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by rating</option>
-                                    <option>Sort by newness</option>
-                                    <option>Sort by price</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 col-sm-3">
-                                <select name="orderby">
-                                    <option selected="selected">Publishing Date</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by rating</option>
-                                    <option>Sort by newness</option>
-                                    <option>Sort by price</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     <div class="booksmedia-fullwidth">
                         <ul>
-                            <li>
-                                <div class="book-list-icon red-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-01.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
+                            <?php
+                            if (count($books) == 0) {
+                               
+                            } else {
+                                $no = 1;
+                                foreach ($books as $b) {
+                                    echo '<li class="paginate">
+                                        <div class="book-list-icon red-icon"></div>
+                                        <figure>
+                                            <a href="books-media-detail-v2.html"><img src="'.$b->getUrl().'" alt="Book"></a>
+                                            <figcaption>
+                                                <header>
+                                                    <h4><a href="books-media-detail-v2.html">'.$b->getTitle().'</a></h4>
+                                                    <p><strong>Author:</strong> '.$b->getAuthors().'</p>
+                                                    <p><strong>ISBN:</strong>'.$b->getISBN().'</p>
+                                                </header>
+                                                <p>'.$b->getDescription().'</p>
+                                                <div class="actions">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                        </li>
 
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon yellow-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-02.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon green-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-03.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon yellow-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-04.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon red-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-05.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon red-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-06.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon green-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-07.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon light-green-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-07.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <div class="book-list-icon red-icon"></div>
-                                <figure>
-                                    <a href="books-media-detail-v2.html"><img src="images/books-media/layout-3/books-media-layout3-09.jpg" alt="Book"></a>
-                                    <figcaption>
-                                        <header>
-                                            <h4><a href="books-media-detail-v2.html">The Great Gatsby</a></h4>
-                                            <p><strong>Author:</strong> F. Scott Fitzgerald</p>
-                                            <p><strong>ISBN:</strong> 9781581573268</p>
-                                        </header>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                        <div class="actions">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </li>
+                                                    </ul>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </li>';
+                                }
+                                if (count($books) == 0) {
+                               
+                                } else {
+                                    $no = 1;
+                                    foreach ($books as $b) {
+                                        echo '<li class="paginate">
+                                            <div class="book-list-icon red-icon"></div>
+                                            <figure>
+                                                <a href="books-media-detail-v2.html"><img src="'.$b->getUrl().'" alt="Book"></a>
+                                                <figcaption>
+                                                    <header>
+                                                        <h4><a href="books-media-detail-v2.html">'.$b->getTitle().'</a></h4>
+                                                        <p><strong>Author:</strong> '.$b->getAuthors().'</p>
+                                                        <p><strong>ISBN:</strong>'.$b->getISBN().'</p>
+                                                    </header>
+                                                    <p>'.$b->getDescription().'</p>
+                                                    <div class="actions">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </a>
+                                                            </li>
+    
+                                                        </ul>
+                                                    </div>
+                                                </figcaption>
+                                            </figure>
+                                        </li>';
+                                    }
+                                    if (count($books) == 0) {
+                               
+                                    } else {
+                                        $no = 1;
+                                        foreach ($books as $b) {
+                                            echo '<li class="paginate">
+                                                <div class="book-list-icon red-icon"></div>
+                                                <figure>
+                                                    <a href="books-media-detail-v2.html"><img src="'.$b->getUrl().'" alt="Book"></a>
+                                                    <figcaption>
+                                                        <header>
+                                                            <h4><a href="books-media-detail-v2.html">'.$b->getTitle().'</a></h4>
+                                                            <p><strong>Author:</strong> '.$b->getAuthors().'</p>
+                                                            <p><strong>ISBN:</strong>'.$b->getISBN().'</p>
+                                                        </header>
+                                                        <p>'.$b->getDescription().'</p>
+                                                        <div class="actions">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                                                                        <i class="fa fa-shopping-cart"></i>
+                                                                    </a>
+                                                                </li>
+        
+                                                            </ul>
+                                                        </div>
+                                                    </figcaption>
+                                                </figure>
+                                            </li>';
+                                        }
+                            }
+                            ?>
                         </ul>
                     </div>
-                    <nav class="navigation pagination text-center">
-                        <h2 class="screen-reader-text">Posts navigation</h2>
-                        <div class="nav-links">
-                            <a class="prev page-numbers" href="#."><i class="fa fa-long-arrow-left"></i> Previous</a>
-                            <a class="page-numbers" href="#.">1</a>
-                            <span class="page-numbers current">2</span>
-                            <a class="page-numbers" href="#.">3</a>
-                            <a class="page-numbers" href="#.">4</a>
-                            <a class="next page-numbers" href="#.">Next <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </nav>
+
+                    <div id="page-nav"></div>
                 </div>
                 <!-- Start: Staff Picks -->
                 <!-- End: Staff Picks -->
@@ -343,3 +205,38 @@
 <!-- End: Products Section -->
 <section class="social-network section-padding">
 </section>
+<script type="text/javascript" src="jquery.simplePagination.js"></script>
+<script type="text/javascript">
+    jQuery(function($) {
+        // Grab whatever we need to paginate
+        var pageParts = $(".paginate");
+
+        // How many parts do we have?
+        var numPages = pageParts.length;
+        // How many parts do we want per page?
+        var perPage = 9;
+
+        // When the document loads we're on page 1
+        // So to start with... hide everything else
+        pageParts.slice(perPage).hide();
+        // Apply simplePagination to our placeholder
+        $("#page-nav").pagination({
+            items: numPages,
+            itemsOnPage: perPage,
+            cssStyle: "light-theme",
+            // We implement the actual pagination
+            //   in this next function. It runs on
+            //   the event that a user changes page
+            onPageClick: function(pageNum) {
+                // Which page parts do we show?
+                var start = perPage * (pageNum - 1);
+                var end = start + perPage;
+
+                // First hide all page parts
+                // Then show those just for our page
+                pageParts.hide()
+                    .slice(start, end).show();
+            }
+        });
+    });
+</script>

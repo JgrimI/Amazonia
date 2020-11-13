@@ -26,6 +26,9 @@ if (!isset($_SESSION['redirect'])) {
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- pagination -->
+    <link type="text/css" rel="stylesheet" href="simplePagination.css"/>
+
     <!-- Stylesheet -->
     <link href="style.css" rel="stylesheet" type="text/css" />
     
@@ -55,9 +58,7 @@ if (!isset($_SESSION['redirect'])) {
             background-color: #1cc88a!important;
             color: #fff;
         }
-        .select-styled {
-         display: none;
-        }
+        
     </style>
     <!-- End: Header Section -->
 
@@ -101,6 +102,7 @@ if (!isset($_SESSION['redirect'])) {
 
     <!-- Custom Scripts -->
     <script type="text/javascript" src="js/main.js"></script>
+  
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
