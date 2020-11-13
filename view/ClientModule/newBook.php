@@ -61,7 +61,6 @@ if(isset($_POST['upload'])){
             '</p>';
       }
       $("#changer").html(div);
-      console.log(val+' entra');
   }
 </script>
 <!-- Start: Page Banner -->
