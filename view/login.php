@@ -1,3 +1,50 @@
+<?php
+if(isset($_POST['login'])){
+
+    require_once('../business/ManageUser.php');
+    require_once('../business/ManageAdmin.php');
+    require_once('../persistence/util/Connection.php');
+    require_once('util.php');
+
+    $con= new Connection;
+    $connection=$con->conectBD();
+    $email=$_POST["email"];
+    $password=$_POST["password"];
+
+    if($connection->connect_error){
+        die("Problema de conexión con la base de datos: ".$connection->connect_error);
+    }
+    ManageUser::setConnectionBD($connection);
+    $validUser=ManageUser::login($email, $password);
+
+    if ($validUser != '') {
+        $_SESSION['email_user']=$email;
+        $_SESSION['cod_user'] = $validUser->getId();
+        $_SESSION['name_user'] = $validUser->getName();
+        $_SESSION['status'] = $validUser->getStatus();
+        $_SESSION['redirect']='user.php';
+        echo printMessageWithRedirect("Welcome to Amazonia en Linea ".$validUser->getName(),"","success","user.php");
+
+    }
+    if(!isset($_SESSION['cod_user'])){
+        ManageAdmin::setConnectionBD($connection);
+        $validUser=ManageAdmin::login($email, $password);
+
+        if ($validUser != '') {
+            $_SESSION['email_user']=$email;
+            $_SESSION['cod_user'] = $validUser->getId();
+            $_SESSION['name_user'] = $validUser->getName();
+            $_SESSION['redirect']='admin.php';
+            echo printMessageWithRedirect("Welcome to Amazonia en Linea ".$validUser->getName(),"","success","admin.php");
+            
+        }else {
+            echo printMessageWithRedirect("Invalid User","","error","?menu=signin");
+        }
+    }
+
+    mysqli_close($connection);
+}
+?>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
     <div class="container">
@@ -32,22 +79,10 @@
                                                     <h2>Sign in</h2>
                                                     <span class="underline left"></span>
                                                 </div>
-                                                <form class="login" method="post" action="signin.php">
-                                                    <p class="form-row form-row-first input-required">
-                                                        <label>
-                                                                    <span class="first-letter">Email</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                        <input type="text" id="email" name="email" class="input-text">
-                                                    </p>
-                                                    <p class="form-row form-row-last input-required">
-                                                        <label>
-                                                                    <span class="first-letter">Password</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                        <input type="password" id="password" name="password" class="input-text">
-                                                    </p>
-                                                    <div class="password-form-row" style="margin-top:2.4%;">
+                                                <form class="login" method="post">
+                                                    <input type="text" id="email" name="email" class="input-text" required placeholder="Email">
+                                                    <input type="password" id="password" name="password" class="input-text" required placeholder="Password">
+                                                    <div class="password-form-row">
                                                         <br>
                                                         <p class="lost_password">
                                                             <a href="#">Lost your Password?</a>
@@ -69,27 +104,9 @@
                                                     <br>
                                                 </div>
                                                 <form class="login" method="post" action="register.php">
-                                                    <p class="form-row form-row-first input-required">
-                                                        <label>
-                                                                    <span class="first-letter">Name</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                        <input type="text" id="name" name="name" class="input-text">
-                                                    </p>
-                                                    <p class="form-row form-row-first input-required">
-                                                        <label>
-                                                                    <span class="first-letter">Email</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                        <input type="text" id="email" name="email" class="input-text">
-                                                    </p>
-                                                    <p class="form-row input-required">
-                                                        <label>
-                                                                    <span class="first-letter">Password</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                        <input type="password" id="password" name="password" class="input-text">
-                                                    </p>
+                                                    <input type="text" id="name" name="name" class="input-text" required placeholder="Name" style="margin-top:4%;">
+                                                    <input type="text" id="email" name="email" class="input-text" required placeholder="Email">
+                                                    <input type="password" id="password" name="password" class="input-text" required placeholder="Password" >
                                                     <div class="clear"></div>
                                                     <input type="submit" value="Signup" name="signup" class="button btn btn-default">
                                                     <div class="clear"></div>

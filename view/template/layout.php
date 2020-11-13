@@ -107,6 +107,21 @@ if (isset($_SESSION['redirect'])) {
   
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <style>
+        .swal2-modal .swal2-styled {
+            border-left-color: orange!important;
+            border-right-color: orange!important;
+            background-color: orange!important;
+        }
+        .swal2-styled:hover {
+            border-left-color: #FF8000!important;
+            border-right-color: #FF8000!important;
+            background-color: #FF8000!important;
+        }
+        div .select{
+            display:none;
+        }
+    </style>
     
 </body>
 

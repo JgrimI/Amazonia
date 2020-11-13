@@ -12,6 +12,12 @@
 		if ($_GET['menu']=='newBook'){
 			include_once('AdminModule/newBook.php');
 		}
+		if ($_GET['menu']=='docs'){
+			include_once('AdminModule/docs.php');
+		}
+		if ($_GET['menu']=='users'){
+			include_once('AdminModule/users.php');
+		}
 	} else {
 		include_once('AdminModule/home.php');
 	}

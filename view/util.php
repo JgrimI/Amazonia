@@ -34,4 +34,14 @@ function printMessage($titulo,$desc,$tipo){
       )</script>";
       return $r;
 }
+function printMessageWithRedirect($titulo,$desc,$tipo,$route){
+    $r="<script>swal(
+        '".$titulo."',
+        '".$desc."',
+        '".$tipo."'
+      ).then(function(){
+        window.location.href='".$route."'
+      })</script>";
+      return $r;
+}
 ?>

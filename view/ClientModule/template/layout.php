@@ -61,6 +61,16 @@ if (!isset($_SESSION['redirect'])) {
             background-color: #1cc88a!important;
             color: #fff;
         }
+        .swal2-modal .swal2-styled {
+            border-left-color: orange!important;
+            border-right-color: orange!important;
+            background-color: orange!important;
+        }
+        .swal2-styled:hover {
+            border-left-color: #FF8000!important;
+            border-right-color: #FF8000!important;
+            background-color: #FF8000!important;
+        }
         
     </style>
     <!-- End: Header Section -->

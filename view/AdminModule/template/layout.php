@@ -36,7 +36,9 @@ if (!isset($_SESSION['redirect'])) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="dropify/dropify.min.css">
+
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,6 +61,19 @@ if (!isset($_SESSION['redirect'])) {
         .select2-container--default .select2-results__option--highlighted[aria-selected] {
             background-color: #1cc88a!important;
             color: #fff;
+        }
+        .dataTables_length{
+            display:none;
+        }
+        .swal2-modal .swal2-styled {
+            border-left-color: orange!important;
+            border-right-color: orange!important;
+            background-color: orange!important;
+        }
+        .swal2-styled:hover {
+            border-left-color: #FF8000!important;
+            border-right-color: #FF8000!important;
+            background-color: #FF8000!important;
         }
         
     </style>
@@ -89,6 +104,9 @@ if (!isset($_SESSION['redirect'])) {
 
     <!-- MixItUp - Category Filter -->
     <script type="text/javascript" src="js/mixitup.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
 
     <!-- Bootstrap -->
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
