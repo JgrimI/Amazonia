@@ -9,9 +9,9 @@ class Presentation extends Document{
     //Atributos
     //-------------------------
     /*
-    Representa numero de paginas
+    Representa nombre del congreso
     */
-    private $namCongress;
+    private $congressName;
 
 
     //----------------------------
@@ -27,15 +27,15 @@ class Presentation extends Document{
     * Método para obtener la clave de acceso del Usuario
     * @return [String] clave de acceso del Usuario
     */
-    public function getNamCongress(){
-        return $this->namCongress;
+    public function getCongressName(){
+        return $this->congressName;
     }
     /**
     * Método para cambiar la clave de acceso del Usuario
     * @param [String] clave de acceso del Usuario
     */
-    public function setNamCongress($namCongress){
-        $this->namCongress = $namCongress;
+    public function setCongressName($congressName){
+        $this->congressName = $congressName;
     }
     
 }
