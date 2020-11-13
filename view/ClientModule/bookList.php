@@ -18,12 +18,23 @@ $books = ManageBook::listAll();
         background-color: transparent;
     }
 
-    .simple-pagination {
-        display: block;
-        overflow: hidden;
-        padding: 0px 5px 5px 45%;
-        margin: 0;
-    }
+    .pagination {
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+}
+.pagination li {
+    float: left;
+}
+.pagination ul {
+    float: left;
+    left: 50%;
+    position: relative;
+}
+.pagination ul > li {
+    left: -50%;
+    position: relative;
+}
 
     .light-theme .current {
         background: #ff7236;
@@ -95,7 +106,9 @@ $books = ManageBook::listAll();
                         <div class="clear"></div>
                     </section>
                     <!-- End: Search Section -->
-
+                    <div class="pagination">
+                        <div id="page-nav" class="page-nav"></div>
+                    </div>
                     <div class="booksmedia-fullwidth">
                         <ul>
                             <?php
@@ -164,6 +177,66 @@ $books = ManageBook::listAll();
                                 $no = 1;
                                 foreach ($books as $b) {
                                     echo '<li class="paginate">
+                                            <div class="book-list-icon red-icon"></div>
+                                            <figure>
+                                                <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
+                                                <figcaption>
+                                                    <header>
+                                                        <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
+                                                        <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
+                                                        <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
+                                                    </header>
+                                                    <p>' . $b->getDescription() . '</p>
+                                                    <div class="actions">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </a>
+                                                            </li>
+    
+                                                        </ul>
+                                                    </div>
+                                                </figcaption>
+                                            </figure>
+                                        </li>';
+                                }
+                            }
+                            if (count($books) == 0) {
+                            } else {
+                                $no = 1;
+                                foreach ($books as $b) {
+                                    echo '<li class="paginate">
+                                            <div class="book-list-icon red-icon"></div>
+                                            <figure>
+                                                <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
+                                                <figcaption>
+                                                    <header>
+                                                        <h4><a href="books-media-detail-v2.html">' . $b->getTitle() . '</a></h4>
+                                                        <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
+                                                        <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
+                                                    </header>
+                                                    <p>' . $b->getDescription() . '</p>
+                                                    <div class="actions">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </a>
+                                                            </li>
+    
+                                                        </ul>
+                                                    </div>
+                                                </figcaption>
+                                            </figure>
+                                        </li>';
+                                }
+                            }
+                            if (count($books) == 0) {
+                            } else {
+                                $no = 1;
+                                foreach ($books as $b) {
+                                    echo '<li class="paginate">
                                                 <div class="book-list-icon red-icon"></div>
                                                 <figure>
                                                     <a href="books-media-detail-v2.html"><img src="' . $b->getUrl() . '" alt="Book"></a>
@@ -192,8 +265,10 @@ $books = ManageBook::listAll();
                             ?>
                         </ul>
                     </div>
-
-                    <div id="page-nav"></div>
+                    
+                    <div class="pagination">
+                        <div id="page-nav" class="page-nav"></div>
+                    </div>
                 </div>
                 <!-- Start: Staff Picks -->
                 <!-- End: Staff Picks -->
@@ -219,10 +294,9 @@ $books = ManageBook::listAll();
         // So to start with... hide everything else
         pageParts.slice(perPage).hide();
         // Apply simplePagination to our placeholder
-        $("#page-nav").pagination({
+        $(".page-nav").pagination({
             items: numPages,
             itemsOnPage: perPage,
-            cssStyle: "light-theme",
             // We implement the actual pagination
             //   in this next function. It runs on
             //   the event that a user changes page
