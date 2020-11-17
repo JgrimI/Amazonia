@@ -3,17 +3,37 @@
     <!-- Carousel slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <figure>
-                <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
-            </figure>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Online Learning Anytime, Anywhere!</h3>
-                    <h2>Discover Your Roots</h2>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by injected humor, or randomized words.</p>
+        <figure>
+            <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
+        </figure>
+        <div class="container">
+            <div class="carousel-caption">
+              <div class="col-md-6">
+                <div class="grid">
+                  <div class="grid-body">
+                    <h3>Grafico de donut</h3>
+                    <div class="item-wrapper">
+                      <canvas id="chartjs-doughnut-chart" width="600" height="400"></canvas>
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="grid">
+                  <div class="grid-body">
+                    <h3>Grafico de barras</h3>
+                    <div class="item-wrapper">
+                      <canvas id="chartjs-bar-chart" width="600" height="400"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+        </div>
+
+        
+
         </div>
         <div class="item">
             <figure>

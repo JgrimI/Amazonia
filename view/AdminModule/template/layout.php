@@ -83,6 +83,7 @@ if (!isset($_SESSION['redirect'])) {
     <div id="panel">
         <div>
 
+
             <?php
             require_once('routing.php');
             ?>
@@ -97,6 +98,13 @@ if (!isset($_SESSION['redirect'])) {
         </footer>
         <!-- End: Footer -->
     </div>
+
+    <!-- GRAFICAS Libreria -->
+    <script src="Charts/charts/chartjs.js"></script>
+    <script src="Charts/chartjs/Chart.min.js"></script>
+    <script src="Charts/charts/chartjs.addon.js"></script>
+    <script src="Charts/template.js"></script>
+
 
 
     <!-- Facts Counter -->
