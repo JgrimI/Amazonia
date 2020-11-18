@@ -37,7 +37,6 @@ class PresentationDAO implements DAO
 	private function __construct($connection)
 	{
 		$this->connection=$connection;
-		mysqli_set_charset($this->connection, "utf8");
 	}
 
 	/**
@@ -47,20 +46,27 @@ class PresentationDAO implements DAO
 	 */
 	public function consult($id){
 		$query="SELECT * FROM presentation WHERE id_presentation=".$id;
-		if(!$result=mysqli_query($this->connection,$query))die();
-		$row=mysqli_fetch_array($result);
+		$rs = pg_query( $this->connection, $query );
 		$presentation = new Presentation();
-		$presentation->setId($row['id_presentation']);
-		$presentation->setTitle($row["title"]);
-		$presentation->setIsbn($row["isbn"]);
-		$presentation->setDatePublished($row["datePublished"]);
-		$presentation->setEditorial($row["editorial"]);
-		$presentation->setAvailable($row["available"]);
-		$presentation->setUrl($row["url"]);
-		$presentation->setAuthors($row["authors"]);
-		$presentation->setDescription($row["description"]);
-		$presentation->setIdUser($row["cod_user"]);
-		$presentation->setCongressName($row["congressName"]);
+
+		if( $rs )
+        {
+             if( pg_num_rows($rs) > 0 )
+            {
+				$obj = pg_fetch_object($rs,0 );
+				$presentation->setId($obj->id_presentation);
+				$presentation->setTitle($obj->title);
+				$presentation->setIsbn($obj->isbn);
+				$presentation->setDatePublished($obj->datepublished);
+				$presentation->setEditorial($obj->editorial);
+				$presentation->setAvailable($obj->available);
+				$presentation->setUrl($obj->url);
+				$presentation->setAuthors($obj->authors);
+				$presentation->setDescription($obj->description);
+				$presentation->setIdUser($obj->cod_user);
+				$presentation->setCongressName($obj->congressname);
+			}
+		}
 		
 		return $presentation;
 	}
@@ -73,7 +79,7 @@ class PresentationDAO implements DAO
 	public function create ($newPresentation){
 		
 		$query="INSERT INTO presentation VALUES(0,'".$newPresentation->getTitle()."','".$newPresentation->getISBN()."','".$newPresentation->getDatePublished()."','".$newPresentation->getEditorial()."','".$newPresentation->getAvailable()."','".$newPresentation->getUrl()."','".$newPresentation->getAuthors()."','".$newPresentation->getDescription()."','".$newPresentation->getIdUser()."','".$newPresentation->getCongressName()."');";
-		mysqli_query($this->connection, $query);
+		pg_query($this->connection, $query);
 
 	}
 
@@ -85,7 +91,7 @@ class PresentationDAO implements DAO
 	public function modify ($presentation){
 
 		$query="UPDATE presentation SET title='".$presentation->getTitle()."', isbn ='".$presentation->getIsbn()."', datePublished='".$presentation->getDatePublished()."', editorial='".$presentation->getEditorial()."', available='".$presentation->getAvailable()."', url='".$presentation->getUrl()."', authors='".$presentation->getAuthors()."', description='".$presentation->getDescription()."' WHERE id_presentation= ".$presentation->getId();
-		mysqli_query($this->connection,$query);
+		pg_query($this->connection,$query);
 	}
 
 	/**
@@ -94,23 +100,27 @@ class PresentationDAO implements DAO
 	 */
 	public function listAll(){
 		$query="SELECT * FROM presentation";
-		if(!$result = mysqli_query($this->connection, $query)) die();
+		$rs = pg_query( $this->connection, $query );
 		$presentations = array();
-		while ($row = mysqli_fetch_array($result)) {
-			$presentation=new Presentation();
-			$presentation->setId($row["id_presentation"]);
-			$presentation->setTitle($row["title"]);
-			$presentation->setIsbn($row["isbn"]);
-			$presentation->setDatePublished($row["datePublished"]);
-			$presentation->setEditorial($row["editorial"]);
-			$presentation->setAvailable($row["available"]);
-			$presentation->setUrl($row["url"]);
-			$presentation->setAuthors($row["authors"]);
-			$presentation->setDescription($row["description"]);
-			$presentation->setIdUser($row["cod_user"]);
-			$presentation->setCongressName($row["congressName"]);
-			
-			array_push($presentations,$presentation);
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$presentation=new Presentation();
+					$presentation->setId($obj->id_presentation);
+					$presentation->setTitle($obj->title);
+					$presentation->setIsbn($obj->isbn);
+					$presentation->setDatePublished($obj->datepublished);
+					$presentation->setEditorial($obj->editorial);
+					$presentation->setAvailable($obj->available);
+					$presentation->setUrl($obj->url);
+					$presentation->setAuthors($obj->authors);
+					$presentation->setDescription($obj->description);
+					$presentation->setIdUser($obj->cod_user);
+					$presentation->setCongressName($obj->congressname);
+					
+					array_push($presentations,$presentation);
+			   }
+			}
 		}
 		return $presentations;
 	}

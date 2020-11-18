@@ -11,9 +11,6 @@ if(isset($_POST['login'])){
     $email=$_POST["email"];
     $password=$_POST["password"];
 
-    if($connection->connect_error){
-        die("Problema de conexión con la base de datos: ".$connection->connect_error);
-    }
     ManageUser::setConnectionBD($connection);
     $validUser=ManageUser::login($email, $password);
 
@@ -42,7 +39,7 @@ if(isset($_POST['login'])){
         }
     }
 
-    mysqli_close($connection);
+    $con->turnOffBD($connection);
 }
 ?>
 <!-- Start: Page Banner -->

@@ -37,7 +37,6 @@ class ScienceArticleDAO implements DAO
 	private function __construct($connection)
 	{
 		$this->connection=$connection;
-		mysqli_set_charset($this->connection, "utf8");
 	}
 
 	/**
@@ -47,19 +46,25 @@ class ScienceArticleDAO implements DAO
 	 */
 	public function consult($id){
 		$query="SELECT * FROM scienceArticle WHERE id_sa=".$id;
-		if(!$result=mysqli_query($this->connection,$query))die();
-		$row=mysqli_fetch_array($result);
+		$rs = pg_query( $this->connection, $query );
 		$scienceArticle = new ScienceArticle();
-		$scienceArticle->setId($row['id_sa']);
-		$scienceArticle->setTitle($row["title"]);
-		$scienceArticle->setSSN($row["ssn"]);
-		$scienceArticle->setDatePublished($row["datePublished"]);
-		$scienceArticle->setEditorial($row["editorial"]);
-		$scienceArticle->setAvailable($row["available"]);
-		$scienceArticle->setUrl($row["url"]);
-		$scienceArticle->setAuthors($row["authors"]);
-		$scienceArticle->setDescription($row["description"]);
-		$scienceArticle->setIdUser($row["cod_user"]);
+
+		if( $rs )
+        {
+             if( pg_num_rows($rs) > 0 )
+            {
+				$scienceArticle->setId($obj->id_sa);
+				$scienceArticle->setTitle($obj->title);
+				$scienceArticle->setSSN($obj->ssn);
+				$scienceArticle->setDatePublished($obj->datepublished);
+				$scienceArticle->setEditorial($obj->editorial);
+				$scienceArticle->setAvailable($obj->available);
+				$scienceArticle->setUrl($obj->url);
+				$scienceArticle->setAuthors($obj->authors);
+				$scienceArticle->setDescription($obj->description);
+				$scienceArticle->setIdUser($obj->cod_user);
+			}
+		}
 		
 		return $scienceArticle;
 	}
@@ -72,7 +77,7 @@ class ScienceArticleDAO implements DAO
 	public function create ($newArticle){
 		
 		$query="INSERT INTO scienceArticle VALUES(0,'".$newArticle->getTitle()."','".$newArticle->getSSN()."','".$newArticle->getDatePublished()."','".$newArticle->getEditorial()."','".$newArticle->getAvailable()."','".$newArticle->getUrl()."','".$newArticle->getAuthors()."','".$newArticle->getDescription()."',".$newArticle->getIdUser().");";
-		mysqli_query($this->connection, $query);
+		pg_query($this->connection, $query);
 
 	}
 
@@ -84,7 +89,7 @@ class ScienceArticleDAO implements DAO
 	public function modify ($scienceArticle){
 
 		$query="UPDATE scienceArticle SET title='".$scienceArticle->getTitle()."', ssn ='".$scienceArticle->getSSN()."', datePublished='".$scienceArticle->getDatePublished()."', editorial='".$scienceArticle->getEditorial()."', available='".$scienceArticle->getAvailable()."', url='".$scienceArticle->getUrl()."', authors='".$scienceArticle->getAuthors()."', description='".$scienceArticle->getDescription()."' WHERE id_sa= ".$scienceArticle->getId();
-		mysqli_query($this->connection,$query);
+		pg_query($this->connection,$query);
 	}
 
 	/**
@@ -93,22 +98,26 @@ class ScienceArticleDAO implements DAO
 	 */
 	public function listAll(){
 		$query="SELECT * FROM scienceArticle";
-		if(!$result = mysqli_query($this->connection, $query)) die();
+		$rs = pg_query( $this->connection, $query );
 		$articles = array();
-		while ($row = mysqli_fetch_array($result)) {
-			$scienceArticle=new scienceArticle();
-			$scienceArticle->setId($row["id_sa"]);
-			$scienceArticle->setTitle($row["title"]);
-			$scienceArticle->setSSN($row["ssn"]);
-			$scienceArticle->setDatePublished($row["datePublished"]);
-			$scienceArticle->setEditorial($row["editorial"]);
-			$scienceArticle->setAvailable($row["available"]);
-			$scienceArticle->setUrl($row["url"]);
-			$scienceArticle->setAuthors($row["authors"]);
-			$scienceArticle->setDescription($row["description"]);
-			$scienceArticle->setIdUser($row["cod_user"]);
-			
-			array_push($articles,$scienceArticle);
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$scienceArticle=new scienceArticle();			
+					$scienceArticle->setId($obj->id_sa);
+					$scienceArticle->setTitle($obj->title);
+					$scienceArticle->setSSN($obj->ssn);
+					$scienceArticle->setDatePublished($obj->datepublished);
+					$scienceArticle->setEditorial($obj->editorial);
+					$scienceArticle->setAvailable($obj->available);
+					$scienceArticle->setUrl($obj->url);
+					$scienceArticle->setAuthors($obj->authors);
+					$scienceArticle->setDescription($obj->description);
+					$scienceArticle->setIdUser($obj->cod_user);
+					
+					array_push($articles,$scienceArticle);
+			   }
+			}
 		}
 		return $articles;
 	}
