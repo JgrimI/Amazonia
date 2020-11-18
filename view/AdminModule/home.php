@@ -1,4 +1,12 @@
 <div data-ride="carousel" class="carousel slide" id="home-v1-header-carousel">
+<?php
+include_once('graphics.php');
+?>
+<script>
+   window.onload=function(){
+    graf();
+  };
+</script>
 
     <!-- Carousel slides -->
     <div class="carousel-inner">
@@ -24,7 +32,7 @@
                   <div class="grid-body">
                     <h3>Grafico de barras</h3>
                     <div class="item-wrapper">
-                      <canvas id="chartjs-bar-chart" width="600" height="400"></canvas>
+                      <canvas id="bar-graphic1" width="600" height="400"></canvas>
                     </div>
                   </div>
                 </div>

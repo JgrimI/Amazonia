@@ -3,7 +3,7 @@
 
 // THEME COLORS
 var style = getComputedStyle(document.body);
-var chartColors = ["#34AD00", "#FF7236", "#2e8036", "#00cccc", "#C6FC6F", "#F9B81E"];
+var chartColors = ["#34AD00", "#FF7236", "#2e8036", "#7BC043", "#C6FC6F", "#F9B81E"];
 var primaryColor = style.getPropertyValue('--primary');
 var secondaryColor = style.getPropertyValue('--secondary');
 var successColor = style.getPropertyValue('--success');
