@@ -2,6 +2,7 @@
 require_once('../business/ManageBook.php');
 require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
+require_once('../business/ManageUser.php');
 require_once('../persistence/util/Connection.php');
 
 $con = new Connection();
@@ -15,6 +16,9 @@ $papers = ManagePresentation::listAll();
 
 ManageScienceArticle::setConnectionBD($connection);
 $articles = ManageScienceArticle::listAll();
+
+ManageUser::setConnectionBD($connection);
+$users = ManageUser::listAll();
 
 ?>
 <script>
@@ -54,14 +58,14 @@ function graf() {
       labels: ["Books", "Papers", "Articles"],
       datasets: [{
           label: 'Aviable',
-          data: [<?php $numBooksY?>, <?php $numPapersY?>, <?php $numArticlesY?>],
+          data: [<?php echo $numBooksY?>, <?php echo $numPapersY?>, <?php echo $numArticlesY?>],
           backgroundColor: chartColors[0],
           borderColor: chartColors[0],
           borderWidth: 0
         },
         {
           label: 'Not Aviable',
-          data: [<?php $numBooksN?>, <?php $numPapersN?>, <?php $numArticlesN?>],
+          data: [<?php echo $numBooksN?>, <?php echo $numPapersN?>, <?php echo $numArticlesN?>],
           backgroundColor: chartColors[1],
           borderColor: chartColors[1],
           borderWidth: 0
@@ -90,6 +94,54 @@ function graf() {
       }
     });
   }
+
+  if ($("#donut-graphic1").length) {
+    <?php
+    $numUsersA =0;
+    $numUsersD =0;
+
+   
+    foreach($users as $user){
+      if ($user->getStatus()=='activo') {
+        $numUsersA += 1;
+      } else {
+        $numUsersD += 1;
+      }
+    }
+    
+    ?> 
+    var DoughnutData = {
+      datasets: [{
+        data: [<?php echo $numUsersA?>, <?php echo $numUsersD?>],
+        backgroundColor: chartColors,
+        borderColor: chartColors,
+        borderWidth: chartColors
+      }],
+      labels: [
+        'Usuarios Activos',
+        'Usuarios Inactivos',
+      ]
+    };
+    var DoughnutOptions = {
+      responsive: true,
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      }
+    };
+    var doughnutChartCanvas = $("#donut-graphic1").get(0).getContext("2d");
+    var doughnutChart = new Chart(doughnutChartCanvas, {
+      type: 'doughnut',
+      data: DoughnutData,
+      options: DoughnutOptions
+    });
+  }
+
+
+
+
+
+
 }
 
 </script>

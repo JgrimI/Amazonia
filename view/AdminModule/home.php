@@ -14,34 +14,8 @@ include_once('graphics.php');
         <figure>
             <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
         </figure>
-        <div class="container">
-            <div class="carousel-caption">
-              <div class="col-md-6">
-                <div class="grid">
-                  <div class="grid-body">
-                    <h3>Grafico de donut</h3>
-                    <div class="item-wrapper">
-                      <canvas id="chartjs-doughnut-chart" width="600" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="grid">
-                  <div class="grid-body">
-                    <h3>Grafico de barras</h3>
-                    <div class="item-wrapper">
-                      <canvas id="bar-graphic1" width="600" height="400"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
 
         
-
         </div>
         <div class="item">
             <figure>
@@ -117,58 +91,31 @@ include_once('graphics.php');
         <div class="row">
             <div class="col-md-6">
                 <div class="welcome-wrap">
-                    <div class="welcome-text">
-                        <h2 class="section-title">Welcome to Amazonía en Linea</h2>
-                        <span class="underline left"></span>
-                        <p class="lead">Celebrating Words, Ideas and Community</p>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                            have suffered alteration in some form, by injected humor, or randomized words
-                            which don't look even slightly believable. If you are going to use
-                            a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
-                            hidden in the middle of text. All the Lorem Ipsum generators on the Internet
-                            tend to repeat predefined chunks as necessary, making this the
-                            first true generator on the Internet. It uses a dictionary of over 200 Latin
-                            words, combined with a handful of model sentence structures, to generate Lorem
-                            Ipsum which looks reasonable. The generated Lorem Ipsum is therefore
-                            always free from repetition, injected humor, or non-characteristic words etc.
-                        </p>
-                        <a class="btn btn-primary" href="#">Read More</a>
+                <div class="container">
+            
+              <div class="col-md-6">
+                <div class="grid">
+                  <div class="grid-body">
+                    <h3>Active Users graphic </h3>
+                    <div class="item-wrapper">
+                      <canvas id="donut-graphic1" width="600" height="400"></canvas>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="facts-counter">
-                    <ul>
-                        <li class="bg-light-green">
-                            <div class="fact-item">
-                                <div class="fact-icon">
-                                    <i class="ebook"></i>
-                                </div>
-                                <span>Books<strong class="fact-counter">45780</strong></span>
-                            </div>
-                        </li>
-                        <li class="bg-yellow">
-                            <div class="fact-item">
-                                <div class="fact-icon">
-                                    <i class="eaudio"></i>
-                                </div>
-                                <span>Lectures<strong class="fact-counter">32450</strong></span>
-                            </div>
-                        </li>
-                        <li class="bg-red">
-                            <div class="fact-item">
-                                <div class="fact-icon">
-                                    <i class="magazine"></i>
-                                </div>
-                                <span>Scientific <br>Articles<strong class="fact-counter">14450</strong></span>
-                            </div>
-                        </li>
-                    </ul>
+              </div>
+
+              <div class="col-md-6">
+                <div class="grid">
+                  <div class="grid-body">
+                    <h3>Documents number graphic</h3>
+                    <div class="item-wrapper">
+                      <canvas id="bar-graphic1" width="600" height="400"></canvas>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
         </div>
-    </div>
-    <div class="welcome-image"></div>
 </section>
 <!-- End: Welcome Section -->
 
