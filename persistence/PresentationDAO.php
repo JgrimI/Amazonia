@@ -53,17 +53,18 @@ class PresentationDAO implements DAO
         {
              if( pg_num_rows($rs) > 0 )
             {
+				$obj = pg_fetch_object($rs,0 );
 				$presentation->setId($obj->id_presentation);
 				$presentation->setTitle($obj->title);
 				$presentation->setIsbn($obj->isbn);
-				$presentation->setDatePublished($obj->datePublished);
+				$presentation->setDatePublished($obj->datepublished);
 				$presentation->setEditorial($obj->editorial);
 				$presentation->setAvailable($obj->available);
 				$presentation->setUrl($obj->url);
 				$presentation->setAuthors($obj->authors);
 				$presentation->setDescription($obj->description);
 				$presentation->setIdUser($obj->cod_user);
-				$presentation->setCongressName($obj->congressName);
+				$presentation->setCongressName($obj->congressname);
 			}
 		}
 		
@@ -108,14 +109,14 @@ class PresentationDAO implements DAO
 					$presentation->setId($obj->id_presentation);
 					$presentation->setTitle($obj->title);
 					$presentation->setIsbn($obj->isbn);
-					$presentation->setDatePublished($obj->datePublished);
+					$presentation->setDatePublished($obj->datepublished);
 					$presentation->setEditorial($obj->editorial);
 					$presentation->setAvailable($obj->available);
 					$presentation->setUrl($obj->url);
 					$presentation->setAuthors($obj->authors);
 					$presentation->setDescription($obj->description);
 					$presentation->setIdUser($obj->cod_user);
-					$presentation->setCongressName($obj->congressName);
+					$presentation->setCongressName($obj->congressname);
 					
 					array_push($presentations,$presentation);
 			   }

@@ -56,7 +56,7 @@ class ScienceArticleDAO implements DAO
 				$scienceArticle->setId($obj->id_sa);
 				$scienceArticle->setTitle($obj->title);
 				$scienceArticle->setSSN($obj->ssn);
-				$scienceArticle->setDatePublished($obj->datePublished);
+				$scienceArticle->setDatePublished($obj->datepublished);
 				$scienceArticle->setEditorial($obj->editorial);
 				$scienceArticle->setAvailable($obj->available);
 				$scienceArticle->setUrl($obj->url);
@@ -102,11 +102,12 @@ class ScienceArticleDAO implements DAO
 		$articles = array();
 		if( $rs ){
 			if( pg_num_rows($rs) > 0 ){
-			   while( $obj = pg_fetch_object($rs) ){			$scienceArticle=new scienceArticle();
+			   while( $obj = pg_fetch_object($rs) ){
+					$scienceArticle=new scienceArticle();			
 					$scienceArticle->setId($obj->id_sa);
 					$scienceArticle->setTitle($obj->title);
 					$scienceArticle->setSSN($obj->ssn);
-					$scienceArticle->setDatePublished($obj->datePublished);
+					$scienceArticle->setDatePublished($obj->datepublished);
 					$scienceArticle->setEditorial($obj->editorial);
 					$scienceArticle->setAvailable($obj->available);
 					$scienceArticle->setUrl($obj->url);

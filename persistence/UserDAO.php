@@ -53,6 +53,7 @@ class UserDAO implements DAO
         {
              if( pg_num_rows($rs) > 0 )
             {
+				$obj = pg_fetch_object($rs,0 );
 				$user->setId($obj->cod_user);
 				$user->setPassword($obj->pass_user);
 				$user->setEmail($obj->email_user);
@@ -76,6 +77,7 @@ class UserDAO implements DAO
         {
              if( pg_num_rows($rs) > 0 )
             {
+				$obj = pg_fetch_object($rs,0 );
 				$user->setId($obj->cod_user);
 				$user->setPassword($obj->pass_user);
 				$user->setEmail($obj->email_user);

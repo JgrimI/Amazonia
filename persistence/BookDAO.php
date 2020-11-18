@@ -56,7 +56,7 @@ class BookDAO implements DAO
 				$book->setId($obj->id_book);
 				$book->setTitle($obj->title);
 				$book->setIsbn($obj->isbn);
-				$book->setDatePublished($obj->datePublished);
+				$book->setDatePublished($obj->datepublished);
 				$book->setEditorial($obj->editorial);
 				$book->setAvailable($obj->available);
 				$book->setUrl($obj->url);
@@ -108,7 +108,7 @@ class BookDAO implements DAO
 					$book->setId($obj->id_book);
 					$book->setTitle($obj->title);
 					$book->setIsbn($obj->isbn);
-					$book->setDatePublished($obj->datePublished);
+					$book->setDatePublished($obj->datepublished);
 					$book->setEditorial($obj->editorial);
 					$book->setAvailable($obj->available);
 					$book->setUrl($obj->url);

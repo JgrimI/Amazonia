@@ -11,9 +11,6 @@ $email=$_POST["email"];
 $password=$_POST["password"];
 $name=$_POST['name'];
 
-if($connection->connect_error){
-	die("Problema de conexión con la base de datos: ".$connection->connect_error);
-}
 ManageUser::setConnectionBD($connection);
 $validUser=ManageUser::consultByMail($email);
 if($validUser->getId()!=''){
@@ -36,7 +33,7 @@ if($validUser->getId()!=''){
 
 
 
-mysqli_close($connection);
+$con->turnOffBD($connection);
 
 
 ?>
