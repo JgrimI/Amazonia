@@ -38,7 +38,6 @@ class UserDAO implements DAO
 	private function __construct($connection)
 	{
 		$this->connection=$connection;
-		mysqli_set_charset($this->connection, "utf8");
 	}
 
 	/**
@@ -47,18 +46,21 @@ class UserDAO implements DAO
 	 * @return [user]         user encontrado
 	 */
 	public function consult($id){
-		$query="SELECT * FROM user WHERE cod_user=".$id;
-		if(!$result=mysqli_query($this->connection,$query))die();
-		$row=mysqli_fetch_array($result);
+		$query="SELECT * FROM usr WHERE cod_user=".$id;
+		$rs = pg_query( $this->connection, $query );
 		$user = new User();
-		$user->setId($row['cod_user']);
-		$user->setPassword($row['pass_user']);
-		$user->setEmail($row['email_user']);
-		$user->setStatus($row['status_user']);
-		$user->setName($row['name_user']);
-
+		if( $rs )
+        {
+             if( pg_num_rows($rs) > 0 )
+            {
+				$user->setId($obj->cod_user);
+				$user->setPassword($obj->pass_user);
+				$user->setEmail($obj->email_user);
+				$user->setStatus($obj->status_user);
+				$user->setName($obj->name_user);
+			}
+		}
 		return $user;
-
 	}
 
 	/**
@@ -67,16 +69,20 @@ class UserDAO implements DAO
 	 * @return [user]         user encontrado
 	 */
 	public function consultByMail($email){
-		$query="SELECT * FROM user WHERE email_user='".$email."'";
-		if(!$result=mysqli_query($this->connection,$query))die();
-		$row=mysqli_fetch_array($result);
+		$query="SELECT * FROM usr WHERE email_user='".$email."'";
+		$rs = pg_query( $this->connection, $query );
 		$user = new User();
-		$user->setId($row['cod_user']);
-		$user->setPassword($row['pass_user']);
-		$user->setEmail($row['email_user']);
-		$user->setStatus($row['status_user']);
-		$user->setName($row['name_user']);
-
+		if( $rs )
+        {
+             if( pg_num_rows($rs) > 0 )
+            {
+				$user->setId($obj->cod_user);
+				$user->setPassword($obj->pass_user);
+				$user->setEmail($obj->email_user);
+				$user->setStatus($obj->status_user);
+				$user->setName($obj->name_user);
+			}
+		}
 		return $user;
 
 	}
@@ -88,8 +94,8 @@ class UserDAO implements DAO
 	public function create ($newUser){
 		$password = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
 
-		$query="INSERT INTO user VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."');";
-		mysqli_query($this->connection, $query);
+		$query="INSERT INTO usr VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."');";
+		pg_query($this->connection, $query);
 
 	}
 
@@ -100,8 +106,8 @@ class UserDAO implements DAO
 	 */
 	public function modify ($user){
 		$password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
-		$query="UPDATE user SET name_user='".$user->getName()."', email_user ='".$user->getEmail()."', pass_user='".$password."', status_user='".$user->getStatus()."' WHERE cod_user= ".$user->getId();
-		mysqli_query($this->connection,$query);
+		$query="UPDATE usr SET name_user='".$user->getName()."', email_user ='".$user->getEmail()."', pass_user='".$password."', status_user='".$user->getStatus()."' WHERE cod_user= ".$user->getId();
+		pg_query($this->connection,$query);
 	}
 
 	/**
@@ -109,20 +115,23 @@ class UserDAO implements DAO
 	 * @return [users]
 	 */
 	public function listAll(){
-		$query="SELECT * FROM user";
-		if(!$result = mysqli_query($this->connection, $query)) die();
+		$query="SELECT * FROM usr";
+		$rs = pg_query( $this->connection, $query );
 		$users = array();
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$user=new user();
 
-		while ($row = mysqli_fetch_array($result)) {
-			$user=new user();
+					$user->setId($obj->cod_user);
+					$user->setName($obj->name_user);
+					$user->setEmail($obj->email_user);
+					$user->setPassword($obj->pass_user);
+					$user->setStatus($obj->status_user);
 
-			$user->setId($row["cod_user"]);
-			$user->setName($row["name_user"]);
-			$user->setEmail($row["email_user"]);
-			$user->setPassword($row["pass_user"]);
-			$user->setStatus($row["status_user"]);
-
-			array_push($users,$user);
+					array_push($users,$user);
+			   }
+			}
 		}
 		return $users;
 	}

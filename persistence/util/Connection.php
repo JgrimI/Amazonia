@@ -9,17 +9,12 @@
 		 * @return Object $connection Devuelve un objeto para conectar con la base de datos en caso de éxito y false en caso de error
 		 */
 		public function conectBD(){
-			 $server = "35.184.25.215";
-			 $user = "prueba";
-			 $pass = "1234";
-
-
-			$bd = "amazonia";
-			$port = "3306";
-			$connection = mysqli_connect($server, $user, $pass,$bd,$port)
-			or die("Ha sucedido un error inesperado en la connection de la base de datos");
-
-			return $connection;
+			$conexion = pg_connect( "user= user ".
+                                "password=123 ".
+                                "host=35.192.145.149 ".
+                                "dbname=amazonia"
+                               ) or die( "Error al conectar: ".pg_last_error() );
+        	return $conexion;
 		}
 
 		/**
@@ -29,9 +24,7 @@
 		 */
 		public function turnOffBD($connection){
 
-			$close = mysqli_close($connection)
-			or die("Ha sucedido un error inexperado en la desconnection de la base de datos");
-
+			$close = pg_close($connection);
 			return $close;
 		}
 	}

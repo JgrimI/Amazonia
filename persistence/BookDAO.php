@@ -37,7 +37,6 @@ class BookDAO implements DAO
 	private function __construct($connection)
 	{
 		$this->connection=$connection;
-		mysqli_set_charset($this->connection, "utf8");
 	}
 
 	/**
@@ -47,21 +46,27 @@ class BookDAO implements DAO
 	 */
 	public function consult($id){
 		$query="SELECT * FROM book WHERE id_book=".$id;
-		if(!$result=mysqli_query($this->connection,$query))die();
-		$row=mysqli_fetch_array($result);
+		$rs = pg_query( $this->connection, $query );
 		$book = new Book();
-		$book->setId($row['id_book']);
-		$book->setTitle($row["title"]);
-		$book->setIsbn($row["isbn"]);
-		$book->setDatePublished($row["datePublished"]);
-		$book->setEditorial($row["editorial"]);
-		$book->setAvailable($row["available"]);
-		$book->setUrl($row["url"]);
-		$book->setAuthors($row["authors"]);
-		$book->setDescription($row["description"]);
-		$book->setIdUser($row["cod_user"]);
-		$book->setNumPages($row["num_pages"]);
-		
+		if( $rs )
+        {
+             if( pg_num_rows($rs) > 0 )
+            {
+				$obj = pg_fetch_object($rs,0 );
+				$book->setId($obj->id_book);
+				$book->setTitle($obj->title);
+				$book->setIsbn($obj->isbn);
+				$book->setDatePublished($obj->datePublished);
+				$book->setEditorial($obj->editorial);
+				$book->setAvailable($obj->available);
+				$book->setUrl($obj->url);
+				$book->setAuthors($obj->authors);
+				$book->setDescription($obj->description);
+				$book->setIdUser($obj->cod_user);
+				$book->setNumPages($obj->num_pages);
+            }
+            
+		}
 		return $book;
 	}
 
@@ -73,7 +78,7 @@ class BookDAO implements DAO
 	public function create ($newBook){
 		
 		$query="INSERT INTO book VALUES(0,'".$newBook->getTitle()."','".$newBook->getISBN()."','".$newBook->getDatePublished()."','".$newBook->getEditorial()."','".$newBook->getAvailable()."','".$newBook->getUrl()."','".$newBook->getAuthors()."','".$newBook->getDescription()."','".$newBook->getIdUser()."','".$newBook->getNumPages()."');";
-		mysqli_query($this->connection, $query);
+		pg_query($this->connection, $query);
 
 	}
 
@@ -85,7 +90,7 @@ class BookDAO implements DAO
 	public function modify ($book){
 
 		$query="UPDATE book SET title='".$book->getTitle()."', isbn ='".$book->getIsbn()."', datePublished='".$book->getDatePublished()."', editorial='".$book->getEditorial()."', available='".$book->getAvailable()."', url='".$book->getUrl()."', authors='".$book->getAuthors()."', description='".$book->getDescription()."', num_pages='".$book->getNumPages()."' WHERE id_book= ".$book->getId();
-		mysqli_query($this->connection,$query);
+		pg_query($this->connection,$query);
 	}
 
 	/**
@@ -94,23 +99,27 @@ class BookDAO implements DAO
 	 */
 	public function listAll(){
 		$query="SELECT * FROM book";
-		if(!$result = mysqli_query($this->connection, $query)) die();
+		$rs = pg_query( $this->connection, $query );
 		$books = array();
-		while ($row = mysqli_fetch_array($result)) {
-			$book=new book();
-			$book->setId($row["id_book"]);
-			$book->setTitle($row["title"]);
-			$book->setIsbn($row["isbn"]);
-			$book->setDatePublished($row["datePublished"]);
-			$book->setEditorial($row["editorial"]);
-			$book->setAvailable($row["available"]);
-			$book->setUrl($row["url"]);
-			$book->setAuthors($row["authors"]);
-			$book->setDescription($row["description"]);
-			$book->setIdUser($row["cod_user"]);
-			$book->setNumPages($row["num_pages"]);
-			
-			array_push($books,$book);
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$book=new book();
+					$book->setId($obj->id_book);
+					$book->setTitle($obj->title);
+					$book->setIsbn($obj->isbn);
+					$book->setDatePublished($obj->datePublished);
+					$book->setEditorial($obj->editorial);
+					$book->setAvailable($obj->available);
+					$book->setUrl($obj->url);
+					$book->setAuthors($obj->authors);
+					$book->setDescription($obj->description);
+					$book->setIdUser($obj->cod_user);
+					$book->setNumPages($obj->num_pages);
+					
+					array_push($books,$book);
+			   }
+			}
 		}
 		return $books;
 	}
