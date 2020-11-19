@@ -14,7 +14,6 @@ if(isset($_POST["cod"])){
     $php=$_POST['cod'];
     $aux = ManageBook::consult($php);
     if($aux->getAvailable()=='Y'){
-        echo 'entra y';
         $aux->setAvailable('N');
         ManageBook::modify($aux);
     }
