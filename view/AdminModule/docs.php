@@ -49,6 +49,24 @@ if(isset($_POST["cod"])){
     }    
 }
 
+if(isset($_POST["all"])){
+    $books = ManageBook::listAll();
+    foreach($books as $book){
+        $book->setAvailable('Y');
+        ManageBook::modify($book);
+    }
+    $books = ManagePresentation::listAll();
+    foreach($books as $book){
+        $book->setAvailable('Y');
+        ManagePresentation::modify($book);
+    }
+    $books = ManageScienceArticle::listAll();
+    foreach($books as $book){
+        $book->setAvailable('Y');
+        ManageScienceArticle::modify($book);
+    }
+}
+
 $books = ManageBook::listAll();
 
 $table='<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
@@ -56,7 +74,6 @@ foreach($books as $book){
     $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
 }
-
 
 
 $books = ManagePresentation::listAll();
@@ -74,6 +91,7 @@ foreach($books as $book){
 }
 $table.='</tbody></table>';
 
+$all='<form method="POST"><input type="hidden" name="all" value="enable"><button type="submit">Enable All</button></form>';
 
 ?>
 <style>
@@ -154,7 +172,8 @@ $table.='</tbody></table>';
             <div class="booksmedia-detail-main">
                 <div class="container">
                     <br><br>
-                    <?php echo $table; ?>
+                    <?php echo $all; 
+                          echo $table;?>
                 </div>
             </div>
         </main>
