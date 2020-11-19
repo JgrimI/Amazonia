@@ -56,7 +56,7 @@
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">Cruds</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="?menu=docs">Dcouments</a></li>
+                                    <li><a href="?menu=docs">Documents</a></li>
                                     <li><a href="?menu=users">Users</a></li>
                                 </ul>
                             </li>

@@ -116,15 +116,18 @@ include_once('graphics.php');
 <section class="features">
     <div class="container">
         <ul>
-            <li class="bg-yellow">
+        <li class="bg-yellow">
                 <div class="feature-box">
                     <i class="yellow"></i>
                     <h3>Books</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
                         pulvinar varius dui id, convallis iaculis eros.</p>
-                    <a class="yellow" href="#">
-                        View Selection <i class="fa fa-long-arrow-right"></i>
-                    </a>
+                    <form action="?menu=books" method="post" id="form1">
+                    <input type="hidden" name="t" id="t" value="book">
+                    <input type="hidden" name="keywords" id="keywords">
+                    <a href="javascript:void(0);" class="yellow" onclick="document.getElementById('form1').submit();">View Selection <i class="fa fa-long-arrow-right"></i></a>
+                    </form>
+
                 </div>
             </li>
             <li class="bg-light-green">
@@ -133,9 +136,11 @@ include_once('graphics.php');
                     <h3>Lectures</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
                         pulvinar varius dui id, convallis iaculis eros.</p>
-                    <a class="light-green" href="#">
-                        View Selection <i class="fa fa-long-arrow-right"></i>
-                    </a>
+                    <form action="?menu=books" method="post" id="form2">
+                        <input type="hidden" name="t" id="t" value="presentation">
+                        <input type="hidden" name="keywords" id="keywords">
+                        <a href="javascript:void(0);" class="yellow" onclick="document.getElementById('form2').submit();">View Selection <i class="fa fa-long-arrow-right"></i></a>
+                    </form>
                 </div>
             </li>
             <li class="bg-red">
@@ -144,9 +149,11 @@ include_once('graphics.php');
                     <h3>Scientific Articles</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
                         pulvinar varius dui id, convallis iaculis eros.</p>
-                    <a class="red" href="#">
-                        View Selection <i class="fa fa-long-arrow-right"></i>
-                    </a>
+                    <form action="?menu=books" method="post" id="form3">
+                        <input type="hidden" name="t" id="t" value="sa">
+                        <input type="hidden" name="keywords" id="keywords">
+                        <a href="javascript:void(0);" class="yellow" onclick="document.getElementById('form3').submit();">View Selection <i class="fa fa-long-arrow-right"></i></a>
+                    </form>
                 </div>
             </li>
         </ul>
