@@ -6,11 +6,28 @@ $con = new Connection();
 $connection = $con->conectBD();
 
 ManageUser::setConnectionBD($connection);
+
+if(isset($_POST["cod"])){
+    $php=$_POST['cod'];
+        $aux = ManageUser::consult($php);
+        if($aux->getStatus()=='activo'){
+            $aux->setStatus('inactivo');
+            ManageUser::modify($aux);
+        }
+        else{
+            $aux->setStatus('activo');
+            ManageUser::modify($aux);   
+        }
+    }
+    
+
+
+
 $users = ManageUser::listAll();
-$table='<table class="table" id="myTable"><thead><th>Name</th><th>Email</th><th>Status</th><th>Actions</th></thead><tbody>';
+$table='<table class="table" id="myTable"><thead><th>Name</th><th>Email</th><th>Status</th></thead><tbody>';
 foreach($users as $user){
-    $ico=($user->getStatus()=='activo') ? 'Active <i class="fa fa-check" style="color:green;"></i>' : 'Inactive <i class="fa fa-times"></i>';
-    $table.='<tr><td>'.$user->getName().'</td><td>'.$user->getEmail().'</td><td><center>'.$ico.'</center></td><td><center><button class="btn btn-primary" style="width:30%;height:12px;">Disabled</button></center></td></tr>';
+    $ico=($user->getStatus()=='activo') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$user->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i style="color:green;">Enabled</i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$user->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i style="color:red;">Disabled</i></button></form>';;
+    $table.='<tr><td>'.$user->getName().'</td><td>'.$user->getEmail().'</td><td>'.$ico.'</td></tr>';
 }
 $table.='</tbody></table>';
 
@@ -36,6 +53,40 @@ $table.='</tbody></table>';
     .col-md-3 {
         width: 22%;
     }
+    .button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #1bcc00;
+}
+
+.btn1:hover {
+  background-color: #1bcc00;
+  color: white;
+}
+
+.btn2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #ff4040;
+}
+
+.btn2:hover {
+  background-color: #ff4040;
+  color: white;
+}
 </style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
