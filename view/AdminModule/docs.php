@@ -10,10 +10,11 @@ $connection = $con->conectBD();
 ManageBook::setConnectionBD($connection);
 
 
-if(isset($_POST["formstatus"])){
+if(isset($_POST["cod"])){
     $php=$_POST['cod'];
     $aux = ManageBook::consult($php);
     if($aux->getAvailable()=='Y'){
+        echo 'entra y';
         $aux->setAvailable('N');
         ManageBook::modify($aux);
     }
@@ -27,7 +28,7 @@ $books = ManageBook::listAll();
 
 $table='<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<form method="POST" id="formstatus" name="formstatus"><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" id="formstatus" name="formstatus"><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
+    $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
 }
 
@@ -36,14 +37,14 @@ ManagePresentation::setConnectionBD($connection);
 $books = ManagePresentation::listAll();
 
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<form method="POST" id="formstatus" name="formstatus"><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" id="formstatus" name="formstatus"><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
+    $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Presentation</td><td>'.$ico.'</td></tr>';
 }
 
 ManageScienceArticle::setConnectionBD($connection);
 $book = ManageScienceArticle::listAll();
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<form method="POST" id="formstatus" name="formstatus"><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" id="formstatus" name="formstatus"><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
+    $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Science Article</td><td>'.$ico.'</td></tr>';
 }
 $table.='</tbody></table>';
