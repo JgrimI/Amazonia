@@ -28,6 +28,20 @@
             return $presentation;
 
         }
+
+        
+        /**
+         * Obtiene un presentationistrador
+        * @param  [String] $presentation [Nombre de presentation del presentationistrador a buscar]
+        * @return [presentationistrador] presentationistrador encontrado
+        */
+        public static function consultByUSer($id){
+
+            $presentationDAO=PresentationDAO::getPresentationDAO(self::$connection);
+            $presentation=$presentationDAO->consultByUser($id);
+            return $presentation;
+
+        }
         
         /**
          * Crea un nuevo presentationi
@@ -71,5 +85,3 @@
             self::$connection = $connection;
         }
     }
-
-?>

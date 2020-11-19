@@ -12,6 +12,9 @@
 		if ($_GET['menu']=='newBook'){
 			include_once('ClientModule/newBook.php');
 		}
+		if ($_GET['menu']=='myBooks'){
+			include_once('ClientModule/myBooks.php');
+		}
 	} else {
 		include_once('ClientModule/home.php');
 	}

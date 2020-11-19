@@ -132,7 +132,7 @@ if(isset($_POST['upload'])){
         <div class="breadcrumb">
             <ul>
                 <li><a href="?menu=home">Home</a></li>
-                <li><a href="?menu=books">Books & Media</a></li>
+                <li><a href="?menu=books">Documents & Media</a></li>
                 <li>Register New Document</li>
             </ul>
         </div>

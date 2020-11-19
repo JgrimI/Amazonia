@@ -40,8 +40,8 @@
                             <li class="dropdown books">
                                 <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=books">Books &amp; Media</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="?menu=books">Books &amp; Media</a></li>
-                                    <li><a href="?menu=details">Books &amp; Media Detail</a></li>
+                                    <li><a href="?menu=books">Documents &amp; Media</a></li>
+                                    <li><a href="?menu=details">Documents &amp; Media Detail</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

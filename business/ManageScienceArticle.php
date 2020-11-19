@@ -30,6 +30,19 @@
         }
         
         /**
+         * Obtiene un bookistrador
+        * @param  [String] $scienceArticle [Nombre de scienceArticle del bookistrador a buscar]
+        * @return [bookistrador] bookistrador encontrado
+        */
+        public static function consultByUser($id){
+
+            $scienceArticleDAO=ScienceArticleDAO::getScienceArticleDAO(self::$connection);
+            $scienceArticle=$scienceArticleDAO->consultByUser($id);
+            return $scienceArticle;
+
+        }
+
+        /**
          * Crea un nuevo booki
          * @param scienceArticle bookistrador a ingresar
          * @return void

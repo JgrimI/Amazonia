@@ -39,10 +39,11 @@
                                 <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=home">Home</a>
                             </li>
                             <li class="dropdown books">
-                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=books">Books &amp; Media</a>
+                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=books">Documents &amp; Media</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="?menu=books">Books &amp; Media</a></li>
+                                    <li><a href="?menu=books">Documents &amp; Media</a></li>
                                     <li><a href="?menu=newBook">Register New Document</a></li>
+                                    <li><a href="?menu=myBooks">My Documents</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
