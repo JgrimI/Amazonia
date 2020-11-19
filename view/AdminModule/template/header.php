@@ -26,9 +26,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="topbar-links">
-                                    <span>Bienvenido <?php echo $_SESSION['name_user']; ?></span>
+                                    <span>Welcome <?php echo $_SESSION['name_user']; ?></span>
                                     <span>|</span>
-                                    <a class="dropdown-grid" href="logout.php">Cerrar sesión</a>
+                                    <a class="dropdown-grid" href="logout.php">Log Out</a>
                                 </div>
                             </div>
                         </div>

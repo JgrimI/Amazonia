@@ -75,7 +75,9 @@ if (!isset($_SESSION['redirect'])) {
             border-right-color: #FF8000!important;
             background-color: #FF8000!important;
         }
-        
+        .item-purchase-banner{
+            display:none;
+        }
     </style>
     <!-- End: Header Section -->
 
