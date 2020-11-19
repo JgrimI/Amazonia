@@ -114,7 +114,7 @@ class PresentationDAO implements DAO
 	public function create($newPresentation)
 	{
 
-		$query = "INSERT INTO presentation VALUES(0,'" . $newPresentation->getTitle() . "','" . $newPresentation->getISBN() . "','" . $newPresentation->getDatePublished() . "','" . $newPresentation->getEditorial() . "','" . $newPresentation->getAvailable() . "','" . $newPresentation->getUrl() . "','" . $newPresentation->getAuthors() . "','" . $newPresentation->getDescription() . "','" . $newPresentation->getIdUser() . "','" . $newPresentation->getCongressName() . "');";
+		$query = "INSERT INTO presentation(title,isbn,datepublished,editorial,available,url,authors,description,cod_user,congressname) VALUES('" . $newPresentation->getTitle() . "','" . $newPresentation->getISBN() . "','" . $newPresentation->getDatePublished() . "','" . $newPresentation->getEditorial() . "','" . $newPresentation->getAvailable() . "','" . $newPresentation->getUrl() . "','" . $newPresentation->getAuthors() . "','" . $newPresentation->getDescription() . "','" . $newPresentation->getIdUser() . "','" . $newPresentation->getCongressName() . "');";
 		pg_query($this->connection, $query);
 	}
 

@@ -110,7 +110,7 @@ class ScienceArticleDAO implements DAO
 	public function create($newArticle)
 	{
 
-		$query = "INSERT INTO scienceArticle VALUES(0,'" . $newArticle->getTitle() . "','" . $newArticle->getSSN() . "','" . $newArticle->getDatePublished() . "','" . $newArticle->getEditorial() . "','" . $newArticle->getAvailable() . "','" . $newArticle->getUrl() . "','" . $newArticle->getAuthors() . "','" . $newArticle->getDescription() . "'," . $newArticle->getIdUser() . ");";
+		$query = "INSERT INTO scienceArticle(title,ssn,datepublished,editorial,available,url,authors,description,cod_user) VALUES('" . $newArticle->getTitle() . "','" . $newArticle->getSSN() . "','" . $newArticle->getDatePublished() . "','" . $newArticle->getEditorial() . "','" . $newArticle->getAvailable() . "','" . $newArticle->getUrl() . "','" . $newArticle->getAuthors() . "','" . $newArticle->getDescription() . "'," . $newArticle->getIdUser() . ");";
 		pg_query($this->connection, $query);
 	}
 

@@ -95,7 +95,7 @@ class AdminDAO implements DAO
 	public function create ($newUser){
 		$password = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
 
-		$query="INSERT INTO administrator VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getEmail()."');";
+		$query="INSERT INTO administrator(name_admin,email_admin,pass_admin) VALUES('".$newUser->getName()."','".$password."','".$newUser->getEmail()."');";
 		pg_query($this->connection, $query);
 
 	}

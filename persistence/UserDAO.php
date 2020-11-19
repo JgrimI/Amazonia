@@ -96,7 +96,7 @@ class UserDAO implements DAO
 	public function create ($newUser){
 		$password = password_hash($newUser->getPassword(), PASSWORD_BCRYPT);
 
-		$query="INSERT INTO usr VALUES(0,'".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."');";
+		$query="INSERT INTO usr(name_user,pass_user,status_user,email_user) VALUES('".$newUser->getName()."','".$password."','".$newUser->getStatus()."','".$newUser->getEmail()."');";
 		pg_query($this->connection, $query);
 
 	}

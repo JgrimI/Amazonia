@@ -112,7 +112,7 @@ class BookDAO implements DAO
 	public function create($newBook)
 	{
 
-		$query = "INSERT INTO book VALUES(0,'" . $newBook->getTitle() . "','" . $newBook->getISBN() . "','" . $newBook->getDatePublished() . "','" . $newBook->getEditorial() . "','" . $newBook->getAvailable() . "','" . $newBook->getUrl() . "','" . $newBook->getAuthors() . "','" . $newBook->getDescription() . "','" . $newBook->getIdUser() . "','" . $newBook->getNumPages() . "');";
+		$query = "INSERT INTO book(title,isbn,datepublished,editorial,available,url,authors,description,cod_user,num_pages) VALUES('" . $newBook->getTitle() . "','" . $newBook->getISBN() . "','" . $newBook->getDatePublished() . "','" . $newBook->getEditorial() . "','" . $newBook->getAvailable() . "','" . $newBook->getUrl() . "','" . $newBook->getAuthors() . "','" . $newBook->getDescription() . "','" . $newBook->getIdUser() . "','" . $newBook->getNumPages() . "');";
 		pg_query($this->connection, $query);
 	}
 
