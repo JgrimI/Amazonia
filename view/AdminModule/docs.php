@@ -64,7 +64,7 @@ if (isset($_POST["all"])) {
 
 $books = ManageBook::listAll();
 
-$table = '<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
+$table = '<table class="table text-center" id="myTable" style="text-align-last: center;"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
 foreach ($books as $book) {
     $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
     $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Book</td><td>' . $ico . '</td></tr>';
@@ -86,7 +86,6 @@ foreach ($books as $book) {
 }
 $table .= '</tbody></table>';
 
-$all = '<form method="POST"><input type="hidden" name="all" value="enable"><button type="submit" style="float: right;margin-bottom: -3%;">Enable All</button></form>';
 
 ?>
 <style>
@@ -99,7 +98,6 @@ $all = '<form method="POST"><input type="hidden" name="all" value="enable"><butt
 
     .detailed-box .post-thumbnail {
         display: inline-block;
-        float: left;
         margin: 0px -15px 0px -15px;
         position: relative;
         padding: 0px;
@@ -173,7 +171,12 @@ $all = '<form method="POST"><input type="hidden" name="all" value="enable"><butt
             <div class="booksmedia-detail-main">
                 <div class="container">
                     <br><br>
-                    <?php echo $all;
+                    <form method="POST">
+                        <input type="hidden" name="all" value="enable">
+                        <button type="submit" style="float: right;">Enable All</button>
+                    </form>
+
+                    <?php
                     echo $table; ?>
                 </div>
             </div>
