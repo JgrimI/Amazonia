@@ -11,36 +11,30 @@ include_once('graphics.php');
     <!-- Carousel slides -->
     <div class="carousel-inner">
         <div class="item active">
-        <figure>
-            <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
-        </figure>
-
         
-        </div>
-        <div class="item">
             <figure>
                 <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
             </figure>
             <div class="container">
                 <div class="carousel-caption">
-                    <h3>Online Learning Anytime, Anywhere!</h3>
-                    <h2>Discover Your Roots</h2>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by injected humor, or randomized words.</p>
+                    <h3>Amazonias</h3>
+                    <h2>Libraries and bookstores:</h2>
+                    <p>between inheritances and future</p>
 
                 </div>
             </div>
         </div>
         <div class="item">
             <figure>
-                <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
-            </figure>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Online Learning Anytime, Anywhere!</h3>
-                    <h2>Discover Your Roots</h2>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by injected humor, or randomized words.</p>
+                    <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
+                </figure>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Amazonias</h3>
+                        <h2>Libraries and bookstores:</h2>
+                        <p>between inheritances and future</p>
+    
+                    </div>
                 </div>
             </div>
         </div>
