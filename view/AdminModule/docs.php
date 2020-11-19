@@ -12,7 +12,7 @@ $books = ManageBook::listAll();
 $countbook = 0; 
 $table='<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'book\')"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'book\')"><i class="fa fa-times" style="color:red;"></i></button>';
+    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id)"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id)"><i class="fa fa-times" style="color:red;"></i></button>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
     $countbook++;
 }
@@ -22,7 +22,7 @@ ManagePresentation::setConnectionBD($connection);
 $books = ManagePresentation::listAll();
 
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'pres\')"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'pres\')"><i class="fa fa-times" style="color:red;"></i></button>';
+    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id)"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id)"><i class="fa fa-times" style="color:red;"></i></button>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
     $countbook++;
 }
@@ -30,7 +30,7 @@ foreach($books as $book){
 ManageScienceArticle::setConnectionBD($connection);
 $book = ManageScienceArticle::listAll();
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'art\')"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'art\')"><i class="fa fa-times" style="color:red;"></i></button>';
+    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id)"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id)"><i class="fa fa-times" style="color:red;"></i></button>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
     $countbook++;
 }
@@ -127,35 +127,15 @@ $(document).ready( function () {
     $('#myTable').DataTable();
 } );
 
-    function setColor(b, tt, ty) {
+    function setColor(b) {
         var bu = document.getElementById(b);
         if(bu.className == "btn1") {
             bu.className = "btn2";
             bu.innerHTML = "<i class=\"fa fa-times\" style=\"color:red;\"></i>";
-            if(ty == 'book'){
-
-            }
-            else if(ty == 'pres'){
-
-            }
-            else if(ty == 'art'){
-
-            }
-
        }
        else if(bu.className == "btn2"){
             bu.className = "btn1";
             bu.innerHTML = "<i class=\"fa fa-check\" style=\"color:green;\"></i>";  
-            if(ty == 'book'){
-
-            }
-            else if(ty == 'pres'){
-
-            }
-            else if(ty == 'art'){
-
-            }
-
        }
             
     }
