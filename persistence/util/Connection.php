@@ -11,7 +11,7 @@
 		public function conectBD(){
 			$conexion = pg_connect( "user= user ".
                                 "password=123 ".
-                                "host=35.192.145.149 ".
+                                "host=35.222.249.192 ".
                                 "dbname=amazonia"
                                ) or die( "Error al conectar: ".pg_last_error() );
         	return $conexion;
