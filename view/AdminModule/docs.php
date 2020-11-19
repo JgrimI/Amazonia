@@ -12,56 +12,51 @@ ManagePresentation::setConnectionBD($connection);
 ManageScienceArticle::setConnectionBD($connection);
 
 
-if(isset($_POST["cod"])){
-    $php=$_POST['cod'];
-    if($_POST['tipo'] == 'book'){
+if (isset($_POST["cod"])) {
+    $php = $_POST['cod'];
+    if ($_POST['tipo'] == 'book') {
         $aux = ManageBook::consult($php);
-        if($aux->getAvailable()=='Y'){
+        if ($aux->getAvailable() == 'Y') {
             $aux->setAvailable('N');
             ManageBook::modify($aux);
-        }
-        else{
+        } else {
             $aux->setAvailable('Y');
-            ManageBook::modify($aux);   
+            ManageBook::modify($aux);
         }
-    }
-    else if($_POST['tipo'] == 'presentation'){
+    } else if ($_POST['tipo'] == 'presentation') {
         $aux = ManagePresentation::consult($php);
-        if($aux->getAvailable()=='Y'){
+        if ($aux->getAvailable() == 'Y') {
             $aux->setAvailable('N');
             ManagePresentation::modify($aux);
-        }
-        else{
+        } else {
             $aux->setAvailable('Y');
-            ManagePresentation::modify($aux);   
+            ManagePresentation::modify($aux);
         }
-    }
-    else if($_POST['tipo'] == 'science'){
+    } else if ($_POST['tipo'] == 'science') {
         $aux = ManageScienceArticle::consult($php);
-        if($aux->getAvailable()=='Y'){
+        if ($aux->getAvailable() == 'Y') {
             $aux->setAvailable('N');
             ManageScienceArticle::modify($aux);
-        }
-        else{
+        } else {
             $aux->setAvailable('Y');
-            ManageScienceArticle::modify($aux);   
+            ManageScienceArticle::modify($aux);
         }
-    }    
+    }
 }
 
-if(isset($_POST["all"])){
+if (isset($_POST["all"])) {
     $books = ManageBook::listAll();
-    foreach($books as $book){
+    foreach ($books as $book) {
         $book->setAvailable('Y');
         ManageBook::modify($book);
     }
     $books = ManagePresentation::listAll();
-    foreach($books as $book){
+    foreach ($books as $book) {
         $book->setAvailable('Y');
         ManagePresentation::modify($book);
     }
     $books = ManageScienceArticle::listAll();
-    foreach($books as $book){
+    foreach ($books as $book) {
         $book->setAvailable('Y');
         ManageScienceArticle::modify($book);
     }
@@ -69,29 +64,29 @@ if(isset($_POST["all"])){
 
 $books = ManageBook::listAll();
 
-$table='<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
-foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
-    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
+$table = '<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
+foreach ($books as $book) {
+    $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
+    $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Book</td><td>' . $ico . '</td></tr>';
 }
 
 
 $books = ManagePresentation::listAll();
 
-foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="presentation"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="presentation"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
-    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Presentation</td><td>'.$ico.'</td></tr>';
+foreach ($books as $book) {
+    $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="presentation"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="presentation"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
+    $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Presentation</td><td>' . $ico . '</td></tr>';
 }
 
 
 $books = ManageScienceArticle::listAll();
-foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="science"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$book->getId().'"><input type="hidden" name="tipo" value="science"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
-    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Science Article</td><td>'.$ico.'</td></tr>';
+foreach ($books as $book) {
+    $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="science"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="science"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
+    $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Science Article</td><td>' . $ico . '</td></tr>';
 }
-$table.='</tbody></table>';
+$table .= '</tbody></table>';
 
-$all='<form method="POST"><input type="hidden" name="all" value="enable"><button type="submit">Enable All</button></form>';
+$all = '<form method="POST"><input type="hidden" name="all" value="enable"><button type="submit" style="float: right;margin-bottom: -3%;">Enable All</button></form>';
 
 ?>
 <style>
@@ -111,43 +106,49 @@ $all='<form method="POST"><input type="hidden" name="all" value="enable"><button
         vertical-align: top;
     }
 
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+        text-align: left;
+    }
+
     .col-md-3 {
         width: 22%;
     }
+
     .button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
 
-.btn1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #1bcc00;
-}
+    .btn1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #1bcc00;
+    }
 
-.btn1:hover {
-  background-color: #1bcc00;
-  color: white;
-}
+    .btn1:hover {
+        background-color: #1bcc00;
+        color: white;
+    }
 
-.btn2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #ff4040;
-}
+    .btn2 {
+        background-color: white;
+        color: black;
+        border: 2px solid #ff4040;
+    }
 
-.btn2:hover {
-  background-color: #ff4040;
-  color: white;
-}
+    .btn2:hover {
+        background-color: #ff4040;
+        color: white;
+    }
 </style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
@@ -172,29 +173,34 @@ $all='<form method="POST"><input type="hidden" name="all" value="enable"><button
             <div class="booksmedia-detail-main">
                 <div class="container">
                     <br><br>
-                    <?php echo $all; 
-                          echo $table;?>
+                    <?php echo $all;
+                    echo $table; ?>
                 </div>
             </div>
         </main>
     </div>
 </div>
 <script>
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            language: {
+                search: "<i class='fa fa-search'></i>",
+                searchPlaceholder: "Search"
+
+            }
+        });
+    });
 
     function setColor(b) {
         var bu = document.getElementById(b);
-        if(bu.className == "btn1") {
+        if (bu.className == "btn1") {
             bu.className = "btn2";
             bu.innerHTML = "<i class=\"fa fa-times\" style=\"color:red;\"></i>";
-       }
-       else if(bu.className == "btn2"){
+        } else if (bu.className == "btn2") {
             bu.className = "btn1";
-            bu.innerHTML = "<i class=\"fa fa-check\" style=\"color:green;\"></i>";  
-       }
-            
+            bu.innerHTML = "<i class=\"fa fa-check\" style=\"color:green;\"></i>";
+        }
+
     }
 </script>
 <!-- End: Products Section -->
