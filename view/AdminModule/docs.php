@@ -9,10 +9,12 @@ $connection = $con->conectBD();
 
 ManageBook::setConnectionBD($connection);
 $books = ManageBook::listAll();
+$countbook = 0; 
 $table='<table class="table" id="myTable"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<i class="fa fa-check" style="color:green;"></i>' : '<i class="fa fa-times" style="color:red;"></i>';
+    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'book\')"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'book\')"><i class="fa fa-times" style="color:red;"></i></button>';
     $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
+    $countbook++;
 }
 
 
@@ -20,15 +22,17 @@ ManagePresentation::setConnectionBD($connection);
 $books = ManagePresentation::listAll();
 
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<i class="fa fa-check" style="color:green;"></i>' : '<i class="fa fa-times" style="color:red;"></i>';
-    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Paper</td><td>'.$ico.'</td></tr>';
+    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'pres\')"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'pres\')"><i class="fa fa-times" style="color:red;"></i></button>';
+    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
+    $countbook++;
 }
 
 ManageScienceArticle::setConnectionBD($connection);
 $book = ManageScienceArticle::listAll();
 foreach($books as $book){
-    $ico=($book->getAvailable()=='Y') ? '<i class="fa fa-check" style="color:green;"></i>' : '<i class="fa fa-times" style="color:red;"></i>';
-    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Science Article</td><td>'.$ico.'</td></tr>';
+    $ico=($book->getAvailable()=='Y') ? '<button class="btn1" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'art\')"><i class="fa fa-check" style="color:green;"></i></button>' : '<button class="btn2" id="btn'.$countbook.'" onclick="setColor(this.id, '.$book->getTitle().', \'art\')"><i class="fa fa-times" style="color:red;"></i></button>';
+    $table.='<tr><td>'.$book->getTitle().'</td><td>'.$book->getAuthors().'</td><td>'.$book->getDatePublished().'</td><td>Book</td><td>'.$ico.'</td></tr>';
+    $countbook++;
 }
 $table.='</tbody></table>';
 
@@ -54,6 +58,40 @@ $table.='</tbody></table>';
     .col-md-3 {
         width: 22%;
     }
+    .button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #1bcc00;
+}
+
+.btn1:hover {
+  background-color: #1bcc00;
+  color: white;
+}
+
+.btn2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #ff4040;
+}
+
+.btn2:hover {
+  background-color: #ff4040;
+  color: white;
+}
 </style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
@@ -88,6 +126,39 @@ $table.='</tbody></table>';
 $(document).ready( function () {
     $('#myTable').DataTable();
 } );
+
+    function setColor(b, tt, ty) {
+        var bu = document.getElementById(b);
+        if(bu.className == "btn1") {
+            bu.className = "btn2";
+            bu.innerHTML = "<i class=\"fa fa-times\" style=\"color:red;\"></i>";
+            if(ty == 'book'){
+
+            }
+            else if(ty == 'pres'){
+
+            }
+            else if(ty == 'art'){
+
+            }
+
+       }
+       else if(bu.className == "btn2"){
+            bu.className = "btn1";
+            bu.innerHTML = "<i class=\"fa fa-check\" style=\"color:green;\"></i>";  
+            if(ty == 'book'){
+
+            }
+            else if(ty == 'pres'){
+
+            }
+            else if(ty == 'art'){
+
+            }
+
+       }
+            
+    }
 </script>
 <!-- End: Products Section -->
 
