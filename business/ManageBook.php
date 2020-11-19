@@ -65,6 +65,11 @@ class ManageBook
         return $books;
     }
 
+        public  static function listByQuery($query){
+            $bookDAO = bookDAO::getBookDAO(self::$connection);
+            $books=$bookDAO->listByQuery($query);
+            return $books;
+        }
 
     /**
      * Modifica un bookistrador

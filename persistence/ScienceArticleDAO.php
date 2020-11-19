@@ -157,6 +157,33 @@ class ScienceArticleDAO implements DAO
 		return $articles;
 	}
 
+	public function listByQuery($query){
+		$query="SELECT * FROM scienceArticle where description ILIKE '%".$query."%' or title ILIKE '%".$query."%' or ssn ILIKE '%".$query."%' or editorial ILIKE '%".$query."%' or authors ILIKE '%".$query."%'";
+		$rs = pg_query( $this->connection, $query );
+		$articles = array();
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$scienceArticle=new scienceArticle();			
+					$scienceArticle->setId($obj->id_sa);
+					$scienceArticle->setTitle($obj->title);
+					$scienceArticle->setSSN($obj->ssn);
+					$scienceArticle->setDatePublished($obj->datepublished);
+					$scienceArticle->setEditorial($obj->editorial);
+					$scienceArticle->setAvailable($obj->available);
+					$scienceArticle->setUrl($obj->url);
+					$scienceArticle->setAuthors($obj->authors);
+					$scienceArticle->setDescription($obj->description);
+					$scienceArticle->setIdUser($obj->cod_user);
+					
+					array_push($articles,$scienceArticle);
+			   }
+			}
+		}
+		return $articles;
+	}
+
+
 	/*
 	*Obtiene el objeto de esta clase
 	*

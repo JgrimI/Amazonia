@@ -160,6 +160,33 @@ class BookDAO implements DAO
 		return $books;
 	}
 
+	public function listByQuery($query){
+		$query="SELECT * FROM book where title ILIKE '%".$query."%' or isbn ILIKE '%".$query."%' or editorial ILIKE '%".$query."%' or authors ILIKE '%".$query."%'";
+		$rs = pg_query( $this->connection, $query );
+		$books = array();
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$book=new book();
+					$book->setId($obj->id_book);
+					$book->setTitle($obj->title);
+					$book->setIsbn($obj->isbn);
+					$book->setDatePublished($obj->datepublished);
+					$book->setEditorial($obj->editorial);
+					$book->setAvailable($obj->available);
+					$book->setUrl($obj->url);
+					$book->setAuthors($obj->authors);
+					$book->setDescription($obj->description);
+					$book->setIdUser($obj->cod_user);
+					$book->setNumPages($obj->num_pages);
+					
+					array_push($books,$book);
+			   }
+			}
+		}
+		return $books;
+	}
+
 	/*
 	*Obtiene el objeto de esta clase
 	*

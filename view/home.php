@@ -60,34 +60,32 @@
 
 <!-- Start: Search Section -->
 <section class="search-filters">
-    <div class="container">
-        <div class="filter-box">
-            <h3>What are you looking for at the library?</h3>
-            <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                <div class="col-md-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="sr-only" for="keywords">Search</label>
-                        <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                    </div>
+    <div class="filter-box">
+        <h3>What are you looking for at the library?</h3>
+        <form action="?menu=books" method="post">
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="form-group">
-                        <select name="catalog" id="catalog" class="form-control">
-                            <option>Search the Catalog</option>
-                            <option>Books</option>
-                            <option>Paper</option>
-                            <option>Scientific Articles</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <select name="t" id="t" class="form-control">
+                        <option>Search the Catalog</option>
+                        <option value="book">Books</option>
+                        <option value="presentation">Lectures</option>
+                        <option value="sa">Scientific Articles</option>
+                    </select>
                 </div>
-                <div class="col-md-2 col-sm-6">
-                    <div class="form-group">
-                        <input class="form-control" type="submit" value="Search">
-                    </div>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <div class="form-group">
+                    <input class="form-control" type="submit" value="Search">
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+    <div class="clear"></div>
 </section>
 <!-- End: Search Section -->
 

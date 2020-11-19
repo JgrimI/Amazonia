@@ -162,6 +162,33 @@ class PresentationDAO implements DAO
 		return $presentations;
 	}
 
+	public function listByQuery($query){
+		$query="SELECT * FROM public.presentation where congressname ILIKE '%".$query."%' or title ILIKE '%".$query."%' or isbn ILIKE '%".$query."%' or editorial ILIKE '%".$query."%' or authors ILIKE '%".$query."%'";
+		$rs = pg_query( $this->connection, $query );
+		$presentations = array();
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$presentation=new Presentation();
+					$presentation->setId($obj->id_presentation);
+					$presentation->setTitle($obj->title);
+					$presentation->setIsbn($obj->isbn);
+					$presentation->setDatePublished($obj->datepublished);
+					$presentation->setEditorial($obj->editorial);
+					$presentation->setAvailable($obj->available);
+					$presentation->setUrl($obj->url);
+					$presentation->setAuthors($obj->authors);
+					$presentation->setDescription($obj->description);
+					$presentation->setIdUser($obj->cod_user);
+					$presentation->setCongressName($obj->congressname);
+					
+					array_push($presentations,$presentation);
+			   }
+			}
+		}
+		return $presentations;
+	}
+
 	/*
 	*Obtiene el objeto de esta clase
 	*

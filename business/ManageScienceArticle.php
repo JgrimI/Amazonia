@@ -63,6 +63,12 @@
             return $articles;
         }
 
+        public  static function listByQuery($query){
+            $scienceArticleDAO = ScienceArticleDAO::getScienceArticleDAO(self::$connection);
+            $articles=$scienceArticleDAO->listByQuery($query);
+            return $articles;
+        }
+
 
         /**
          * Modifica un bookistrador

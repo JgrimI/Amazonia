@@ -118,9 +118,6 @@ if (isset($_SESSION['redirect'])) {
             border-right-color: #FF8000!important;
             background-color: #FF8000!important;
         }
-        div .select{
-            display:none;
-        }
     </style>
     
 </body>

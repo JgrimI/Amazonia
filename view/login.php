@@ -42,6 +42,11 @@ if(isset($_POST['login'])){
     $con->turnOffBD($connection);
 }
 ?>
+<style>
+.select-styled{
+    display:none;
+}
+</style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
     <div class="container">

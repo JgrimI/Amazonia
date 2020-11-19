@@ -64,6 +64,12 @@
             return $presentations;
         }
 
+        public  static function listByQuery($query){
+            $presentationDAO = presentationDAO::getPresentationDAO(self::$connection);
+            $presentations=$presentationDAO->listByQuery($query);
+            return $presentations;
+        }
+
 
         /**
          * Modifica un presentationistrador
