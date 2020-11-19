@@ -53,6 +53,7 @@ class ScienceArticleDAO implements DAO
         {
              if( pg_num_rows($rs) > 0 )
             {
+				$obj = pg_fetch_object($rs,0 );
 				$scienceArticle->setId($obj->id_sa);
 				$scienceArticle->setTitle($obj->title);
 				$scienceArticle->setSSN($obj->ssn);
@@ -65,7 +66,6 @@ class ScienceArticleDAO implements DAO
 				$scienceArticle->setIdUser($obj->cod_user);
 			}
 		}
-		
 		return $scienceArticle;
 	}
 
