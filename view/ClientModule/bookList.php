@@ -151,7 +151,7 @@ $results=count($books)+count($papers)+count($articles);
         </div>
         <div class="breadcrumb">
             <ul>
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="?menu=home">Home</a></li>
                 <li>Books & Media</li>
             </ul>
         </div>
