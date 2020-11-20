@@ -64,7 +64,6 @@ $articles = ManageScienceArticle::consultByUser($codUser);
     }
 
     .booksmedia-fullwidth ul li {
-        border: 5px solid #f3f3f3;
         display: inline-block;
         margin: 0 0px 30px 26px;
         position: relative;
@@ -81,9 +80,9 @@ $articles = ManageScienceArticle::consultByUser($codUser);
 <section class="page-banner services-banner">
     <div class="container">
         <div class="banner-header">
-            <h2>Books & Media Listing</h2>
+            <h2>Books & Media</h2>
             <span class="underline center"></span>
-            <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
+            <p class="lead"></p>
         </div>
         <div class="breadcrumb">
             <ul>
@@ -129,30 +128,30 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             <h4>
                                                             <form id="form1B' . $no . '" target="_blank" action="?menu=details" method="post">
                                                                 <a href="javascript:;" onclick="document.getElementById(' . "'form1B$no'" . ').submit();">
-                                                                ' . $b->getTitle() . '</a>
+                                                                ' . mb_strimwidth($b->getTitle(), 0, 35, "...") . '</a>
                                                                 <input type="hidden" name="mess" value="' . $b->getId() . '"/>
                                                                 <input type="hidden" name="type" value="0"/>
                                                             </form>
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
                                                             <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
+                                                            <p>' . mb_strimwidth($b->getDescription(), 0, 85, "...") . '</p>
+                                                            <div class="actions">
+                                                                <ul>
+                                                                    <li style="margin: 0px 0px 0px 0px;">
+                                                                        <form id="form3B' . $no . '" target="_blank" action="?menu=editBook" method="post">
+                                                                            <a href="javascript:;" onclick="document.getElementById(' . "'form3B$no'" . ').submit();" data-toggle="blog-tags" data-placement="top" title="Edit">
+                                                                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                                                            </a>
+                                                                            <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                                            <input type="hidden" name="type" value="0"/>
+                                                                        </form>
+                                                                       
+                                                                    </li>
+    
+                                                                </ul>
+                                                            </div>
                                                         </header>
-                                                        <p>' . $b->getDescription() . '</p>
-                                                        <div class="actions">
-                                                            <ul>
-                                                                <li>
-                                                                    <form id="form3B' . $no . '" target="_blank" action="?menu=editBook" method="post">
-                                                                        <a href="javascript:;" onclick="document.getElementById(' . "'form3B$no'" . ').submit();" data-toggle="blog-tags" data-placement="top" title="Edit">
-                                                                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                                                                        </a>
-                                                                        <input type="hidden" name="mess" value="' . $b->getId() . '"/>
-                                                                        <input type="hidden" name="type" value="0"/>
-                                                                    </form>
-                                                                   
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
                                                     </figcaption>
                                                 </figure>
                                             </li>';
@@ -163,8 +162,7 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                             } else {
                                 $no = 0;
                                 foreach ($papers as $b) {
-                                    if ($b->getAvailable() == "Y") {
-                                        echo '<li class="paginate">
+                                    echo '<li class="paginate">
                                                 <div class="book-list-icon red-icon"></div>
                                                 <figure>
                                                 <form id="formP' . $no . '" target="_blank" action="?menu=details" method="post">
@@ -178,29 +176,42 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             <h4>
                                                             <form id="formP1' . $no . '" target="_blank" action="?menu=details" method="post">
                                                                 <a href="javascript:;" onclick="document.getElementById(' . "'formP1$no'" . ').submit();">
-                                                                ' . $b->getTitle() . '</a>
+                                                                ' . mb_strimwidth($b->getTitle(), 0, 35, "...") . '</a>
                                                                 <input type="hidden" name="mess" value="' . $b->getId() . '"/>
                                                                 <input type="hidden" name="type" value="1"/>
                                                             </form>
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
                                                             <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
+                                                            <p>' .  mb_strimwidth($b->getDescription(), 0, 85, "...") . '</p>
+                                                            <div class="actions">
+                                                                <ul>
+                                                                    <li style="margin: 0px 0px 0px 0px;">
+                                                                        <form id="form3P' . $no . '" target="_blank" action="?menu=editBook" method="post">
+                                                                            <a href="javascript:;" onclick="document.getElementById(' . "'form3P$no'" . ').submit();" data-toggle="blog-tags" data-placement="top" title="Edit">
+                                                                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                                                            </a>
+                                                                            <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                                            <input type="hidden" name="type" value="1"/>
+                                                                        </form>
+                                                                    
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+
                                                         </header>
-                                                        <p>' . $b->getDescription() . '</p>
-                                                        
                                                     </figcaption>
                                                 </figure>
                                             </li>';
-                                        $no += 1;
-                                    }
+                                    $no += 1;
                                 }
                             }
                             if (count($articles) == 0) {
                             } else {
                                 $no = 0;
                                 foreach ($articles as $a) {
-                                    if ($a->getAvailable() == "Y") {
-                                        echo '<li class="paginate">
+                                    echo '<li class="paginate">
                                                 <div class="book-list-icon light-green-icon"></div>
                                                 <figure>
                                                 <form id="formA' . $no . '" target="_blank" action="?menu=details" method="post">
@@ -214,21 +225,34 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             <h4>
                                                             <form id="formA1' . $no . '" target="_blank" action="?menu=details" method="post">
                                                                 <a href="javascript:;" onclick="document.getElementById(' . "'formA1$no'" . ').submit();">
-                                                                ' . $a->getTitle() . '</a>
+                                                                ' . mb_strimwidth($a->getTitle(), 0, 35, "...")  . '</a>
                                                                 <input type="hidden" name="mess" value="' . $a->getId() . '"/>
                                                                 <input type="hidden" name="type" value="2"/>
                                                             </form>
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $a->getAuthors() . '</p>
                                                             <p><strong>SNN:</strong>' . $a->getSSN() . '</p>
+                                                            <p>' .  mb_strimwidth($a->getDescription(), 0, 85, "...") . '</p>
+                                                            <div class="actions">
+                                                                <ul>
+                                                                    <li style="margin: 0px 0px 0px 0px;">
+                                                                        <form id="form3A' . $no . '" target="_blank" action="?menu=editBook" method="post">
+                                                                            <a href="javascript:;" onclick="document.getElementById(' . "'form3A$no'" . ').submit();" data-toggle="blog-tags" data-placement="top" title="Edit">
+                                                                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                                                            </a>
+                                                                            <input type="hidden" name="mess" value="' . $a->getId() . '"/>
+                                                                            <input type="hidden" name="type" value="2"/>
+                                                                        </form>
+                                                                       
+                                                                    </li>
+    
+                                                                </ul>
+                                                            </div>
                                                         </header>
-                                                        <p>' . $a->getDescription() . '</p>
-                                                        
                                                     </figcaption>
                                                 </figure>
                                             </li>';
-                                        $no += 1;
-                                    }
+                                    $no += 1;
                                 }
                             }
                             ?>
