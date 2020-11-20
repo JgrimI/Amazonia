@@ -139,7 +139,6 @@ foreach ($books as $book) {
                             Ipsum which looks reasonable. The generated Lorem Ipsum is therefore
                             always free from repetition, injected humor, or non-characteristic words etc.
                         </p>
-                        <a class="btn btn-primary" href="#">Read More</a>
                     </div>
                 </div>
             </div>
