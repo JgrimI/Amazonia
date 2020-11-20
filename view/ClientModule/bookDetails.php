@@ -72,6 +72,19 @@ if (isset($_POST['operation'])) {
             break;
     }
 }
+if(isset($_POST['del'])){
+    $cod = $_POST["mess"];
+    $type = $_POST["type"];
+    $con = new Connection();
+    $connection = $con->conectBD();
+    ManageBooking::setConnectionBD($connection);
+    $reserves=ManageBooking::listByDoc($cod,$type);
+    if(count($reserves)>0){
+
+    }else{
+        echo printMessage("Error!!", $_SESSION['name_user']. " you cannot delete this document, because it has active reservations", "error");
+    }
+}
 if ($_POST["mess"]) {
     $cod = $_POST["mess"];
     $type = $_POST["type"];
@@ -83,7 +96,7 @@ if ($_POST["mess"]) {
         $book = ManageBook::consult($cod);
 
         if($book->getIdUser()==$_SESSION['cod_user']){
-            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Book</a></form>';
+            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><input type="hidden" name="del" id="del"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Book</a></form>';
         }else{
             $btnDelete ='';
         }
@@ -122,7 +135,7 @@ if ($_POST["mess"]) {
         $book = ManagePresentation::consult($cod);
 
         if($book->getIdUser()==$_SESSION['cod_user']){
-            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Paper</a></form>';
+            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><input type="hidden" name="del" id="del"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Paper</a></form>';
         }else{
             $btnDelete ='';
         }
@@ -161,7 +174,7 @@ if ($_POST["mess"]) {
         $book = ManageScienceArticle::consult($cod);
 
         if($book->getIdUser()==$_SESSION['cod_user']){
-            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Article</a></form>';
+            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><input type="hidden" name="del" id="del"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Article</a></form>';
         }else{
             $btnDelete ='';
         }
