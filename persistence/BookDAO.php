@@ -64,6 +64,8 @@ class BookDAO implements DAO
 				$book->setDescription($obj->description);
 				$book->setIdUser($obj->cod_user);
 				$book->setNumPages($obj->num_pages);
+				$book->setQuantity($obj->quantity);
+
 			}
 		}
 		return $book;
@@ -95,6 +97,7 @@ class BookDAO implements DAO
 					$book->setDescription($obj->description);
 					$book->setIdUser($obj->cod_user);
 					$book->setNumPages($obj->num_pages);
+					$book->setQuantity($obj->quantity);
 
 					array_push($books, $book);
 				}
@@ -112,7 +115,7 @@ class BookDAO implements DAO
 	public function create($newBook)
 	{
 
-		$query = "INSERT INTO book(title,isbn,datepublished,editorial,available,url,authors,description,cod_user,num_pages) VALUES('" . $newBook->getTitle() . "','" . $newBook->getISBN() . "','" . $newBook->getDatePublished() . "','" . $newBook->getEditorial() . "','" . $newBook->getAvailable() . "','" . $newBook->getUrl() . "','" . $newBook->getAuthors() . "','" . $newBook->getDescription() . "','" . $newBook->getIdUser() . "','" . $newBook->getNumPages() . "');";
+		$query = "INSERT INTO book(title,isbn,datepublished,editorial,available,url,authors,description,cod_user,num_pages,quantity) VALUES('" . $newBook->getTitle() . "','" . $newBook->getISBN() . "','" . $newBook->getDatePublished() . "','" . $newBook->getEditorial() . "','" . $newBook->getAvailable() . "','" . $newBook->getUrl() . "','" . $newBook->getAuthors() . "','" . $newBook->getDescription() . "','" . $newBook->getIdUser() . "','" . $newBook->getNumPages() . "',".$newBook->getQuantity().");";
 		pg_query($this->connection, $query);
 	}
 
@@ -124,7 +127,7 @@ class BookDAO implements DAO
 	public function modify($book)
 	{
 
-		$query = "UPDATE book SET title='" . $book->getTitle() . "', isbn ='" . $book->getIsbn() . "', datePublished='" . $book->getDatePublished() . "', editorial='" . $book->getEditorial() . "', available='" . $book->getAvailable() . "', url='" . $book->getUrl() . "', authors='" . $book->getAuthors() . "', description='" . $book->getDescription() . "', num_pages='" . $book->getNumPages() . "' WHERE id_book= " . $book->getId();
+		$query = "UPDATE book SET title='" . $book->getTitle() . "', isbn ='" . $book->getIsbn() . "', datePublished='" . $book->getDatePublished() . "', editorial='" . $book->getEditorial() . "', available='" . $book->getAvailable() . "', url='" . $book->getUrl() . "', authors='" . $book->getAuthors() . "', description='" . $book->getDescription() . "', num_pages='" . $book->getNumPages() . "', quantity=".$newBook->getQuantity()." WHERE id_book= " . $book->getId();
 		pg_query($this->connection, $query);
 	}
 
@@ -152,6 +155,7 @@ class BookDAO implements DAO
 					$book->setDescription($obj->description);
 					$book->setIdUser($obj->cod_user);
 					$book->setNumPages($obj->num_pages);
+					$book->setQuantity($obj->quantity);
 
 					array_push($books, $book);
 				}
@@ -179,6 +183,7 @@ class BookDAO implements DAO
 					$book->setDescription($obj->description);
 					$book->setIdUser($obj->cod_user);
 					$book->setNumPages($obj->num_pages);
+					$book->setQuantity($obj->quantity);
 					
 					array_push($books,$book);
 			   }

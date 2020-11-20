@@ -64,6 +64,7 @@ class ScienceArticleDAO implements DAO
 				$scienceArticle->setAuthors($obj->authors);
 				$scienceArticle->setDescription($obj->description);
 				$scienceArticle->setIdUser($obj->cod_user);
+				$scienceArticle->setQuantity($obj->quantity);
 			}
 		}
 		return $scienceArticle;
@@ -93,6 +94,7 @@ class ScienceArticleDAO implements DAO
 					$scienceArticle->setAuthors($obj->authors);
 					$scienceArticle->setDescription($obj->description);
 					$scienceArticle->setIdUser($obj->cod_user);
+					$scienceArticle->setQuantity($obj->quantity);
 
 					array_push($articles, $scienceArticle);
 				}
@@ -110,7 +112,7 @@ class ScienceArticleDAO implements DAO
 	public function create($newArticle)
 	{
 
-		$query = "INSERT INTO scienceArticle(title,ssn,datepublished,editorial,available,url,authors,description,cod_user) VALUES('" . $newArticle->getTitle() . "','" . $newArticle->getSSN() . "','" . $newArticle->getDatePublished() . "','" . $newArticle->getEditorial() . "','" . $newArticle->getAvailable() . "','" . $newArticle->getUrl() . "','" . $newArticle->getAuthors() . "','" . $newArticle->getDescription() . "'," . $newArticle->getIdUser() . ");";
+		$query = "INSERT INTO scienceArticle(title,ssn,datepublished,editorial,available,url,authors,description,cod_user,quantity) VALUES('" . $newArticle->getTitle() . "','" . $newArticle->getSSN() . "','" . $newArticle->getDatePublished() . "','" . $newArticle->getEditorial() . "','" . $newArticle->getAvailable() . "','" . $newArticle->getUrl() . "','" . $newArticle->getAuthors() . "','" . $newArticle->getDescription() . "'," . $newArticle->getIdUser() . ",".$newArticle->getQuantity().");";
 		pg_query($this->connection, $query);
 	}
 
@@ -122,7 +124,7 @@ class ScienceArticleDAO implements DAO
 	public function modify($scienceArticle)
 	{
 
-		$query = "UPDATE scienceArticle SET title='" . $scienceArticle->getTitle() . "', ssn ='" . $scienceArticle->getSSN() . "', datePublished='" . $scienceArticle->getDatePublished() . "', editorial='" . $scienceArticle->getEditorial() . "', available='" . $scienceArticle->getAvailable() . "', url='" . $scienceArticle->getUrl() . "', authors='" . $scienceArticle->getAuthors() . "', description='" . $scienceArticle->getDescription() . "' WHERE id_sa= " . $scienceArticle->getId();
+		$query = "UPDATE scienceArticle SET title='" . $scienceArticle->getTitle() . "', ssn ='" . $scienceArticle->getSSN() . "', datePublished='" . $scienceArticle->getDatePublished() . "', editorial='" . $scienceArticle->getEditorial() . "', available='" . $scienceArticle->getAvailable() . "', url='" . $scienceArticle->getUrl() . "', authors='" . $scienceArticle->getAuthors() . "', description='" . $scienceArticle->getDescription() . "', quantity=".$scienceArticle->getQuantity()." WHERE id_sa= " . $scienceArticle->getId();
 		pg_query($this->connection, $query);
 	}
 
@@ -149,6 +151,7 @@ class ScienceArticleDAO implements DAO
 					$scienceArticle->setAuthors($obj->authors);
 					$scienceArticle->setDescription($obj->description);
 					$scienceArticle->setIdUser($obj->cod_user);
+					$scienceArticle->setQuantity($obj->quantity);
 
 					array_push($articles, $scienceArticle);
 				}
@@ -175,7 +178,7 @@ class ScienceArticleDAO implements DAO
 					$scienceArticle->setAuthors($obj->authors);
 					$scienceArticle->setDescription($obj->description);
 					$scienceArticle->setIdUser($obj->cod_user);
-					
+
 					array_push($articles,$scienceArticle);
 			   }
 			}
