@@ -78,24 +78,31 @@ if(isset($_POST['del'])){
     $con = new Connection();
     $connection = $con->conectBD();
     ManageBooking::setConnectionBD($connection);
+    if($type==0){
+        $type='book';
+    }else if($type==1){
+        $type='presentation';
+    }else if ($type==2){
+        $type='sciencearticle';
+    }
     $reserves=ManageBooking::listByDoc($cod,$type);
-    if(count($reserves)>0){
+    if(count($reserves)==0){
         switch($type){
-            case 0:
+            case 'book':
                 ManageBook::setConnectionBD($connection);
                 $book = ManageBook::consult($cod);
                 $book->setAvailable('N');
                 ManageBook::modify($book);
                 echo printMessageWithRedirect("Congratulations " . $_SESSION['name_user'], "Your book was deleted successfully", "success","?menu=books");
                 break;
-            case 1:
+            case 'presentation':
                 ManagePresentation::setConnectionBD($connection);
                 $book = ManagePresentation::consult($cod);
                 $book->setAvailable('N');
                 ManagePresentation::modify($book);
                 echo printMessageWithRedirect("Congratulations " . $_SESSION['name_user'], "Your paper was deleted successfully", "success","?menu=books");
                 break;
-            case 2:
+            case 'sciencearticle':
                 ManageScienceArticle::setConnectionBD($connection);
                 $book = ManageScienceArticle::consult($cod);
                 $book->setAvailable('N');
