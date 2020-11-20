@@ -91,7 +91,7 @@ function sendMail($mail, $name,$id)
             <div style="margin-left: 10%; margin-right: 10%;"><br><br>
                 <p>We welcome '.$name.' to the Amazonia en linea portal.</p>
                 <p>In order to use all of our services please click on the following button to finish your registration process.</p><br><br><br>
-                <center><a href="http://localhost:8082/Amazonia/view/index.php?menu=signin&i='.base64_encode($id).'" style="background-color:#f3984d;border:10px solid #f3984d;text-decoration:none;color:#fff" target="_blank">Activate account</a></center>
+                <center><a href="http://localhost:8080/Amazonia/view/index.php?menu=signin&i='.base64_encode($id).'" style="background-color:#f3984d;border:10px solid #f3984d;text-decoration:none;color:#fff" target="_blank">Activate account</a></center>
                 <br><br>
             </div>
             <br><br><br><br>
