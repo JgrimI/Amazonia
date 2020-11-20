@@ -18,8 +18,6 @@
 
         /**
          * Obtiene un bookistrador
-        * @param  [String] $book [Nombre de book del bookistrador a buscar]
-        * @return [bookistrador] bookistrador encontrado
         */
         public static function consult($cod_booking){
 
@@ -31,7 +29,6 @@
         
         /**
          * Crea un nuevo booki
-         * @param book bookistrador a ingresar
          * @return void
          */
         public static function create($booking){
@@ -42,7 +39,6 @@
 
            /**
          * Lista todos los bookistradores
-         * @return book[] Lista de todos los bookistradores de la base de datos
          */
         public  static function listAll(){
             $bookingDAO = bookingDAO::getBookingDAO(self::$connection);
@@ -53,7 +49,6 @@
 
         /**
          * Modifica un bookistrador
-         * @param book bookistrador a modificar
          * @return void
          */
         public static function modify($booking){

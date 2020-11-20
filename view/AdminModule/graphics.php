@@ -27,7 +27,9 @@ $bookings = ManageBooking::listAll();
 
 ?>
 <script>
+
 function graf() {
+
   if ($("#bar-graphic1").length) {
     <?php
     $numBooksN= 0;
@@ -36,6 +38,7 @@ function graf() {
     $numPapersN= 0;
     $numArticlesY= 0;
     $numArticlesN= 0;
+
     foreach($books as $book){
       if ($book->getAvailable()=='Y') {
         $numBooksY += 1;
@@ -100,52 +103,11 @@ function graf() {
     });
   }
 
-  if ($("#donut-graphic2").length) {
-    <?php
-    $numBooking =0;
-    
-    foreach($bookings as $booking){
-      if ($booking->getT=='activo') {
-        $numUsersA += 1;
-      } else {
-        $numUsersD += 1;
-      }
-    }
-    
-    ?> 
-    var DoughnutData = {
-      datasets: [{
-        data: [<?php echo $numUsersA?>, <?php echo $numUsersD?>],
-        backgroundColor: chartColors,
-        borderColor: chartColors,
-        borderWidth: chartColors
-      }],
-      labels: [
-        'Usuarios Activos',
-        'Usuarios Inactivos',
-      ]
-    };
-    var DoughnutOptions = {
-      responsive: true,
-      animation: {
-        animateScale: true,
-        animateRotate: true
-      }
-    };
-    var doughnutChartCanvas = $("#donut-graphic1").get(0).getContext("2d");
-    var doughnutChart = new Chart(doughnutChartCanvas, {
-      type: 'doughnut',
-      data: DoughnutData,
-      options: DoughnutOptions
-    });
-  }
-
-  if ($("#line-graphic1").length) {
+  if ($("#donut-graphic1").length) {
     <?php
     $numUsersA =0;
     $numUsersD =0;
 
-   
     foreach($users as $user){
       if ($user->getStatus()=='activo') {
         $numUsersA += 1;
@@ -182,9 +144,44 @@ function graf() {
     });
   }
 
-  
-
-
+  if ($("#bar-graphic2").length) {
+    <?php
+    $numBooks= 0;
+    $numPapers= 0;
+    $numArticles= 0;
+    
+    foreach($bookings as $booking){
+      if ($booking->getType_document()=='book') {
+        $numBooks += 1;
+      } 
+      else if ($booking->getType_document()=='papers'){
+        $numPapers += 1;
+      }
+      else{
+        $numArticles += 1;
+      }
+    }
+    
+    ?> 
+    var BarData = {
+      labels: ["Books", "Papers", "Articles"],
+      datasets: [{
+        label: 'Number of Bookings',
+        data: [<?php echo $numBooks?>, <?php echo $numPapers?>, <?php echo $numArticles?>],
+        backgroundColor: chartColors,
+        borderColor: chartColors,
+        borderWidth: 0
+      }]
+    };
+    var barChartCanvas = $("#bar-graphic2").get(0).getContext("2d");
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar',
+      data: BarData,
+      options: {
+        legend: false
+      }
+    });
+  }
 
 
 
