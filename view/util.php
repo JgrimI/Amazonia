@@ -44,4 +44,21 @@ function printMessageWithRedirect($titulo,$desc,$tipo,$route){
       })</script>";
       return $r;
 }
+function strtotitle($title)
+{
+    $title=strtolower($title);
+    $smallwordsarray = array(
+        'of', 'a', 'the', 'and', 'an', 'or', 'nor', 'but', 'is', 'if', 'then', 'else', 'when',
+        'at', 'from', 'by', 'on', 'off', 'for', 'in', 'out', 'over', 'to', 'into', 'with', 'en', 'y', 'de', 'e', 'el', 'a', 'para',
+        'u', 'con', 'del', 'la'
+    );
+    $words = explode(' ', $title);
+    foreach ($words as $key => $word) {
+        if ($key == 0 or !in_array($word, $smallwordsarray))
+            $words[$key] = ucwords($word);
+    }
+    $newtitle = implode(' ', $words);
+
+    return $newtitle;
+}
 ?>

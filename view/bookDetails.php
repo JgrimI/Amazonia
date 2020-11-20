@@ -1,6 +1,7 @@
 <?php
 require_once('../business/ManageBook.php');
 require_once('../business/ManagePresentation.php');
+require_once('../business/ManageBooking.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../persistence/util/Connection.php');
 
@@ -10,10 +11,22 @@ if ($_POST["mess"]) {
     $type = $_POST["type"];
     $con = new Connection();
     $connection = $con->conectBD();
+    ManageBooking::setConnectionBD($connection);
     if ($type == 0) {
         ManageBook::setConnectionBD($connection);
         $book = ManageBook::consult($cod);
-
+        $reserves = ManageBooking::listByDoc($cod,'book');
+        if(count($reserves)<$book->getQuantity()){
+            $msgAvai='Available now';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='';
+        }else{
+            $msgAvai='No copies available';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='';
+        }
+        
+        
         $name = $book->getTitle();
         $author = $book->getAuthors();
         $date = $book->getDatePublished();
@@ -25,9 +38,23 @@ if ($_POST["mess"]) {
         $lenght = "<p><strong>Lenght:</strong>$pages</p>";
         $isnn = "ISBN:";
         $icon = "yellow-icon";
+
+        
     } elseif ($type == 1) {
         ManagePresentation::setConnectionBD($connection);
         $book = ManagePresentation::consult($cod);
+        $reserves = ManageBooking::listByDoc($cod,'book');
+
+        if(count($reserves)<$book->getQuantity()){
+            $msgAvai='Available now';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='';
+        }else{
+            $msgAvai='No copies available';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='';
+        }
+        
 
         $name = $book->getTitle();
         $author = $book->getAuthors();
@@ -40,9 +67,23 @@ if ($_POST["mess"]) {
         $lenght = "<p><strong>Congress Name:</strong>$congress</p>";
         $isnn = "ISBN:";
         $icon = "red-icon";
+
+        
     } elseif ($type == 2) {
         ManageScienceArticle::setConnectionBD($connection);
         $book = ManageScienceArticle::consult($cod);
+        $reserves = ManageBooking::listByDoc($cod,'book');
+
+        if(count($reserves)<$book->getQuantity()){
+            $msgAvai='Available now';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='';
+        }else{
+            $msgAvai='No copies available';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='';
+        }
+        
 
         $name = $book->getTitle();
         $author = $book->getAuthors();
@@ -55,9 +96,10 @@ if ($_POST["mess"]) {
         $icon = "light-green-icon";
         $lenght = "";
         $isnn = "SNN:";
+
     }
-} else {
-    header('Location: user.php');
+}else {
+    header('Location: index.php?menu=books');
 }
 
 ?>
@@ -108,40 +150,7 @@ if ($_POST["mess"]) {
         <main id="main" class="site-main">
             <div class="booksmedia-detail-main">
                 <div class="container">
-                    <div class="row">
-                        <!-- Start: Search Section -->
-                        <section class="search-filters">
-                            <div class="container">
-                                <div class="filter-box">
-                                    <h3>What are you looking for at the library?</h3>
-                                    <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="keywords">Search</label>
-                                                <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="form-group">
-                                                <select name="catalog" id="catalog" class="form-control">
-                                                    <option>Search the Catalog</option>
-                                                    <option>Books</option>
-                                                    <option>Lectures</option>
-                                                    <option>Scientific Articles</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="submit" value="Search">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- End: Search Section -->
-                    </div>
+                    <br><br>
                     <div class="booksmedia-detail-box">
                         <div class="detailed-box">
                             <div class="col-xs-12 col-sm-5 col-md-3">
@@ -170,11 +179,10 @@ if ($_POST["mess"]) {
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 ">
                                 <div class="post-right-content">
-                                    <h4>Available now</h4>
-                                    <p><strong>Holds:</strong> 01</p>
-                                    <p><strong>On the shelves now at:</strong> Lawrence Public Library</p>
-                                    <p><strong>Call #:</strong> 747 STRUTT C</p>
-                                    <a href="#." class="btn btn-dark-gray">Place a Hold</a>
+                                    <h4><?php echo $msgAvai ?></h4>
+                                    <p><strong>Copies availables:</strong> <?php echo $disp;?></p>
+                                    <p><strong>On the shelves now at:</strong> Amazonia en Linea</p>
+                                    <?php echo $btnReserve; ?>
                                 </div>
                             </div>
                             <div class="clearfix"></div>

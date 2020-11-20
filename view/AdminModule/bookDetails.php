@@ -1,19 +1,109 @@
 <?php
 require_once('../business/ManageBook.php');
+require_once('../business/ManageBooking.php');
 require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
+require_once('../business/Booking.php');
 require_once('../persistence/util/Connection.php');
+require_once('util.php');
 
 
+if(isset($_POST['operation'])){
+    $cod = $_POST["mess"];
+    $type = $_POST["type"];
+    $con = new Connection();
+    $connection = $con->conectBD();
+    switch($type){
+        case 0:
+            ManageBooking::setConnectionBD($connection);
+            if($_POST['operation']=='Y'){
+                $booking = new Booking();
+                $booking->setCod_booking(0);
+                $booking->setCod_document($cod);
+                $booking->setType_document('book');
+                $booking->setAvailable('Y');
+                $booking->setCod_user($_SESSION['cod_user']);
+                ManageBooking::create($booking);
+                echo printMessage("Congratulations ".$_SESSION['name_user'],"Your book was booked successfully","success");
+
+            }else{
+                $return=ManageBooking::consultByUser($cod,'book',$_SESSION['cod_user']);
+                $return->setAvailable('N');
+                ManageBooking::modify($return);
+                echo printMessage("Congratulations ".$_SESSION['name_user'],"Your book was returned successfully","success");
+            }
+            
+            break;
+        case 1:
+            ManageBooking::setConnectionBD($connection);
+            if($_POST['operation']=='Y'){
+                $booking = new Booking();
+                $booking->setCod_booking(0);
+                $booking->setCod_document($cod);
+                $booking->setType_document('book');
+                $booking->setAvailable('Y');
+                $booking->setCod_user($_SESSION['cod_user']);
+                ManageBooking::create($booking);
+                echo printMessage("Congratulations ".$_SESSION['name_user'],"Your paper was booked successfully","success");
+            }else{
+                $return=ManageBooking::consultByUser($cod,'presentation',$_SESSION['cod_user']);
+                $return->setAvailable('N');
+                ManageBooking::modify($return);
+                echo printMessage("Congratulations ".$_SESSION['name_user'],"Your paper was returned successfully","success");
+
+            }
+            break;
+        case 2:
+            ManageBooking::setConnectionBD($connection);
+            if($_POST['operation']=='Y'){
+                $booking = new Booking();
+                $booking->setCod_booking(0);
+                $booking->setCod_document($cod);
+                $booking->setType_document('book');
+                $booking->setAvailable('Y');
+                $booking->setCod_user($_SESSION['cod_user']);
+                ManageBooking::create($booking);
+                echo printMessage("Congratulations ".$_SESSION['name_user'],"Your article was booked successfully","success");
+            }else{
+                $return=ManageBooking::consultByUser($cod,'sciencearticle',$_SESSION['cod_user']);
+                $return->setAvailable('N');
+                ManageBooking::modify($return);
+                echo printMessage("Congratulations ".$_SESSION['name_user'],"Your article was returned successfully","success");
+
+            }
+            
+            break;
+    }
+}
 if ($_POST["mess"]) {
     $cod = $_POST["mess"];
     $type = $_POST["type"];
     $con = new Connection();
     $connection = $con->conectBD();
+    ManageBooking::setConnectionBD($connection);
     if ($type == 0) {
         ManageBook::setConnectionBD($connection);
         $book = ManageBook::consult($cod);
 
+        $reserves = ManageBooking::listByDoc($cod,'book');
+        $return=ManageBooking::consultByUser($cod,'book',$_SESSION['cod_user']);
+        if($return->getCod_user()!=''){
+            $msgAvai='Return now';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='<form id="f1" name="f1" method="post" action="?menu=details"><input type="hidden" name="operation" id="operation" value="N"><input type="hidden" name="mess" id="mess" value="'.$cod.'"><input type="hidden" name="type" id="type" value="'.$type.'"><a href="javascript:void(0)" class="btn btn-dark-gray"  onclick="document.getElementById('."'f1'".').submit();">Return now</a></form>';
+        
+        }else{
+            if(count($reserves)<$book->getQuantity()){
+                $msgAvai='Available now';
+                $disp=$book->getQuantity()-count($reserves);
+                $btnReserve='<form id="f1" name="f1" method="post" action="?menu=details"><input type="hidden" name="operation" id="operation" value="Y"><input type="hidden" name="mess" id="mess" value="'.$cod.'"><input type="hidden" name="type" id="type" value="'.$type.'"><a href="javascript:void(0)" class="btn btn-dark-gray"  onclick="document.getElementById('."'f1'".').submit();">Reserve now</a></form>';
+            }else{
+                $msgAvai='No copies available';
+                $disp=$book->getQuantity()-count($reserves);
+                $btnReserve='';
+            }
+        }
+        
         $name = $book->getTitle();
         $author = $book->getAuthors();
         $date = $book->getDatePublished();
@@ -25,9 +115,30 @@ if ($_POST["mess"]) {
         $lenght = "<p><strong>Lenght:</strong>$pages</p>";
         $isnn = "ISBN:";
         $icon = "yellow-icon";
+
+        
     } elseif ($type == 1) {
         ManagePresentation::setConnectionBD($connection);
         $book = ManagePresentation::consult($cod);
+
+        $reserves = ManageBooking::listByDoc($cod,'presentation');
+        $return=ManageBooking::consultByUser($cod,'presentation',$_SESSION['cod_user']);
+        if($return->getCod_user()!=''){
+            $msgAvai='Return now';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='<form id="f1" name="f1" method="post" action="?menu=details"><input type="hidden" name="operation" id="operation" value="N"><input type="hidden" name="mess" id="mess" value="'.$cod.'"><input type="hidden" name="type" id="type" value="'.$type.'"><a href="javascript:void(0)" class="btn btn-dark-gray"  onclick="document.getElementById('."'f1'".').submit();">Return now</a></form>';
+        
+        }else{
+            if(count($reserves)<$book->getQuantity()){
+                $msgAvai='Available now';
+                $disp=$book->getQuantity()-count($reserves);
+                $btnReserve='<form id="f1" name="f1" method="post" action="?menu=details"><input type="hidden" name="operation" id="operation" value="Y"><input type="hidden" name="mess" id="mess" value="'.$cod.'"><input type="hidden" name="type" id="type" value="'.$type.'"><a href="javascript:void(0)" class="btn btn-dark-gray"  onclick="document.getElementById('."'f1'".').submit();">Reserve now</a></form>';
+            }else{
+                $msgAvai='No copies available';
+                $disp=$book->getQuantity()-count($reserves);
+                $btnReserve='';
+            }
+        }
 
         $name = $book->getTitle();
         $author = $book->getAuthors();
@@ -40,9 +151,30 @@ if ($_POST["mess"]) {
         $lenght = "<p><strong>Congress Name:</strong>$congress</p>";
         $isnn = "ISBN:";
         $icon = "red-icon";
+
+        
     } elseif ($type == 2) {
         ManageScienceArticle::setConnectionBD($connection);
         $book = ManageScienceArticle::consult($cod);
+
+        $reserves = ManageBooking::listByDoc($cod,'sciencearticle');
+        $return=ManageBooking::consultByUser($cod,'sciencearticle',$_SESSION['cod_user']);
+        if($return->getCod_user()!=''){
+            $msgAvai='Return now';
+            $disp=$book->getQuantity()-count($reserves);
+            $btnReserve='<form id="f1" name="f1" method="post" action="?menu=details"><input type="hidden" name="operation" id="operation" value="N"><input type="hidden" name="mess" id="mess" value="'.$cod.'"><input type="hidden" name="type" id="type" value="'.$type.'"><a href="javascript:void(0)" class="btn btn-dark-gray"  onclick="document.getElementById('."'f1'".').submit();">Return now</a></form>';
+        
+        }else{
+            if(count($reserves)<$book->getQuantity()){
+                $msgAvai='Available now';
+                $disp=$book->getQuantity()-count($reserves);
+                $btnReserve='<form id="f1" name="f1" method="post" action="?menu=details"><input type="hidden" name="operation" id="operation" value="Y"><input type="hidden" name="mess" id="mess" value="'.$cod.'"><input type="hidden" name="type" id="type" value="'.$type.'"><a href="javascript:void(0)" class="btn btn-dark-gray"  onclick="document.getElementById('."'f1'".').submit();">Reserve now</a></form>';
+            }else{
+                $msgAvai='No copies available';
+                $disp=$book->getQuantity()-count($reserves);
+                $btnReserve='';
+            }
+        }
 
         $name = $book->getTitle();
         $author = $book->getAuthors();
@@ -55,9 +187,10 @@ if ($_POST["mess"]) {
         $icon = "light-green-icon";
         $lenght = "";
         $isnn = "SNN:";
+
     }
 } else {
-    header('Location: user.php');
+    header('Location: admin.php?menu=books');
 }
 
 ?>
@@ -80,6 +213,9 @@ if ($_POST["mess"]) {
 
     .col-md-3 {
         width: 22%;
+    }
+    .select-styled{
+        display:none;
     }
 </style>
 <!-- Start: Page Banner -->
@@ -108,40 +244,7 @@ if ($_POST["mess"]) {
         <main id="main" class="site-main">
             <div class="booksmedia-detail-main">
                 <div class="container">
-                    <div class="row">
-                        <!-- Start: Search Section -->
-                        <section class="search-filters">
-                            <div class="container">
-                                <div class="filter-box">
-                                    <h3>What are you looking for at the library?</h3>
-                                    <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="keywords">Search</label>
-                                                <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="form-group">
-                                                <select name="catalog" id="catalog" class="form-control">
-                                                    <option>Search the Catalog</option>
-                                                    <option>Books</option>
-                                                    <option>Lectures</option>
-                                                    <option>Scientific Articles</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="submit" value="Search">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- End: Search Section -->
-                    </div>
+                    <br><br>
                     <div class="booksmedia-detail-box">
                         <div class="detailed-box">
                             <div class="col-xs-12 col-sm-5 col-md-3">
@@ -170,11 +273,10 @@ if ($_POST["mess"]) {
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 ">
                                 <div class="post-right-content">
-                                    <h4>Available now</h4>
-                                    <p><strong>Holds:</strong> 01</p>
-                                    <p><strong>On the shelves now at:</strong> Lawrence Public Library</p>
-                                    <p><strong>Call #:</strong> 747 STRUTT C</p>
-                                    <a href="#." class="btn btn-dark-gray">Place a Hold</a>
+                                    <h4><?php echo $msgAvai ?></h4>
+                                    <p><strong>Copies availables:</strong> <?php echo $disp;?></p>
+                                    <p><strong>On the shelves now at:</strong> Amazonia en Linea</p>
+                                    <?php echo $btnReserve; ?>
                                 </div>
                             </div>
                             <div class="clearfix"></div>

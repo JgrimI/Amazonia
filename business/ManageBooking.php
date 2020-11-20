@@ -26,6 +26,14 @@
             return $booking;
 
         }
+
+        public static function consultByUser($cod,$type,$cod_user){
+
+            $bookingDAO=BookingDAO::getBookingDAO(self::$connection);
+            $booking=$bookingDAO->consultByUser($cod,$type,$cod_user);
+            return $booking;
+
+        }
         
         /**
          * Crea un nuevo booki
@@ -43,6 +51,11 @@
         public  static function listAll(){
             $bookingDAO = bookingDAO::getBookingDAO(self::$connection);
             $bookings=$bookingDAO->listAll();
+            return $bookings;
+        }
+        public  static function listByDoc($doc,$type){
+            $bookingDAO = bookingDAO::getBookingDAO(self::$connection);
+            $bookings=$bookingDAO->listByDoc($doc,$type);
             return $bookings;
         }
 
