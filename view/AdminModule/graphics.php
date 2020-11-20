@@ -3,6 +3,8 @@ require_once('../business/ManageBook.php');
 require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../business/ManageUser.php');
+require_once('../business/ManageBooking.php');
+
 require_once('../persistence/util/Connection.php');
 
 $con = new Connection();
@@ -19,6 +21,9 @@ $articles = ManageScienceArticle::listAll();
 
 ManageUser::setConnectionBD($connection);
 $users = ManageUser::listAll();
+
+ManageBooking::setConnectionBD($connection);
+$bookings = ManageBooking::listAll();
 
 ?>
 <script>
@@ -95,7 +100,47 @@ function graf() {
     });
   }
 
-  if ($("#donut-graphic1").length) {
+  if ($("#donut-graphic2").length) {
+    <?php
+    $numBooking =0;
+    
+    foreach($bookings as $booking){
+      if ($booking->getT=='activo') {
+        $numUsersA += 1;
+      } else {
+        $numUsersD += 1;
+      }
+    }
+    
+    ?> 
+    var DoughnutData = {
+      datasets: [{
+        data: [<?php echo $numUsersA?>, <?php echo $numUsersD?>],
+        backgroundColor: chartColors,
+        borderColor: chartColors,
+        borderWidth: chartColors
+      }],
+      labels: [
+        'Usuarios Activos',
+        'Usuarios Inactivos',
+      ]
+    };
+    var DoughnutOptions = {
+      responsive: true,
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      }
+    };
+    var doughnutChartCanvas = $("#donut-graphic1").get(0).getContext("2d");
+    var doughnutChart = new Chart(doughnutChartCanvas, {
+      type: 'doughnut',
+      data: DoughnutData,
+      options: DoughnutOptions
+    });
+  }
+
+  if ($("#line-graphic1").length) {
     <?php
     $numUsersA =0;
     $numUsersD =0;

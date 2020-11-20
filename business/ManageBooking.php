@@ -5,7 +5,7 @@
     require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/util/Connection.php';
     require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/BookingDAO.php';
 
-    class ManageBook{
+    class ManageBooking{
 
         /**
          * Atributo para la conexión a la base de datos
