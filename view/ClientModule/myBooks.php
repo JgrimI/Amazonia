@@ -7,7 +7,7 @@ require_once('../persistence/util/Connection.php');
 
 $con = new Connection();
 $connection = $con->conectBD();
-$codUser=$_SESSION['cod_user'];
+$codUser = $_SESSION['cod_user'];
 ManageBook::setConnectionBD($connection);
 $books = ManageBook::consultByUser($codUser);
 
@@ -88,7 +88,6 @@ $articles = ManageScienceArticle::consultByUser($codUser);
         <div class="breadcrumb">
             <ul>
                 <li><a href="?menu=home">Home</a></li>
-                <li><a href="?menu=books">Documents & Media</a></li>
                 <li>My Documents</li>
             </ul>
         </div>
@@ -116,8 +115,7 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                             } else {
                                 $no = 0;
                                 foreach ($books as $b) {
-                                    if ($b->getAvailable()=="Y") {
-                                        echo '<li class="paginate">
+                                    echo '<li class="paginate">
                                                 <div class="book-list-icon yellow-icon"></div>
                                                 <figure>
                                                 <form id="formB' . $no . '" target="_blank" action="?menu=details" method="post">
@@ -140,19 +138,32 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
                                                         </header>
                                                         <p>' . $b->getDescription() . '</p>
-                                                        
+                                                        <div class="actions">
+                                                            <ul>
+                                                                <li>
+                                                                    <form id="form3B' . $no . '" target="_blank" action="?menu=editBook" method="post">
+                                                                        <a href="javascript:;" onclick="document.getElementById(' . "'form3B$no'" . ').submit();" data-toggle="blog-tags" data-placement="top" title="Edit">
+                                                                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                                                        </a>
+                                                                        <input type="hidden" name="mess" value="' . $b->getId() . '"/>
+                                                                        <input type="hidden" name="type" value="0"/>
+                                                                    </form>
+                                                                   
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
                                                     </figcaption>
                                                 </figure>
                                             </li>';
-                                        $no += 1;
-                                    }
+                                    $no += 1;
                                 }
                             }
                             if (count($papers) == 0) {
                             } else {
                                 $no = 0;
                                 foreach ($papers as $b) {
-                                    if($b->getAvailable()=="Y"){
+                                    if ($b->getAvailable() == "Y") {
                                         echo '<li class="paginate">
                                                 <div class="book-list-icon red-icon"></div>
                                                 <figure>
@@ -188,7 +199,7 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                             } else {
                                 $no = 0;
                                 foreach ($articles as $a) {
-                                    if ($a->getAvailable()=="Y") {
+                                    if ($a->getAvailable() == "Y") {
                                         echo '<li class="paginate">
                                                 <div class="book-list-icon light-green-icon"></div>
                                                 <figure>

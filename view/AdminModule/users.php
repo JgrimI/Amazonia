@@ -2,45 +2,64 @@
 require_once('../business/ManageUser.php');
 require_once('../persistence/util/Connection.php');
 
+function strtotitle($title)
+{
+    $smallwordsarray = array(
+        'of', 'a', 'the', 'and', 'an', 'or', 'nor', 'but', 'is', 'if', 'then', 'else', 'when',
+        'at', 'from', 'by', 'on', 'off', 'for', 'in', 'out', 'over', 'to', 'into', 'with', 'en', 'y', 'de', 'e', 'el', 'a', 'para',
+        'u', 'con', 'del', 'la'
+    );
+    $words = explode(' ', $title);
+    foreach ($words as $key => $word) {
+        if ($key == 0 or !in_array($word, $smallwordsarray))
+            $words[$key] = ucwords($word);
+    }
+    $newtitle = implode(' ', $words);
+
+    return $newtitle;
+}
+
 $con = new Connection();
 $connection = $con->conectBD();
 
 ManageUser::setConnectionBD($connection);
 
-if(isset($_POST["cod"])){
-    $php=$_POST['cod'];
-        $aux = ManageUser::consult($php);
-        if($aux->getStatus()=='activo'){
-            $aux->setStatus('inactivo');
-            ManageUser::modify($aux);
-        }
-        else{
-            $aux->setStatus('activo');
-            ManageUser::modify($aux);   
-        }
+if (isset($_POST["cod"])) {
+    $php = $_POST['cod'];
+    $aux = ManageUser::consult($php);
+    if ($aux->getStatus() == 'activo') {
+        $aux->setStatus('inactivo');
+        ManageUser::modify($aux);
+    } else {
+        $aux->setStatus('activo');
+        ManageUser::modify($aux);
     }
-    
+}
+
 
 
 
 $users = ManageUser::listAll();
-$table='<table class="table" id="myTable"><thead><th>Name</th><th>Email</th><th>Status</th></thead><tbody>';
-foreach($users as $user){
-    $ico=($user->getStatus()=='activo') ? '<form method="POST" ><input type="hidden" name="cod" value="'.$user->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i style="color:green;">Enabled</i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="'.$user->getId().'"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i style="color:red;">Disabled</i></button></form>';;
-    $table.='<tr><td>'.$user->getName().'</td><td>'.$user->getEmail().'</td><td>'.$ico.'</td></tr>';
+$table = '<table class="table text-center" style="text-align-last: center;" id="myTable"><thead><th>Name</th><th>Email</th><th>Status</th></thead><tbody>';
+foreach ($users as $user) {
+    $ico = ($user->getStatus() == 'activo') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $user->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i style="color:green;">Enabled</i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $user->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i style="color:red;">Disabled</i></button></form>';;
+    $table .= '<tr><td>' . $user->getName() . '</td><td>' . $user->getEmail() . '</td><td>' . $ico . '</td></tr>';
 }
-$table.='</tbody></table>';
+$table .= '</tbody></table>';
 
 
 ?>
 <style>
-    .navbar-default .navbar-nav>.users>a,
-    .navbar-default .navbar-nav>.users>a:hover,
-    .navbar-default .navbar-nav>.users>a:focus {
+    .navbar-default .navbar-nav>.cruds>a,
+    .navbar-default .navbar-nav>.cruds>a:hover,
+    .navbar-default .navbar-nav>.cruds>a:focus {
         color: #ff7236;
         background-color: transparent;
     }
-
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+        text-align: left;
+    }
     .detailed-box .post-thumbnail {
         display: inline-block;
         float: left;
@@ -50,43 +69,40 @@ $table.='</tbody></table>';
         vertical-align: top;
     }
 
-    .col-md-3 {
-        width: 22%;
-    }
     .button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
 
-.btn1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #1bcc00;
-}
+    .btn1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #1bcc00;
+    }
 
-.btn1:hover {
-  background-color: #1bcc00;
-  color: white;
-}
+    .btn1:hover {
+        background-color: #1bcc00;
+        color: white;
+    }
 
-.btn2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #ff4040;
-}
+    .btn2 {
+        background-color: white;
+        color: black;
+        border: 2px solid #ff4040;
+    }
 
-.btn2:hover {
-  background-color: #ff4040;
-  color: white;
-}
+    .btn2:hover {
+        background-color: #ff4040;
+        color: white;
+    }
 </style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
@@ -98,6 +114,8 @@ $table.='</tbody></table>';
         <div class="breadcrumb">
             <ul>
                 <li><a href="?menu=home">Home</a></li>
+                <li><a href="#">Cruds</a></li>
+                <li>Users</li>
             </ul>
         </div>
     </div>
@@ -118,9 +136,15 @@ $table.='</tbody></table>';
     </div>
 </div>
 <script>
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            language: {
+                search: "<i class='fa fa-search'></i>",
+                searchPlaceholder: "Search"
+
+            }
+        });
+    });
 </script>
 <!-- End: Products Section -->
 
