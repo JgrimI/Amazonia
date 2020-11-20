@@ -27,7 +27,7 @@ if($validUser->getId()!=''){
 	ManageUser::createUser($user);
 
 	echo '<script language="javascript">alert("Congratulations, your account was created successfully");
-			window.location.href="index-2.html"
+			window.location.href="?menu=home"
 			</script>';
 }
 

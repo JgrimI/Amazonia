@@ -3,6 +3,8 @@ require_once('../business/ManageBook.php');
 require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../business/ManageUser.php');
+require_once('../business/ManageBooking.php');
+
 require_once('../persistence/util/Connection.php');
 
 $con = new Connection();
@@ -20,9 +22,14 @@ $articles = ManageScienceArticle::listAll();
 ManageUser::setConnectionBD($connection);
 $users = ManageUser::listAll();
 
+ManageBooking::setConnectionBD($connection);
+$bookings = ManageBooking::listAll();
+
 ?>
 <script>
+
 function graf() {
+
   if ($("#bar-graphic1").length) {
     <?php
     $numBooksN= 0;
@@ -31,6 +38,7 @@ function graf() {
     $numPapersN= 0;
     $numArticlesY= 0;
     $numArticlesN= 0;
+
     foreach($books as $book){
       if ($book->getAvailable()=='Y') {
         $numBooksY += 1;
@@ -100,7 +108,6 @@ function graf() {
     $numUsersA =0;
     $numUsersD =0;
 
-   
     foreach($users as $user){
       if ($user->getStatus()=='activo') {
         $numUsersA += 1;
@@ -137,9 +144,44 @@ function graf() {
     });
   }
 
-  
-
-
+  if ($("#bar-graphic2").length) {
+    <?php
+    $numBooks= 0;
+    $numPapers= 0;
+    $numArticles= 0;
+    
+    foreach($bookings as $booking){
+      if ($booking->getType_document()=='book') {
+        $numBooks += 1;
+      } 
+      else if ($booking->getType_document()=='papers'){
+        $numPapers += 1;
+      }
+      else{
+        $numArticles += 1;
+      }
+    }
+    
+    ?> 
+    var BarData = {
+      labels: ["Books", "Papers", "Articles"],
+      datasets: [{
+        label: 'Number of Bookings',
+        data: [<?php echo $numBooks?>, <?php echo $numPapers?>, <?php echo $numArticles?>],
+        backgroundColor: chartColors,
+        borderColor: chartColors,
+        borderWidth: 0
+      }]
+    };
+    var barChartCanvas = $("#bar-graphic2").get(0).getContext("2d");
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar',
+      data: BarData,
+      options: {
+        legend: false
+      }
+    });
+  }
 
 
 

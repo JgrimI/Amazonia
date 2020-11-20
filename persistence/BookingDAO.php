@@ -26,7 +26,7 @@ class BookingDAO implements DAO
 
 	/**
 	 * Objeto de la clase bookDAO
-	 * @var [bookDAO]
+	 * @var [bookingDAO]
 	 */
 	private static $bookingDAO;
 
@@ -41,8 +41,7 @@ class BookingDAO implements DAO
 
 	/**
 	 * Realiza la consulta de un objeto
-	 * @param  [int] $codigo [Código del objeto a consultar]
-	 * @return [book] book encontrado
+	
 	 */
 	public function consult($cod_booking){
 		$query="SELECT * FROM booking WHERE cod_booking=".$cod_booking;
@@ -86,7 +85,6 @@ class BookingDAO implements DAO
 
 	/**
 	 * Crea una nuevo book en la base de datos
-	 * @param  book $newBook
 	 * @return void
 	 */
 	public function create ($newBooking){
@@ -98,7 +96,6 @@ class BookingDAO implements DAO
 
 	/**
 	 * Modifica una book ingresado por parámetro
-	 * @param  book $book book ingresado por parámetro
 	 * @return void
 	 */
 	public function modify ($booking){
@@ -109,7 +106,6 @@ class BookingDAO implements DAO
 
 	/**
 	 * Lista todos los objetos que se están en la tabla de book
-	 * @return [books]
 	 */
 	public function listAll(){
 		$query="SELECT * FROM booking";
@@ -157,9 +153,6 @@ class BookingDAO implements DAO
 
 	/*
 	*Obtiene el objeto de esta clase
-	*
-	*@param $conexion
-	*@return void
 	*/
 	public static function getBookingDAO($connection) {
             if(self::$bookingDAO == null) {
