@@ -1,3 +1,30 @@
+<?php
+require_once('../business/ManageBook.php');
+require_once('../business/ManagePresentation.php');
+require_once('../business/ManageScienceArticle.php');
+require_once('../persistence/util/Connection.php');
+$con = new Connection();
+$connection = $con->conectBD();
+
+ManageBook::setConnectionBD($connection);
+ManagePresentation::setConnectionBD($connection);
+ManageScienceArticle::setConnectionBD($connection);
+$countbook = 0;
+$countpres = 0;
+$countart = 0;
+$books = ManageBook::listAll();
+foreach ($books as $book) {
+$countbook++;
+}
+$books = ManagePresentation::listAll();
+foreach ($books as $book) {
+$countpres++;
+}
+$books = ManageScienceArticle::listAll();
+foreach ($books as $book) {
+$countart++;
+}
+?>
 <style>
     .navbar-default .navbar-nav>.home>a,
     .navbar-default .navbar-nav>.home>a:hover,
@@ -122,7 +149,7 @@
                                 <div class="fact-icon">
                                     <i class="ebook"></i>
                                 </div>
-                                <span>Books<strong class="fact-counter">45780</strong></span>
+                                <span>Books<strong class="fact-counter"><?php echo $countbook; ?></strong></span>
                             </div>
                         </li>
                         <li class="bg-yellow">
@@ -130,7 +157,7 @@
                                 <div class="fact-icon">
                                     <i class="eaudio"></i>
                                 </div>
-                                <span>Lectures<strong class="fact-counter">32450</strong></span>
+                                <span>Lectures<strong class="fact-counter"><?php echo $countpres; ?></strong></span>
                             </div>
                         </li>
                         <li class="bg-red">
@@ -138,7 +165,7 @@
                                 <div class="fact-icon">
                                     <i class="magazine"></i>
                                 </div>
-                                <span>Scientific <br>Articles<strong class="fact-counter">14450</strong></span>
+                                <span>Scientific <br>Articles<strong class="fact-counter"><?php echo $countart; ?></strong></span>
                             </div>
                         </li>
                     </ul>
