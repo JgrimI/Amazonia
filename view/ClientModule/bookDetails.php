@@ -82,6 +82,12 @@ if ($_POST["mess"]) {
         ManageBook::setConnectionBD($connection);
         $book = ManageBook::consult($cod);
 
+        if($book->getIdUser()==$_SESSION['cod_user']){
+            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Book</a></form>';
+        }else{
+            $btnDelete ='';
+        }
+
         $reserves = ManageBooking::listByDoc($cod, 'book');
         $return = ManageBooking::consultByUser($cod, 'book', $_SESSION['cod_user']);
         if ($return->getCod_user() != '') {
@@ -115,6 +121,12 @@ if ($_POST["mess"]) {
         ManagePresentation::setConnectionBD($connection);
         $book = ManagePresentation::consult($cod);
 
+        if($book->getIdUser()==$_SESSION['cod_user']){
+            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Paper</a></form>';
+        }else{
+            $btnDelete ='';
+        }
+
         $reserves = ManageBooking::listByDoc($cod, 'presentation');
         $return = ManageBooking::consultByUser($cod, 'presentation', $_SESSION['cod_user']);
         if ($return->getCod_user() != '') {
@@ -147,6 +159,12 @@ if ($_POST["mess"]) {
     } elseif ($type == 2) {
         ManageScienceArticle::setConnectionBD($connection);
         $book = ManageScienceArticle::consult($cod);
+
+        if($book->getIdUser()==$_SESSION['cod_user']){
+            $btnDelete = '<form id="f2" name="f2" method="post" action="?menu=details"><input type="hidden" name="mess" id="mess" value="' . $cod . '"><input type="hidden" name="type" id="type" value="' . $type . '"><a href="javascript:void(0)" class="btn btn-primary"  onclick="document.getElementById(' . "'f2'" . ').submit();">Delete Article</a></form>';
+        }else{
+            $btnDelete ='';
+        }
 
         $reserves = ManageBooking::listByDoc($cod, 'sciencearticle');
         $return = ManageBooking::consultByUser($cod, 'sciencearticle', $_SESSION['cod_user']);
@@ -265,7 +283,10 @@ if ($_POST["mess"]) {
                                     <h4><?php echo $msgAvai ?></h4>
                                     <p><strong>Copies availables:</strong> <?php echo $disp; ?></p>
                                     <p><strong>On the shelves now at:</strong> Amazonia en Linea</p>
-                                    <?php echo $btnReserve; ?>
+                                    <?php 
+                                        echo $btnReserve;
+                                        echo $btnDelete;
+                                    ?>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
