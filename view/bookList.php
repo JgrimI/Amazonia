@@ -8,16 +8,16 @@ require_once('../persistence/util/Connection.php');
 $con = new Connection();
 $connection = $con->conectBD();
 
-$books=array();
-$papers=array();
-$articles=array();
-if(isset($_POST['t'])){
-    $type=$_POST['t'];
-    $key=$_POST['keywords'];
-    if(isset($key)){
-        if(strlen($key)>0){
-            $key=str_replace("'","",$key);
-            switch($type){
+$books = array();
+$papers = array();
+$articles = array();
+if (isset($_POST['t'])) {
+    $type = $_POST['t'];
+    $key = $_POST['keywords'];
+    if (isset($key)) {
+        if (strlen($key) > 0) {
+            $key = str_replace("'", "", $key);
+            switch ($type) {
                 case 'book':
                     ManageBook::setConnectionBD($connection);
                     $books = ManageBook::listByQuery($key);
@@ -39,8 +39,8 @@ if(isset($_POST['t'])){
                     $articles = ManageScienceArticle::listByQuery($key);
                     break;
             }
-        }else{
-            switch($type){
+        } else {
+            switch ($type) {
                 case 'book':
                     ManageBook::setConnectionBD($connection);
                     $books = ManageBook::listAll();
@@ -56,28 +56,27 @@ if(isset($_POST['t'])){
                 default:
                     ManageBook::setConnectionBD($connection);
                     $books = ManageBook::listAll();
-                    
+
                     ManagePresentation::setConnectionBD($connection);
                     $papers = ManagePresentation::listAll();
-                    
+
                     ManageScienceArticle::setConnectionBD($connection);
                     $articles = ManageScienceArticle::listAll();
                     break;
             }
         }
     }
-
-}else{
+} else {
     ManageBook::setConnectionBD($connection);
     $books = ManageBook::listAll();
-    
+
     ManagePresentation::setConnectionBD($connection);
     $papers = ManagePresentation::listAll();
-    
+
     ManageScienceArticle::setConnectionBD($connection);
     $articles = ManageScienceArticle::listAll();
 }
-$results=count($books)+count($papers)+count($articles);
+$results = count($books) + count($papers) + count($articles);
 
 ?>
 <style>
@@ -138,8 +137,9 @@ $results=count($books)+count($papers)+count($articles);
         width: 100%;
         height: 350px;
     }
+
     .error-info {
-        padding: 23.5% 30px!important;
+        padding: 23.5% 30px !important;
     }
 </style>
 <!-- Start: Page Banner -->
@@ -197,45 +197,46 @@ $results=count($books)+count($papers)+count($articles);
                     </section>
                     <!-- End: Search Section -->
                     <?php
-                    if($results==0){
+                    if ($results == 0) {
                     ?>
-                                        <div class="error-view" style="margin-top:-15%;">
-                                            <div class="company-info">
-                                                <div class="col-md-5 col-md-offset-1 border-dark-left">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="error-box bg-dark margin-left text-center">
-                                                                <img src="images/error-img.png" alt="Error Image">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 border-dark new-user">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="error-info bg-light margin-right">
-                                                            <br><br><br><br><h2>OOPS <small>No Results Found!</small></h2>
-                                                                                                                                           
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                        <div class="error-view" style="margin-top:-15%;">
+                            <div class="company-info">
+                                <div class="col-md-5 col-md-offset-1 border-dark-left">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="error-box bg-dark margin-left text-center">
+                                                <img src="images/error-img.png" alt="Error Image">
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 border-dark new-user">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="error-info bg-light margin-right">
+                                                <br><br><br><br>
+                                                <h2>OOPS <small>No Results Found!</small></h2>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php
-                    }else{
+                    } else {
                     ?>
-                    <div class="pagination">
-                        <div id="page-nav" class="page-nav"></div>
-                    </div>
-                    <div class="booksmedia-fullwidth">
-                        <ul>
-                            <?php
+                        <div class="pagination">
+                            <div id="page-nav" class="page-nav"></div>
+                        </div>
+                        <div class="booksmedia-fullwidth">
+                            <ul>
+                                <?php
                                 if (count($books) == 0) {
                                 } else {
                                     $no = 0;
                                     foreach ($books as $b) {
-                                        if ($b->getAvailable()=="Y") {
+                                        if ($b->getAvailable() == "Y") {
                                             echo '<li class="paginate">
                                                     <div class="book-list-icon yellow-icon"></div>
                                                     <figure>
@@ -271,7 +272,7 @@ $results=count($books)+count($papers)+count($articles);
                                 } else {
                                     $no = 0;
                                     foreach ($papers as $b) {
-                                        if($b->getAvailable()=="Y"){
+                                        if ($b->getAvailable() == "Y") {
                                             echo '<li class="paginate">
                                                     <div class="book-list-icon red-icon"></div>
                                                     <figure>
@@ -307,7 +308,7 @@ $results=count($books)+count($papers)+count($articles);
                                 } else {
                                     $no = 0;
                                     foreach ($articles as $a) {
-                                        if ($a->getAvailable()=="Y") {
+                                        if ($a->getAvailable() == "Y") {
                                             echo '<li class="paginate">
                                                     <div class="book-list-icon light-green-icon"></div>
                                                     <figure>
@@ -339,13 +340,13 @@ $results=count($books)+count($papers)+count($articles);
                                         }
                                     }
                                 }
-                            ?>
-                        </ul>
-                    </div>
+                                ?>
+                            </ul>
+                        </div>
 
-                    <div class="pagination">
-                        <div id="page-nav" class="page-nav"></div>
-                    </div>
+                        <div class="pagination">
+                            <div id="page-nav" class="page-nav"></div>
+                        </div>
                     <?php
                     }
                     ?>

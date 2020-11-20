@@ -26,20 +26,20 @@ if (!isset($_SESSION['redirect'])) {
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <!-- pagination -->
-    <link type="text/css" rel="stylesheet" href="simplePagination.css"/>
+    <link type="text/css" rel="stylesheet" href="simplePagination.css" />
 
     <!-- Stylesheet -->
     <link href="style.css" rel="stylesheet" type="text/css" />
-    
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="dropify/dropify.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="dropify/dropify.min.css">
 
-    
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,24 +59,28 @@ if (!isset($_SESSION['redirect'])) {
     </header>
     <style>
         .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #1cc88a!important;
+            background-color: #1cc88a !important;
             color: #fff;
         }
-        .dataTables_length{
-            display:none;
+
+        .dataTables_length {
+            display: none;
         }
+
         .swal2-modal .swal2-styled {
-            border-left-color: orange!important;
-            border-right-color: orange!important;
-            background-color: orange!important;
+            border-left-color: orange !important;
+            border-right-color: orange !important;
+            background-color: orange !important;
         }
+
         .swal2-styled:hover {
-            border-left-color: #FF8000!important;
-            border-right-color: #FF8000!important;
-            background-color: #FF8000!important;
+            border-left-color: #FF8000 !important;
+            border-right-color: #FF8000 !important;
+            background-color: #FF8000 !important;
         }
-        .item-purchase-banner{
-            display:none;
+
+        .item-purchase-banner {
+            display: none;
         }
     </style>
     <!-- End: Header Section -->
@@ -84,19 +88,15 @@ if (!isset($_SESSION['redirect'])) {
     <!-- Start: Slider Section -->
     <div id="panel">
         <div>
-
-
             <?php
             require_once('routing.php');
             ?>
-
         </div>
         <!-- Start: Footer -->
         <footer class="site-footer">
             <?php
             require_once('footer.php');
             ?>
-
         </footer>
         <!-- End: Footer -->
     </div>
@@ -107,8 +107,6 @@ if (!isset($_SESSION['redirect'])) {
     <script src="Charts/charts/chartjs.addon.js"></script>
     <script src="Charts/template.js"></script>
 
-
-
     <!-- Facts Counter -->
     <script type="text/javascript" src="js/facts.counter.min.js"></script>
 
@@ -116,7 +114,6 @@ if (!isset($_SESSION['redirect'])) {
     <script type="text/javascript" src="js/mixitup.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
 
     <!-- Bootstrap -->
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -132,11 +129,9 @@ if (!isset($_SESSION['redirect'])) {
 
     <!-- Custom Scripts -->
     <script type="text/javascript" src="js/main.js"></script>
-  
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    
+
 </body>
-
-
 </html>

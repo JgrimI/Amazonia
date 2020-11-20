@@ -14,15 +14,15 @@ $countpres = 0;
 $countart = 0;
 $books = ManageBook::listAll();
 foreach ($books as $book) {
-$countbook++;
+    $countbook++;
 }
 $books = ManagePresentation::listAll();
 foreach ($books as $book) {
-$countpres++;
+    $countpres++;
 }
 $books = ManageScienceArticle::listAll();
 foreach ($books as $book) {
-$countart++;
+    $countart++;
 }
 ?>
 <style>
@@ -87,32 +87,34 @@ $countart++;
 
 <!-- Start: Search Section -->
 <section class="search-filters">
-    <div class="filter-box">
-        <h3>What are you looking for at the library?</h3>
-        <form action="?menu=books" method="post">
-            <div class="col-md-6 col-sm-6">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
+    <div class="container">
+        <div class="filter-box">
+            <h3>What are you looking for at the library?</h3>
+            <form action="?menu=books" method="post">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <select name="t" id="t" class="form-control">
-                        <option>Search the Catalog</option>
-                        <option value="book">Books</option>
-                        <option value="presentation">Lectures</option>
-                        <option value="sa">Scientific Articles</option>
-                    </select>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <select name="t" id="t" class="form-control">
+                            <option>Search the Catalog</option>
+                            <option value="book">Books</option>
+                            <option value="presentation">Lectures</option>
+                            <option value="sa">Scientific Articles</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6">
-                <div class="form-group">
-                    <input class="form-control" type="submit" value="Search">
+                <div class="col-md-2 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="submit" value="Search">
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="clear"></div>
     </div>
-    <div class="clear"></div>
 </section>
 <!-- End: Search Section -->
 
@@ -181,16 +183,16 @@ $countart++;
 <section class="features">
     <div class="container">
         <ul>
-        <li class="bg-yellow">
+            <li class="bg-yellow">
                 <div class="feature-box">
                     <i class="yellow"></i>
                     <h3>Books</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
                         pulvinar varius dui id, convallis iaculis eros.</p>
                     <form action="?menu=books" method="post" id="form1">
-                    <input type="hidden" name="t" id="t" value="book">
-                    <input type="hidden" name="keywords" id="keywords">
-                    <a href="javascript:void(0);" class="yellow" onclick="document.getElementById('form1').submit();">View Selection <i class="fa fa-long-arrow-right"></i></a>
+                        <input type="hidden" name="t" id="t" value="book">
+                        <input type="hidden" name="keywords" id="keywords">
+                        <a href="javascript:void(0);" class="yellow" onclick="document.getElementById('form1').submit();">View Selection <i class="fa fa-long-arrow-right"></i></a>
                     </form>
 
                 </div>

@@ -15,18 +15,18 @@ if ($_POST["mess"]) {
     if ($type == 0) {
         ManageBook::setConnectionBD($connection);
         $book = ManageBook::consult($cod);
-        $reserves = ManageBooking::listByDoc($cod,'book');
-        if(count($reserves)<$book->getQuantity()){
-            $msgAvai='Available now';
-            $disp=$book->getQuantity()-count($reserves);
-            $btnReserve='';
-        }else{
-            $msgAvai='No copies available';
-            $disp=$book->getQuantity()-count($reserves);
-            $btnReserve='';
+        $reserves = ManageBooking::listByDoc($cod, 'book');
+        if (count($reserves) < $book->getQuantity()) {
+            $msgAvai = 'Available now';
+            $disp = $book->getQuantity() - count($reserves);
+            $btnReserve = '';
+        } else {
+            $msgAvai = 'No copies available';
+            $disp = $book->getQuantity() - count($reserves);
+            $btnReserve = '';
         }
-        
-        
+
+
         $name = $book->getTitle();
         $author = $book->getAuthors();
         $date = $book->getDatePublished();
@@ -38,23 +38,21 @@ if ($_POST["mess"]) {
         $lenght = "<p><strong>Lenght:</strong>$pages</p>";
         $isnn = "ISBN:";
         $icon = "yellow-icon";
-
-        
     } elseif ($type == 1) {
         ManagePresentation::setConnectionBD($connection);
         $book = ManagePresentation::consult($cod);
-        $reserves = ManageBooking::listByDoc($cod,'book');
+        $reserves = ManageBooking::listByDoc($cod, 'book');
 
-        if(count($reserves)<$book->getQuantity()){
-            $msgAvai='Available now';
-            $disp=$book->getQuantity()-count($reserves);
-            $btnReserve='';
-        }else{
-            $msgAvai='No copies available';
-            $disp=$book->getQuantity()-count($reserves);
-            $btnReserve='';
+        if (count($reserves) < $book->getQuantity()) {
+            $msgAvai = 'Available now';
+            $disp = $book->getQuantity() - count($reserves);
+            $btnReserve = '';
+        } else {
+            $msgAvai = 'No copies available';
+            $disp = $book->getQuantity() - count($reserves);
+            $btnReserve = '';
         }
-        
+
 
         $name = $book->getTitle();
         $author = $book->getAuthors();
@@ -67,23 +65,21 @@ if ($_POST["mess"]) {
         $lenght = "<p><strong>Congress Name:</strong>$congress</p>";
         $isnn = "ISBN:";
         $icon = "red-icon";
-
-        
     } elseif ($type == 2) {
         ManageScienceArticle::setConnectionBD($connection);
         $book = ManageScienceArticle::consult($cod);
-        $reserves = ManageBooking::listByDoc($cod,'book');
+        $reserves = ManageBooking::listByDoc($cod, 'book');
 
-        if(count($reserves)<$book->getQuantity()){
-            $msgAvai='Available now';
-            $disp=$book->getQuantity()-count($reserves);
-            $btnReserve='';
-        }else{
-            $msgAvai='No copies available';
-            $disp=$book->getQuantity()-count($reserves);
-            $btnReserve='';
+        if (count($reserves) < $book->getQuantity()) {
+            $msgAvai = 'Available now';
+            $disp = $book->getQuantity() - count($reserves);
+            $btnReserve = '';
+        } else {
+            $msgAvai = 'No copies available';
+            $disp = $book->getQuantity() - count($reserves);
+            $btnReserve = '';
         }
-        
+
 
         $name = $book->getTitle();
         $author = $book->getAuthors();
@@ -96,9 +92,8 @@ if ($_POST["mess"]) {
         $icon = "light-green-icon";
         $lenght = "";
         $isnn = "SNN:";
-
     }
-}else {
+} else {
     header('Location: index.php?menu=books');
 }
 
@@ -180,7 +175,7 @@ if ($_POST["mess"]) {
                             <div class="col-xs-12 col-sm-12 col-md-3 ">
                                 <div class="post-right-content">
                                     <h4><?php echo $msgAvai ?></h4>
-                                    <p><strong>Copies availables:</strong> <?php echo $disp;?></p>
+                                    <p><strong>Copies availables:</strong> <?php echo $disp; ?></p>
                                     <p><strong>On the shelves now at:</strong> Amazonia en Linea</p>
                                     <?php echo $btnReserve; ?>
                                 </div>

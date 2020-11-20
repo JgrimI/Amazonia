@@ -45,11 +45,18 @@
                                     <li><a href="?menu=newBook">Register New Document</a></li>
                                 </ul>
                             </li>
-                           <li class="dropdown cruds">
+                            <li class="dropdown cruds">
                                 <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">Cruds</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="?menu=docs">Documents</a></li>
                                     <li><a href="?menu=users">Users</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown pdf">
+                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">Reports</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="reportpdf.php" target="_blank">PDF Report</a></li>
+                                    <li><a href="reportExcel.php">Excel Report</a></li>
                                 </ul>
                             </li>
                         </ul>

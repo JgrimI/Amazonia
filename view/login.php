@@ -5,92 +5,89 @@ require_once('../persistence/util/Connection.php');
 require_once('../business/User.php');
 require_once('util.php');
 
-if(isset($_POST['login'])){
- 
-    $con= new Connection;
-    $connection=$con->conectBD();
-    $email=$_POST["email"];
-    $password=$_POST["password"];
+if (isset($_POST['login'])) {
+
+    $con = new Connection;
+    $connection = $con->conectBD();
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
     ManageUser::setConnectionBD($connection);
-    $validUser=ManageUser::login($email, $password);
+    $validUser = ManageUser::login($email, $password);
 
     if ($validUser != '') {
-        $_SESSION['email_user']=$email;
+        $_SESSION['email_user'] = $email;
         $_SESSION['cod_user'] = $validUser->getId();
         $_SESSION['name_user'] = $validUser->getName();
         $_SESSION['status'] = $validUser->getStatus();
-        $_SESSION['redirect']='user.php';
-        echo printMessageWithRedirect("Welcome to Amazonia en Linea ".$validUser->getName(),"","success","user.php");
-
+        $_SESSION['redirect'] = 'user.php';
+        echo printMessageWithRedirect("Welcome to Amazonia en Linea " . $validUser->getName(), "", "success", "user.php");
     }
-    if(!isset($_SESSION['cod_user'])){
+    if (!isset($_SESSION['cod_user'])) {
         ManageAdmin::setConnectionBD($connection);
-        $validUser=ManageAdmin::login($email, $password);
+        $validUser = ManageAdmin::login($email, $password);
 
         if ($validUser != '') {
-            $_SESSION['email_user']=$email;
+            $_SESSION['email_user'] = $email;
             $_SESSION['cod_user'] = $validUser->getId();
             $_SESSION['name_user'] = $validUser->getName();
-            $_SESSION['redirect']='admin.php';
-            echo printMessageWithRedirect("Welcome to Amazonia en Linea ".$validUser->getName(),"","success","admin.php");
-            
-        }else {
-            echo printMessageWithRedirect("Invalid User","","error","?menu=signin");
+            $_SESSION['redirect'] = 'admin.php';
+            echo printMessageWithRedirect("Welcome to Amazonia en Linea " . $validUser->getName(), "", "success", "admin.php");
+        } else {
+            echo printMessageWithRedirect("Invalid User", "", "error", "?menu=signin");
         }
     }
 
     $con->turnOffBD($connection);
 }
-if(isset($_POST['signup'])){
-    $con= new Connection;
-    $connection=$con->conectBD();
-    $email=$_POST["email"];
-    $password=$_POST["password"];
-    $name=$_POST['name'];
+if (isset($_POST['signup'])) {
+    $con = new Connection;
+    $connection = $con->conectBD();
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $name = $_POST['name'];
 
     ManageUser::setConnectionBD($connection);
-    $validUser=ManageUser::consultByMail($email);
-    if($validUser->getId()!=''){
-        echo printMessage("Error!!","The mail is already registered","error");
-    }else{
-        $user=new User();
+    $validUser = ManageUser::consultByMail($email);
+    if ($validUser->getId() != '') {
+        echo printMessage("Error!!", "The mail is already registered", "error");
+    } else {
+        $user = new User();
         $user->setEmail($email);
         $user->setPassword($password);
         $user->setName($name);
         $user->setStatus('inactivo');
-        
+
         ManageUser::createUser($user);
 
-        $user=ManageUser::consultByMail($email);
-        sendMail($email,$name,$user->getId());
+        $user = ManageUser::consultByMail($email);
+        sendMail($email, $name, $user->getId());
 
-        echo printMessage("Congratulations","your account was created successfully","success");
+        echo printMessage("Congratulations", "your account was created successfully", "success");
     }
     $con->turnOffBD($connection);
-
 }
-if(isset($_GET['i'])){
-    $cod=base64_decode($_GET['i']);
-    $con= new Connection;
-    $connection=$con->conectBD();
+if (isset($_GET['i'])) {
+    $cod = base64_decode($_GET['i']);
+    $con = new Connection;
+    $connection = $con->conectBD();
     ManageUser::setConnectionBD($connection);
-    $user=ManageUser::consult($cod);
+    $user = ManageUser::consult($cod);
     $user->setStatus('activo');
     ManageUser::modify($user);
-    $_SESSION['email_user']=$user->getEmail();
+    $_SESSION['email_user'] = $user->getEmail();
     $_SESSION['cod_user'] = $user->getId();
     $_SESSION['name_user'] = $user->getName();
     $_SESSION['status'] = $user->getStatus();
-    $_SESSION['redirect']='user.php';
-    echo printMessageWithRedirect("Welcome to Amazonia en Linea ".$user->getName(),"","success","user.php");
+    $_SESSION['redirect'] = 'user.php';
+    echo printMessageWithRedirect("Welcome to Amazonia en Linea " . $user->getName(), "", "success", "user.php");
     $con->turnOffBD($connection);
 }
 ?>
 <style>
-.select-styled{
-    display:none;
-}
+    .select-styled {
+        display: none;
+    }
 </style>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
@@ -153,7 +150,7 @@ if(isset($_GET['i'])){
                                                 <form class="login" method="post">
                                                     <input type="text" id="name" name="name" class="input-text" required placeholder="Name" style="margin-top:4%;">
                                                     <input type="text" id="email" name="email" class="input-text" required placeholder="Email">
-                                                    <input type="password" id="password" name="password" class="input-text" required placeholder="Password" >
+                                                    <input type="password" id="password" name="password" class="input-text" required placeholder="Password">
                                                     <div class="clear"></div>
                                                     <input type="submit" value="Signup" name="signup" id="signup" class="button btn btn-default">
                                                     <div class="clear"></div>

@@ -56,13 +56,14 @@ $table .= '</tbody></table>';
         color: #ff7236;
         background-color: transparent;
     }
+
     .dataTables_wrapper .dataTables_filter {
         float: left;
         text-align: left;
     }
+
     .detailed-box .post-thumbnail {
         display: inline-block;
-        float: left;
         margin: 0px -15px 0px -15px;
         position: relative;
         padding: 0px;

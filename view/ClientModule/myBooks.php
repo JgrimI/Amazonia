@@ -4,7 +4,7 @@ require_once('../business/ManageBook.php');
 require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../persistence/util/Connection.php');
-
+require_once('util.php');
 $con = new Connection();
 $connection = $con->conectBD();
 $codUser = $_SESSION['cod_user'];
@@ -135,7 +135,7 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
                                                             <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
-                                                            <p>' . mb_strimwidth($b->getDescription(), 0, 85, "...") . '</p>
+                                                            <p>' . mb_strimwidth(strtotitle($b->getDescription()), 0, 85, "...") . '</p>
                                                             <div class="actions">
                                                                 <ul>
                                                                     <li style="margin: 0px 0px 0px 0px;">
@@ -183,7 +183,7 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $b->getAuthors() . '</p>
                                                             <p><strong>ISBN:</strong>' . $b->getISBN() . '</p>
-                                                            <p>' .  mb_strimwidth($b->getDescription(), 0, 85, "...") . '</p>
+                                                            <p>' .  mb_strimwidth(strtotitle($b->getDescription()), 0, 85, "...") . '</p>
                                                             <div class="actions">
                                                                 <ul>
                                                                     <li style="margin: 0px 0px 0px 0px;">
@@ -232,7 +232,7 @@ $articles = ManageScienceArticle::consultByUser($codUser);
                                                             </h4>
                                                             <p><strong>Author:</strong> ' . $a->getAuthors() . '</p>
                                                             <p><strong>SNN:</strong>' . $a->getSSN() . '</p>
-                                                            <p>' .  mb_strimwidth($a->getDescription(), 0, 85, "...") . '</p>
+                                                            <p>' .  mb_strimwidth(strtotitle($a->getDescription()), 0, 85, "...") . '</p>
                                                             <div class="actions">
                                                                 <ul>
                                                                     <li style="margin: 0px 0px 0px 0px;">
