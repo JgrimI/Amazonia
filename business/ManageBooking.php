@@ -5,7 +5,7 @@
     require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/util/Connection.php';
     require_once($_SERVER["DOCUMENT_ROOT"]).'/Amazonia/persistence/BookingDAO.php';
 
-    class ManageBook{
+    class ManageBooking{
 
         /**
          * Atributo para la conexión a la base de datos
@@ -28,6 +28,14 @@
             return $booking;
 
         }
+
+        public static function consultByUser($cod,$type,$cod_user){
+
+            $bookingDAO=BookingDAO::getBookingDAO(self::$connection);
+            $booking=$bookingDAO->consultByUser($cod,$type,$cod_user);
+            return $booking;
+
+        }
         
         /**
          * Crea un nuevo booki
@@ -47,6 +55,11 @@
         public  static function listAll(){
             $bookingDAO = bookingDAO::getBookingDAO(self::$connection);
             $bookings=$bookingDAO->listAll();
+            return $bookings;
+        }
+        public  static function listByDoc($doc,$type){
+            $bookingDAO = bookingDAO::getBookingDAO(self::$connection);
+            $bookings=$bookingDAO->listByDoc($doc,$type);
             return $bookings;
         }
 

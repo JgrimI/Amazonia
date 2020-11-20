@@ -17,8 +17,6 @@
 		}
 		if ($_GET['menu']=='editBook'){
 			include_once('ClientModule/editBook.php');
-		}else{
-			include_once('404.php');
 		}
 	} else {
 		include_once('ClientModule/home.php');

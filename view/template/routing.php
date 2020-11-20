@@ -10,7 +10,7 @@ if (isset($_GET['menu'])) {
 		include_once('login.php');
 	}
 	if ($_GET['menu'] == 'details') {
-		include_once('ClientModule/bookDetails.php');
+		include_once('bookDetails.php');
 	}
 } else {
 	include_once('home.php');

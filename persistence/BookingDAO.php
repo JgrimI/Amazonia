@@ -64,6 +64,26 @@ class BookingDAO implements DAO
 		return $booking;
 	}
 
+	public function consultByUser($cod,$type,$cod_user){
+		$query="SELECT * FROM booking WHERE cod_document=".$cod." and type_document='".$type."' and available='Y' and cod_user=".$cod_user;
+		$rs = pg_query( $this->connection, $query );
+		$booking = new Booking();
+		if( $rs )
+        {
+             if( pg_num_rows($rs) > 0 )
+            {
+				$obj = pg_fetch_object($rs,0 );
+				$booking->setCod_booking($obj->cod_booking);
+				$booking->setCod_document($obj->cod_document);
+				$booking->setType_document($obj->type_document);
+				$booking->setAvailable($obj->available);
+				$booking->setCod_user($obj->cod_user);
+            }
+            
+		}
+		return $booking;
+	}
+
 	/**
 	 * Crea una nuevo book en la base de datos
 	 * @param  book $newBook
@@ -71,7 +91,7 @@ class BookingDAO implements DAO
 	 */
 	public function create ($newBooking){
 		
-		$query="INSERT INTO booking VALUES(0,'".$newBooking->getCod_document()."','".$newBooking->getType_document()."','".$newBooking->getAvailable()."','".$newBooking->getCod_user()."');";
+		$query="INSERT INTO booking(cod_document,type_document,available,cod_user) VALUES('".$newBooking->getCod_document()."','".$newBooking->getType_document()."','".$newBooking->getAvailable()."','".$newBooking->getCod_user()."');";
 		pg_query($this->connection, $query);
 
 	}
@@ -83,7 +103,7 @@ class BookingDAO implements DAO
 	 */
 	public function modify ($booking){
 
-		$query="UPDATE booking SET cod_document='".$booking->getCod_document()."', type_document ='".$booking->getType_document()."', available ='".$booking->getAvailable()."', cod_user='".$booking->getCod_user()."' ;";
+		$query="UPDATE booking SET cod_document='".$booking->getCod_document()."', type_document ='".$booking->getType_document()."', available ='".$booking->getAvailable()."', cod_user='".$booking->getCod_user()."' where cod_booking=".$booking->getCod_booking().";";
 		pg_query($this->connection,$query);
 	}
 
@@ -93,6 +113,28 @@ class BookingDAO implements DAO
 	 */
 	public function listAll(){
 		$query="SELECT * FROM booking";
+		$rs = pg_query( $this->connection, $query );
+		$bookings = array();
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+			   while( $obj = pg_fetch_object($rs) ){
+					$booking=new booking();
+			                    
+					$booking->setCod_booking($obj->cod_booking);
+				    $booking->setCod_document($obj->cod_document);
+				    $booking->setType_document($obj->type_document);
+				    $booking->setAvailable($obj->available);
+				    $booking->setCod_user($obj->cod_user);
+					
+					array_push($bookings,$booking);
+			   }
+			}
+		}
+		return $bookings;
+	}
+
+	public function listByDoc($doc,$type){
+		$query="SELECT * FROM booking where cod_document=".$doc." and type_document='".$type."' and available='Y'";
 		$rs = pg_query( $this->connection, $query );
 		$bookings = array();
 		if( $rs ){
