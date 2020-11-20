@@ -6,9 +6,6 @@ if(isset($_POST['upload'])){
 
     $con= new Connection;
     $connection=$con->conectBD();
-    if($connection->connect_error){
-        die("Problema de conexión con la base de datos: ".$connection->connect_error);
-    }
     $url='';
     if($_FILES["logo"]["tmp_name"]){
         $url=saveImage($_POST["title"],$_FILES["logo"]["tmp_name"]);
@@ -30,6 +27,7 @@ if(isset($_POST['upload'])){
             $book->setDescription($_POST["description"]);
             $book->setIdUser(1);
             $book->setNumPages($_POST["numPages"]);
+            $book->setQuantity($_POST["quantity"]);
             ManageBook::create($book);
             echo printMessage("Congratulations!!","Your book was uploaded to the platform, now it is waiting for an administrator to validate it","success");
             break;
@@ -48,6 +46,8 @@ if(isset($_POST['upload'])){
 			$scienceArticle->setAuthors($_POST["authors"]);
 			$scienceArticle->setDescription($_POST["description"]);
             $scienceArticle->setIdUser(1);
+            $scienceArticle->setQuantity($_POST['quantity']);
+
             ManageScienceArticle::create($scienceArticle);
             echo printMessage("Congratulations!!","Your article was uploaded to the platform, now it is waiting for an administrator to validate it","success");
             break;
@@ -67,6 +67,8 @@ if(isset($_POST['upload'])){
             $presentation->setDescription($_POST["description"]);
             $presentation->setIdUser(1);
             $presentation->setCongressName($_POST["congressName"]);
+            $presentation->setQuantity($_POST["quantity"]);
+
             ManagePresentation::create($presentation);
             echo printMessage("Congratulations!!","Your presentation was uploaded to the platform, now it is waiting for an administrator to validate it","success");
             break;
@@ -81,9 +83,12 @@ if(isset($_POST['upload'])){
         background-color: transparent;
     }
     .select-styled {
-         display: none;
-        }
-    
+        display: none;
+    }
+    .company-info .company-detail input[type="text"], .company-info .company-detail input[type="email"], .company-info .company-detail input[type="url"], .company-info .company-detail input[type="password"], .company-info .company-detail input[type="search"], .company-info .company-detail input[type="number"], .company-info .company-detail input[type="tel"], .company-info .company-detail input[type="range"], .company-info .company-detail input[type="date"], .company-info .company-detail input[type="month"], .company-info .company-detail input[type="week"], .company-info .company-detail input[type="time"], .company-info .company-detail input[type="datetime"], .company-info .company-detail input[type="datetime-local"], .company-info .company-detail input[type="color"] {
+        background-color: #fff;
+        border-color: #F4F4F4;
+    }
 </style>
 <script>
     window.onload=function(){
@@ -170,6 +175,10 @@ if(isset($_POST['upload'])){
                                                             Authors
                                                         </label>
                                                         <input type="text" id="authors" name="authors" class="input-text" required>
+                                                        <label style="color:grey;">
+                                                            Quantity
+                                                        </label>
+                                                        <input type="number" id="quantity" name="quantity" class="input-text" required>
                                                         
                                                         <label style="color:grey;">
                                                             Date published

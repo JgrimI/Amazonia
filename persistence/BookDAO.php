@@ -127,7 +127,7 @@ class BookDAO implements DAO
 	public function modify($book)
 	{
 
-		$query = "UPDATE book SET title='" . $book->getTitle() . "', isbn ='" . $book->getIsbn() . "', datePublished='" . $book->getDatePublished() . "', editorial='" . $book->getEditorial() . "', available='" . $book->getAvailable() . "', url='" . $book->getUrl() . "', authors='" . $book->getAuthors() . "', description='" . $book->getDescription() . "', num_pages='" . $book->getNumPages() . "', quantity=".$newBook->getQuantity()." WHERE id_book= " . $book->getId();
+		$query = "UPDATE book SET title='" . $book->getTitle() . "', isbn ='" . $book->getIsbn() . "', datePublished='" . $book->getDatePublished() . "', editorial='" . $book->getEditorial() . "', available='" . $book->getAvailable() . "', url='" . $book->getUrl() . "', authors='" . $book->getAuthors() . "', description='" . $book->getDescription() . "', num_pages='" . $book->getNumPages() . "', quantity=".$book->getQuantity()." WHERE id_book= " . $book->getId();
 		pg_query($this->connection, $query);
 	}
 
