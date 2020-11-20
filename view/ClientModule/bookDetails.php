@@ -39,7 +39,7 @@ if (isset($_POST['operation'])) {
                 $booking = new Booking();
                 $booking->setCod_booking(0);
                 $booking->setCod_document($cod);
-                $booking->setType_document('book');
+                $booking->setType_document('presentation');
                 $booking->setAvailable('Y');
                 $booking->setCod_user($_SESSION['cod_user']);
                 ManageBooking::create($booking);
@@ -57,7 +57,7 @@ if (isset($_POST['operation'])) {
                 $booking = new Booking();
                 $booking->setCod_booking(0);
                 $booking->setCod_document($cod);
-                $booking->setType_document('book');
+                $booking->setType_document('sciencearticle');
                 $booking->setAvailable('Y');
                 $booking->setCod_user($_SESSION['cod_user']);
                 ManageBooking::create($booking);
