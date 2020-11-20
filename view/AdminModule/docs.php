@@ -4,6 +4,23 @@ require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../persistence/util/Connection.php');
 
+function strtotitle($title)
+{
+    $smallwordsarray = array(
+        'of', 'a', 'the', 'and', 'an', 'or', 'nor', 'but', 'is', 'if', 'then', 'else', 'when',
+        'at', 'from', 'by', 'on', 'off', 'for', 'in', 'out', 'over', 'to', 'into', 'with', 'en', 'y', 'de', 'e', 'el', 'a', 'para',
+        'u', 'con', 'del', 'la'
+    );
+    $words = explode(' ', $title);
+    foreach ($words as $key => $word) {
+        if ($key == 0 or !in_array($word, $smallwordsarray))
+            $words[$key] = ucwords($word);
+    }
+    $newtitle = implode(' ', $words);
+
+    return $newtitle;
+}
+
 $con = new Connection();
 $connection = $con->conectBD();
 
@@ -67,7 +84,7 @@ $books = ManageBook::listAll();
 $table = '<table class="table text-center" id="myTable" style="text-align-last: center;"><thead><th>Title</th><th>Authors</th><th>DatePublished</th><th>Document type</th><th>Status</th></thead><tbody>';
 foreach ($books as $book) {
     $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="book"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
-    $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Book</td><td>' . $ico . '</td></tr>';
+    $table .= '<tr><td>' . strtotitle($book->getTitle()) . '</td><td>' . strtotitle($book->getAuthors()) . '</td><td>' . $book->getDatePublished() . '</td><td>Book</td><td>' . $ico . '</td></tr>';
 }
 
 
@@ -75,23 +92,23 @@ $books = ManagePresentation::listAll();
 
 foreach ($books as $book) {
     $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="presentation"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="presentation"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
-    $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Presentation</td><td>' . $ico . '</td></tr>';
+    $table .= '<tr><td>' . strtotitle($book->getTitle()) . '</td><td>' . strtotitle($book->getAuthors()) . '</td><td>' . $book->getDatePublished() . '</td><td>Presentation</td><td>' . $ico . '</td></tr>';
 }
 
 
 $books = ManageScienceArticle::listAll();
 foreach ($books as $book) {
     $ico = ($book->getAvailable() == 'Y') ? '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="science"><button class="btn1" type="submit"><i class="fa fa-check" style="color:green;"></i></button></form>' : '<form method="POST" ><input type="hidden" name="cod" value="' . $book->getId() . '"><input type="hidden" name="tipo" value="science"><button class="btn2" type="submit"><i class="fa fa-times" style="color:red;"></i></button></form>';
-    $table .= '<tr><td>' . $book->getTitle() . '</td><td>' . $book->getAuthors() . '</td><td>' . $book->getDatePublished() . '</td><td>Science Article</td><td>' . $ico . '</td></tr>';
+    $table .= '<tr><td>' . strtotitle(strtolower($book->getTitle())) . '</td><td>' . strtotitle($book->getAuthors()) . '</td><td>' . $book->getDatePublished() . '</td><td>Science Article</td><td>' . $ico . '</td></tr>';
 }
 $table .= '</tbody></table>';
 
 
 ?>
 <style>
-    .navbar-default .navbar-nav>.books>a,
-    .navbar-default .navbar-nav>.books>a:hover,
-    .navbar-default .navbar-nav>.books>a:focus {
+    .navbar-default .navbar-nav>.cruds>a,
+    .navbar-default .navbar-nav>.cruds>a:hover,
+    .navbar-default .navbar-nav>.cruds>a:focus {
         color: #ff7236;
         background-color: transparent;
     }
@@ -107,10 +124,6 @@ $table .= '</tbody></table>';
     .dataTables_wrapper .dataTables_filter {
         float: left;
         text-align: left;
-    }
-
-    .col-md-3 {
-        width: 22%;
     }
 
     .button {
@@ -158,6 +171,8 @@ $table .= '</tbody></table>';
         <div class="breadcrumb">
             <ul>
                 <li><a href="?menu=home">Home</a></li>
+                <li><a href="#">Cruds</a></li>
+                <li>Documents</li>
             </ul>
         </div>
     </div>

@@ -39,21 +39,13 @@
                                 <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=home">Home</a>
                             </li>
                             <li class="dropdown books">
-                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=books">Books &amp; Media</a>
+                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="?menu=books">Documents &amp; Media</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="?menu=books">Books &amp; Media</a></li>
+                                    <li><a href="?menu=books">Documents &amp; Media</a></li>
                                     <li><a href="?menu=newBook">Register New Document</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="404.html">404/Error</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
+                           <li class="dropdown cruds">
                                 <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">Cruds</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="?menu=docs">Documents</a></li>

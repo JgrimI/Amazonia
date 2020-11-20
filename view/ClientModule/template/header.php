@@ -46,14 +46,6 @@
                                     <li><a href="?menu=myBooks">My Documents</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="404.html">404/Error</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </div>
                 </div>
