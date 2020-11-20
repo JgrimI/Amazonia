@@ -122,9 +122,9 @@ include_once('graphics.php');
               <div class="col-md-6">
                 <div class="grid">
                   <div class="grid-body">
-                    <h3>Documents number graphic</h3>
+                    <h3>Audit graphic</h3>
                     <div class="item-wrapper">
-                      <canvas id="hartjs-staked-area-chart" width="600" height="400"></canvas>
+                      <canvas id="radar-graphic1" width="600" height="400"></canvas>
                     </div>
                   </div>
                 </div>

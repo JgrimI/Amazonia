@@ -4,6 +4,7 @@ require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../business/ManageUser.php');
 require_once('../business/ManageBooking.php');
+require_once('../business/ManageAudit.php');
 
 require_once('../persistence/util/Connection.php');
 
@@ -24,6 +25,9 @@ $users = ManageUser::listAll();
 
 ManageBooking::setConnectionBD($connection);
 $bookings = ManageBooking::listAll();
+
+ManageAudit::setConnectionBD($connection);
+$audits = ManageAudit::listAll();
 
 ?>
 <script>
@@ -182,6 +186,45 @@ function graf() {
       }
     });
   }
+
+  if ($("#radar-graphic1").length) {
+    var marksCanvas = document.getElementById("radar-graphic1");
+    <?php
+    $insert =0;
+    $update =0;
+    $delete =0;
+
+    foreach($audits as $audit){
+      if ($audit->getAction()=='insert') {
+        $insert += 1;
+      } else if ($audit->getAction()=='update') {
+        $update += 1;
+      } else{
+        $delete += 1;       
+      }
+    }
+    
+    ?> 
+
+    var marksData = {
+      labels: ["Insert", "Update", "Delete"],
+      datasets: [
+        {
+          label: "Action number",
+          data: [<?php echo $insert?>, <?php echo $update?>, <?php echo $delete?>],
+          backgroundColor: chartColors[2],
+          borderColor: chartColors[2],
+          borderWidth: 0
+        }
+      ]
+    };
+
+    var radarChart = new Chart(marksCanvas, {
+      type: 'radar',
+      data: marksData
+    });
+  }
+
 
 
 
