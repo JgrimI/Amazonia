@@ -48,6 +48,8 @@ abstract class Document{
     */
     protected $idUser;
 
+    protected $quantity;
+
 
 
     //----------------------------
@@ -198,6 +200,16 @@ abstract class Document{
     */
     public function setIdUser($idUser){
         $this->idUser = $idUser;
+    }
+    public function getQuantity(){
+        return $this->quantity;
+    }
+    /**
+     * Método para cambiar  el Name del Usuario
+    * @param [String] Name del Usuario
+    */
+    public function setQuantity($quantity){
+        $this->quantity = $quantity;
     }
 }
 ?>

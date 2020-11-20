@@ -65,6 +65,8 @@ class PresentationDAO implements DAO
 				$presentation->setDescription($obj->description);
 				$presentation->setIdUser($obj->cod_user);
 				$presentation->setCongressName($obj->congressname);
+				$presentation->setQuantity($obj->quantity);
+				
 			}
 		}
 
@@ -97,6 +99,7 @@ class PresentationDAO implements DAO
 					$presentation->setDescription($obj->description);
 					$presentation->setIdUser($obj->cod_user);
 					$presentation->setCongressName($obj->congressname);
+					$presentation->setQuantity($obj->quantity);
 
 					array_push($presentations, $presentation);
 				}
@@ -114,7 +117,7 @@ class PresentationDAO implements DAO
 	public function create($newPresentation)
 	{
 
-		$query = "INSERT INTO presentation(title,isbn,datepublished,editorial,available,url,authors,description,cod_user,congressname) VALUES('" . $newPresentation->getTitle() . "','" . $newPresentation->getISBN() . "','" . $newPresentation->getDatePublished() . "','" . $newPresentation->getEditorial() . "','" . $newPresentation->getAvailable() . "','" . $newPresentation->getUrl() . "','" . $newPresentation->getAuthors() . "','" . $newPresentation->getDescription() . "','" . $newPresentation->getIdUser() . "','" . $newPresentation->getCongressName() . "');";
+		$query = "INSERT INTO presentation(title,isbn,datepublished,editorial,available,url,authors,description,cod_user,congressname,quanity) VALUES('" . $newPresentation->getTitle() . "','" . $newPresentation->getISBN() . "','" . $newPresentation->getDatePublished() . "','" . $newPresentation->getEditorial() . "','" . $newPresentation->getAvailable() . "','" . $newPresentation->getUrl() . "','" . $newPresentation->getAuthors() . "','" . $newPresentation->getDescription() . "','" . $newPresentation->getIdUser() . "','" . $newPresentation->getCongressName() . "',". $presentation->getQuantity().");";
 		pg_query($this->connection, $query);
 	}
 
@@ -126,7 +129,7 @@ class PresentationDAO implements DAO
 	public function modify($presentation)
 	{
 
-		$query = "UPDATE presentation SET title='" . $presentation->getTitle() . "', isbn ='" . $presentation->getIsbn() . "', datePublished='" . $presentation->getDatePublished() . "', editorial='" . $presentation->getEditorial() . "', available='" . $presentation->getAvailable() . "', url='" . $presentation->getUrl() . "', authors='" . $presentation->getAuthors() . "', description='" . $presentation->getDescription() . "' WHERE id_presentation= " . $presentation->getId();
+		$query = "UPDATE presentation SET title='" . $presentation->getTitle() . "', isbn ='" . $presentation->getIsbn() . "', datePublished='" . $presentation->getDatePublished() . "', editorial='" . $presentation->getEditorial() . "', available='" . $presentation->getAvailable() . "', url='" . $presentation->getUrl() . "', authors='" . $presentation->getAuthors() . "', description='" . $presentation->getDescription() . "', quantity=".$presentation->getQuantity()." WHERE id_presentation= " . $presentation->getId();
 		pg_query($this->connection, $query);
 	}
 
@@ -154,6 +157,7 @@ class PresentationDAO implements DAO
 					$presentation->setDescription($obj->description);
 					$presentation->setIdUser($obj->cod_user);
 					$presentation->setCongressName($obj->congressname);
+					$presentation->setQuantity($obj->quantity);					
 
 					array_push($presentations, $presentation);
 				}
@@ -181,7 +185,8 @@ class PresentationDAO implements DAO
 					$presentation->setDescription($obj->description);
 					$presentation->setIdUser($obj->cod_user);
 					$presentation->setCongressName($obj->congressname);
-					
+					$presentation->setQuantity($obj->quantity);
+
 					array_push($presentations,$presentation);
 			   }
 			}
