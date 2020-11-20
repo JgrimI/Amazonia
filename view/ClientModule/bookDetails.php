@@ -80,7 +80,29 @@ if(isset($_POST['del'])){
     ManageBooking::setConnectionBD($connection);
     $reserves=ManageBooking::listByDoc($cod,$type);
     if(count($reserves)>0){
-
+        switch($type){
+            case 0:
+                ManageBook::setConnectionBD($connection);
+                $book = ManageBook::consult($cod);
+                $book->setAvailable('N');
+                ManageBook::modify($book);
+                echo printMessageWithRedirect("Congratulations " . $_SESSION['name_user'], "Your book was deleted successfully", "success","?menu=books");
+                break;
+            case 1:
+                ManagePresentation::setConnectionBD($connection);
+                $book = ManagePresentation::consult($cod);
+                $book->setAvailable('N');
+                ManagePresentation::modify($book);
+                echo printMessageWithRedirect("Congratulations " . $_SESSION['name_user'], "Your paper was deleted successfully", "success","?menu=books");
+                break;
+            case 2:
+                ManageScienceArticle::setConnectionBD($connection);
+                $book = ManageScienceArticle::consult($cod);
+                $book->setAvailable('N');
+                ManageScienceArticle::modify($book);
+                echo printMessageWithRedirect("Congratulations " . $_SESSION['name_user'], "Your article was deleted successfully", "success","?menu=books");
+                break;
+        }
     }else{
         echo printMessage("Error!!", $_SESSION['name_user']. " you cannot delete this document, because it has active reservations", "error");
     }
