@@ -52,7 +52,7 @@
 
             <div class="col-md-9 pull-right">
                 <ul>
-                    <li><a href="index-2.html">Home</a></li>
+                    <li><a href="?menu=home">Home</a></li>
                     <li><a href="books-media-list-view.html">Books &amp; Media</a></li>
 
                 </ul>
