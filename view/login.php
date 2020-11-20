@@ -1,11 +1,12 @@
 <?php
+require_once('../business/ManageUser.php');
+require_once('../business/ManageAdmin.php');
+require_once('../persistence/util/Connection.php');
+require_once('../business/User.php');
+require_once('util.php');
+
 if(isset($_POST['login'])){
-
-    require_once('../business/ManageUser.php');
-    require_once('../business/ManageAdmin.php');
-    require_once('../persistence/util/Connection.php');
-    require_once('util.php');
-
+ 
     $con= new Connection;
     $connection=$con->conectBD();
     $email=$_POST["email"];
@@ -39,6 +40,50 @@ if(isset($_POST['login'])){
         }
     }
 
+    $con->turnOffBD($connection);
+}
+if(isset($_POST['signup'])){
+    $con= new Connection;
+    $connection=$con->conectBD();
+    $email=$_POST["email"];
+    $password=$_POST["password"];
+    $name=$_POST['name'];
+
+    ManageUser::setConnectionBD($connection);
+    $validUser=ManageUser::consultByMail($email);
+    if($validUser->getId()!=''){
+        echo printMessage("Error!!","The mail is already registered","error");
+    }else{
+        $user=new User();
+        $user->setEmail($email);
+        $user->setPassword($password);
+        $user->setName($name);
+        $user->setStatus('inactivo');
+        
+        ManageUser::createUser($user);
+
+        $user=ManageUser::consultByMail($email);
+        sendMail($email,$name,$user->getId());
+
+        echo printMessage("Congratulations","your account was created successfully","success");
+    }
+    $con->turnOffBD($connection);
+
+}
+if(isset($_GET['i'])){
+    $cod=base64_decode($_GET['i']);
+    $con= new Connection;
+    $connection=$con->conectBD();
+    ManageUser::setConnectionBD($connection);
+    $user=ManageUser::consult($cod);
+    $user->setStatus('activo');
+    ManageUser::modify($user);
+    $_SESSION['email_user']=$user->getEmail();
+    $_SESSION['cod_user'] = $user->getId();
+    $_SESSION['name_user'] = $user->getName();
+    $_SESSION['status'] = $user->getStatus();
+    $_SESSION['redirect']='user.php';
+    echo printMessageWithRedirect("Welcome to Amazonia en Linea ".$user->getName(),"","success","user.php");
     $con->turnOffBD($connection);
 }
 ?>
@@ -105,12 +150,12 @@ if(isset($_POST['login'])){
                                                     <h2>Create New Account</h2>
                                                     <br>
                                                 </div>
-                                                <form class="login" method="post" action="register.php">
+                                                <form class="login" method="post">
                                                     <input type="text" id="name" name="name" class="input-text" required placeholder="Name" style="margin-top:4%;">
                                                     <input type="text" id="email" name="email" class="input-text" required placeholder="Email">
                                                     <input type="password" id="password" name="password" class="input-text" required placeholder="Password" >
                                                     <div class="clear"></div>
-                                                    <input type="submit" value="Signup" name="signup" class="button btn btn-default">
+                                                    <input type="submit" value="Signup" name="signup" id="signup" class="button btn btn-default">
                                                     <div class="clear"></div>
                                                 </form>
                                             </div>

@@ -107,8 +107,7 @@ class UserDAO implements DAO
 	 * @return void
 	 */
 	public function modify ($user){
-		$password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
-		$query="UPDATE usr SET name_user='".$user->getName()."', email_user ='".$user->getEmail()."', pass_user='".$password."', status_user='".$user->getStatus()."' WHERE cod_user= ".$user->getId();
+		$query="UPDATE usr SET name_user='".$user->getName()."', email_user ='".$user->getEmail()."', status_user='".$user->getStatus()."' WHERE cod_user= ".$user->getId();
 		pg_query($this->connection,$query);
 	}
 

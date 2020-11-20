@@ -1,4 +1,7 @@
 <?php
+require 'mailer/PHPMailer.php';
+require 'mailer/SMTP.php';
+require 'mailer/Exception.php';
 function removeAccents($input){
     $output = "";
     $output = str_replace("á", "a", $input);
@@ -60,5 +63,45 @@ function strtotitle($title)
     $newtitle = implode(' ', $words);
 
     return $newtitle;
+}
+
+
+function sendMail($mail, $name,$id)
+{
+    echo 'entra sendmail';
+    $PHPmail=new PHPMailer();
+    $PHPmail->CharSet = 'UTF-8';
+    $PHPmail->IsSMTP();
+    $PHPmail->Host       = 'smtp.gmail.com';
+    $PHPmail->SMTPSecure = 'tls';
+
+    $PHPmail->Port       = 587;
+    $PHPmail->SMTPDebug  = 0;
+    $PHPmail->SMTPAuth   = true;
+    $PHPmail->Username   = 'amazoniaenlinea@gmail.com';
+    $PHPmail->Password   = 'amazonas123';
+    $PHPmail->SetFrom('amazoniaenlinea@gmail.com', "Amazonia en Linea");
+   
+     $PHPmail->Subject    = 'Confirm your email';
+    $PHPmail->MsgHTML('
+            <div style="background-color: rgba(222,222,222,0.6); margin-left: 15%; margin-right: 15%;">
+    <div style=" margin-left: 5%; margin-right: 5%; padding-top: 5%; padding-bottom: 5%;">
+        <div style="background-color: rgba(255,255,255);">
+            
+            <div style="margin-left: 10%; margin-right: 10%;"><br><br>
+                <p>We welcome '.$name.' to the Amazonia en linea portal.</p>
+                <p>In order to use all of our services please click on the following button to finish your registration process.</p><br><br><br>
+                <center><a href="http://localhost:8082/Amazonia/view/index.php?menu=signin&i='.base64_encode($id).'" style="background-color:#f3984d;border:10px solid #f3984d;text-decoration:none;color:#fff" target="_blank">Activate account</a></center>
+                <br><br>
+            </div>
+            <br><br><br><br>
+            </div>
+    </div>
+</div>
+            ');
+
+    $PHPmail->AddAddress($mail, $name);
+    $PHPmail->Send();
+   
 }
 ?>
