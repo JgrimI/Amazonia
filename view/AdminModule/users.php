@@ -130,6 +130,9 @@ $table .= '</tbody></table>';
             <div class="usersmedia-detail-main">
                 <div class="container">
                     <br><br>
+                    <form method="POST" action="?menu=registerNewUser">
+                        <button type="submit" style="float: right;">Create User</button>
+                    </form>
                     <?php echo $table; ?>
                 </div>
             </div>

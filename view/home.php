@@ -43,46 +43,47 @@ foreach ($books as $book) {
     <!-- Carousel slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <figure>
-                <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
-            </figure>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Online Learning Anytime, Anywhere!</h3>
-                    <h2>Discover Your Roots</h2>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by injected humor, or randomized words.</p>
+                <figure>
+                    <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
+                </figure>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Online Learning Anytime, Anywhere!</h3>
+                        <h2>Discover Your Roots</h2>
+                        <p>Build and discover your first stories around the best books, in a friendly environment willing to receive it
+                         like that great world of feats that you have to tell us.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <figure>
+                    <img alt="Home Slide" src="images/books-scroll/2.jpg" />
+                </figure>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Online Learning Anytime, Anywhere!</h3>
+                        <h2>The value of a good book</h2>
+                        <p>Book lovers know the importance of a good book and Amazonia 
+                        gives you a place to find them. Don't miss this opportunity and come join us...</p>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <figure>
+                    <img alt="Home Slide" src="images/books-scroll/3.jpg" />
+                </figure>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Online Learning Anytime, Anywhere!</h3>
+                        <h2>Learn and discover</h2>
+                        <p>The books that help you the most are the ones that make you think the most.
+                         The most difficult way to learn is by reading, but a great book by a great thinker is a ship of thoughts,
+                         discover these great books and documents in Amazonia.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="item">
-            <figure>
-                <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
-            </figure>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Online Learning Anytime, Anywhere!</h3>
-                    <h2>Discover Your Roots</h2>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by injected humor, or randomized words.</p>
-
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <figure>
-                <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
-            </figure>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Online Learning Anytime, Anywhere!</h3>
-                    <h2>Discover Your Roots</h2>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by injected humor, or randomized words.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Controls -->
     <a class="left carousel-control" href="#home-v1-header-carousel" data-slide="prev"></a>

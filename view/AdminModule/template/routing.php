@@ -18,6 +18,9 @@
 		if ($_GET['menu']=='users'){
 			include_once('AdminModule/users.php');
 		}
+		if ($_GET['menu']=='registerNewUser'){
+			include_once('AdminModule/registerNewUser.php');
+		}
 	} else {
 		include_once('AdminModule/home.php');
 	}
