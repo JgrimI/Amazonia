@@ -19,9 +19,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="topbar-info">
-                                    <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>+123-123-123 </a>
+                                    <a href="tel:(571) 648 9000"><i class="fa fa-phone"></i>(571) 648 9000</a>
                                     <span>/</span>
-                                    <a href="mailto:support@example.com"><i class="fa fa-envelope"></i>support@example.com</a>
+                                    <a href="mailto:atencionalusuario@unbosque.edu.co"><i class="fa fa-envelope"></i>correo de atencion</a>
                                 </div>
                             </div>
                             <div class="col-sm-6">

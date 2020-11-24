@@ -6,21 +6,21 @@
                     <h3 class="footer-widget-title">About Amazonia</h3>
                     <span class="underline left"></span>
                     <div class="textwidget">
-                        It is a long established fact that a reader will be distracted by the readable
-                        content of a page when looking.
+                        Amazonia is an online library service in association with El Bosque University located in Bogota D.C.
+                        in the country of Colombia, you can find our contact information down below.
                     </div>
                     <address>
                         <div class="info">
                             <i class="fa fa-location-arrow"></i>
-                            <span>21 King Street, Melbourne, Victoria 3000 Australia</span>
+                            <span>Av. Cra. 9 No. 131 A - 02</span>
                         </div>
                         <div class="info">
                             <i class="fa fa-envelope"></i>
-                            <span><a href="mailto:support@amazonia.com">support@amazonia.com</a></span>
+                            <span><a href="mailto:support@amazonia.com">atencionalusuario@unbosque.edu.co</a></span>
                         </div>
                         <div class="info">
                             <i class="fa fa-phone"></i>
-                            <span><a href="tel:012-345-6789">+ 012-345-6789</a></span>
+                            <span><a href="tel:012-345-6789">(571) 648 9000</a></span>
                         </div>
                     </address>
                 </div>
@@ -36,10 +36,7 @@
                         <time datetime="2017-02-13">Fri: 9 am - 6 pm</time>
                         <time datetime="2017-02-13">Sat: 9 am - 5 pm</time>
                         <time datetime="2017-02-13">Sun: 1 pm - 6 pm</time>
-                        <ul>
-                            <li><a href="#">Closings</a></li>
-                            <li><a href="#">Branches</a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
