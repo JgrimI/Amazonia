@@ -130,8 +130,7 @@
         <div class="feature-box">
           <i class="yellow"></i>
           <h3>Books</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
-            pulvinar varius dui id, convallis iaculis eros.</p>
+          <p>Expand your knowledge or read cool stories with our selection of books!</p>
           <form action="?menu=books" method="post" id="form1">
             <input type="hidden" name="t" id="t" value="book">
             <input type="hidden" name="keywords" id="keywords">
@@ -144,8 +143,7 @@
         <div class="feature-box">
           <i class="light-green"></i>
           <h3>Lectures</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
-            pulvinar varius dui id, convallis iaculis eros.</p>
+          <p>Missed a class? or are you looking for a refresher? Please help yourself to our selection of lectures!</p>
           <form action="?menu=books" method="post" id="form2">
             <input type="hidden" name="t" id="t" value="presentation">
             <input type="hidden" name="keywords" id="keywords">
@@ -157,8 +155,7 @@
         <div class="feature-box">
           <i class="red"></i>
           <h3>Scientific Articles</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
-            pulvinar varius dui id, convallis iaculis eros.</p>
+          <p>Doing some research and don't know where to look? Our selection of science articles is here!</p>
           <form action="?menu=books" method="post" id="form3">
             <input type="hidden" name="t" id="t" value="sa">
             <input type="hidden" name="keywords" id="keywords">

@@ -17,14 +17,14 @@
                     <!-- Header Topbar -->
                     <div class="header-topbar hidden-sm hidden-xs">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 <div class="topbar-info">
                                     <a href="tel:(571) 648 9000"><i class="fa fa-phone"></i>(571) 648 9000</a>
                                     <span>/</span>
-                                    <a href="mailto:atencionalusuario@unbosque.edu.co"><i class="fa fa-envelope"></i>correo de atencion</a>
+                                    <a href="mailto:atencionalusuario@unbosque.edu.co"><i class="fa fa-envelope"></i>atencionalusuario@unbosque.edu.co</a>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="topbar-links">
                                     <a href="?menu=signin"><i class="fa fa-lock"></i>Login / Register</a>
                                     <span>|</span>
