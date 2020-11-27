@@ -125,7 +125,7 @@ if ($_POST["mess"]) {
         <div class="banner-header">
             <h2>Books & Media Listing</h2>
             <span class="underline center"></span>
-            <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
+            <p class="lead">Books, lectures or scientific articles, choose whichever you prefer!</p>
         </div>
         <div class="breadcrumb">
             <ul>

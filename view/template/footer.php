@@ -16,7 +16,7 @@
                         </div>
                         <div class="info">
                             <i class="fa fa-envelope"></i>
-                            <span><a href="mailto:support@amazonia.com">atencionalusuario@unbosque.edu.co</a></span>
+                            <span><a href="mailto:atencionalusuario@unbosque.edu.co">atencionalusuario@unbosque.edu.co</a></span>
                         </div>
                         <div class="info">
                             <i class="fa fa-phone"></i>

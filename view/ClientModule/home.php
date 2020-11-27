@@ -128,16 +128,11 @@ foreach ($books as $book) {
                         <h2 class="section-title">Welcome to Amazonía en Linea</h2>
                         <span class="underline left"></span>
                         <p class="lead">Celebrating Words, Ideas and Community</p>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority
-                            have suffered alteration in some form, by injected humor, or randomized words
-                            which don't look even slightly believable. If you are going to use
-                            a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
-                            hidden in the middle of text. All the Lorem Ipsum generators on the Internet
-                            tend to repeat predefined chunks as necessary, making this the
-                            first true generator on the Internet. It uses a dictionary of over 200 Latin
-                            words, combined with a handful of model sentence structures, to generate Lorem
-                            Ipsum which looks reasonable. The generated Lorem Ipsum is therefore
-                            always free from repetition, injected humor, or non-characteristic words etc.
+                        <p>Libraries are important cornerstones of a healthy community.  Libraries give people the opportunity to find jobs, 
+                        explore medical research, experience new ideas, get lost in wonderful stories, while at the same time providing a 
+                        sense of place for gathering. The Amazonia en linea online library reflects the diversity and character, and the needs and expectations 
+                        of our community.  Those needs and expectations are often extensive, and the services invaluable. Our library is a unique and valuable 
+                        resource.  It is a lifeline to the world and all the information in it.
                         </p>
                     </div>
                 </div>
@@ -186,8 +181,7 @@ foreach ($books as $book) {
                 <div class="feature-box">
                     <i class="yellow"></i>
                     <h3>Books</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
-                        pulvinar varius dui id, convallis iaculis eros.</p>
+                    <p>Expand your knowledge or read cool stories with our selection of books!</p>
                     <form action="?menu=books" method="post" id="form1">
                         <input type="hidden" name="t" id="t" value="book">
                         <input type="hidden" name="keywords" id="keywords">
@@ -200,8 +194,7 @@ foreach ($books as $book) {
                 <div class="feature-box">
                     <i class="light-green"></i>
                     <h3>Lectures</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
-                        pulvinar varius dui id, convallis iaculis eros.</p>
+                    <p>Missed a class? or are you looking for a refresher? Please help yourself to our selection of lectures!</p>
                     <form action="?menu=books" method="post" id="form2">
                         <input type="hidden" name="t" id="t" value="presentation">
                         <input type="hidden" name="keywords" id="keywords">
@@ -213,8 +206,7 @@ foreach ($books as $book) {
                 <div class="feature-box">
                     <i class="red"></i>
                     <h3>Scientific Articles</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis,
-                        pulvinar varius dui id, convallis iaculis eros.</p>
+                    <p>Doing some research and don't know where to look? Our selection of science articles is here!</p>
                     <form action="?menu=books" method="post" id="form3">
                         <input type="hidden" name="t" id="t" value="sa">
                         <input type="hidden" name="keywords" id="keywords">
