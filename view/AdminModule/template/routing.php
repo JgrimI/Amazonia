@@ -21,6 +21,9 @@
 		if ($_GET['menu']=='registerNewUser'){
 			include_once('AdminModule/registerNewUser.php');
 		}
+		if ($_GET['menu']=='audit'){
+			include_once('AdminModule/audits.php');
+		}
 	} else {
 		include_once('AdminModule/home.php');
 	}

@@ -50,6 +50,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="?menu=docs">Documents</a></li>
                                     <li><a href="?menu=users">Users</a></li>
+                                    <li><a href="?menu=audit">Audit</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown pdf">
