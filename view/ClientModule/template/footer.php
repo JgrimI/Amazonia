@@ -6,21 +6,21 @@
                     <h3 class="footer-widget-title">About Amazonia</h3>
                     <span class="underline left"></span>
                     <div class="textwidget">
-                        It is a long established fact that a reader will be distracted by the readable
-                        content of a page when looking.
+                        Amazonia is an online library service in association with El Bosque University located in Bogota D.C.
+                        in the country of Colombia, you can find our contact information down below.
                     </div>
                     <address>
                         <div class="info">
                             <i class="fa fa-location-arrow"></i>
-                            <span>21 King Street, Melbourne, Victoria 3000 Australia</span>
+                            <span>Av. Cra. 9 No. 131 A - 02</span>
                         </div>
                         <div class="info">
                             <i class="fa fa-envelope"></i>
-                            <span><a href="mailto:support@amazonia.com">support@amazonia.com</a></span>
+                            <span><a href="mailto:support@amazonia.com">atencionalusuario@unbosque.edu.co</a></span>
                         </div>
                         <div class="info">
                             <i class="fa fa-phone"></i>
-                            <span><a href="tel:012-345-6789">+ 012-345-6789</a></span>
+                            <span><a href="tel:012-345-6789">(571) 648 9000</a></span>
                         </div>
                     </address>
                 </div>
@@ -32,14 +32,8 @@
                     <h3 class="footer-widget-title">Timing</h3>
                     <span class="underline left"></span>
                     <div class="timming-text-widget">
-                        <time datetime="2017-02-13">Mon - Thu: 9 am - 9 pm</time>
-                        <time datetime="2017-02-13">Fri: 9 am - 6 pm</time>
-                        <time datetime="2017-02-13">Sat: 9 am - 5 pm</time>
-                        <time datetime="2017-02-13">Sun: 1 pm - 6 pm</time>
-                        <ul>
-                            <li><a href="#">Closings</a></li>
-                            <li><a href="#">Branches</a></li>
-                        </ul>
+                        <time datetime="2017-02-13">Mon - Fri: 10 am - 8 pm</time>
+                        <time datetime="2017-02-13">Sat: 8 am - 12 pm</time>
                     </div>
                 </div>
             </div>
@@ -49,19 +43,11 @@
 <div class="sub-footer">
     <div class="container">
         <div class="row">
-            <div class="footer-text col-md-3">
-                <p><a target="_blank" href="https://www.templateshub.net">Hub</a></p>
-            </div>
             <div class="col-md-9 pull-right">
                 <ul>
-                    <li><a href="index-2.html">Home</a></li>
+                    <li><a href="?menu=home">Home</a></li>
                     <li><a href="books-media-list-view.html">Books &amp; Media</a></li>
-                    <li><a href="news-events-list-view.html">News &amp; Events</a></li>
-                    <li><a href="#">Kids &amp; Teens</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="#">Research</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+
                 </ul>
             </div>
         </div>
