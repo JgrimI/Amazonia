@@ -16,11 +16,7 @@
                         </div>
                         <div class="info">
                             <i class="fa fa-envelope"></i>
-<<<<<<< Updated upstream
                             <span><a href="mailto:support@amazonia.com">atencionalusuario@unbosque.edu.co</a></span>
-=======
-                            <span><a href="mailto:atencionalusuario@unbosque.edu.co">atencionalusuario@unbosque.edu.co</a></span>
->>>>>>> Stashed changes
                         </div>
                         <div class="info">
                             <i class="fa fa-phone"></i>
@@ -51,10 +47,6 @@
                 <ul>
                     <li><a href="?menu=home">Home</a></li>
                     <li><a href="books-media-list-view.html">Books &amp; Media</a></li>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
                 </ul>
             </div>
         </div>
