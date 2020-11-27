@@ -192,9 +192,9 @@ $audits = ManageAudit::listAll();
       $delete = 0;
 
       foreach ($audits as $audit) {
-        if ($audit->getAction() == 'insert') {
+        if ($audit->getAction() == 'Insert') {
           $insert += 1;
-        } else if ($audit->getAction() == 'update') {
+        } else if ($audit->getAction() == 'Update') {
           $update += 1;
         } else {
           $delete += 1;
