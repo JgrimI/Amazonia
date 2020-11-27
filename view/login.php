@@ -100,7 +100,7 @@ if (isset($_GET['i'])) {
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>Sign In</li>
+                <li>Sign in</li>
             </ul>
         </div>
     </div>
