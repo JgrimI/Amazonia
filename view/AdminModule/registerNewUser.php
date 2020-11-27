@@ -66,12 +66,20 @@ if (isset($_POST['add'])) {
         color: #ff7236;
         background-color: transparent;
     }
-
+    .select-styled{
+        display: none;
+    }
     .xd {
         background-color: transparent !important;
         height: 50px;
     }
 </style>
+<script>
+    window.onload = function() {
+        $(".tipo").select2();
+    };
+</script>
+
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
     <div class="container">
