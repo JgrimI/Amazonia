@@ -50,10 +50,61 @@ $results = count($books) + count($papers) + count($articles);
 
     <?php
         }
-        echo '<tr><td colspan="4" style="text-align:right;border:7% solid;background-color: #46D900;">Total: '.count($books).'</td></tr>';
+        echo '<tr><td colspan="4" style="text-align:right;background-color: #46D900;">Total: '.count($books).'</td></tr>';
     }
     ?>
 </table>
-<br>
-<?php
-?>
+<table>
+    <caption style="background-color: #3C3C3C; color:white;">List of Papers</caption>
+    <tr>
+        <th style="background-color: #46D900">ID</th>
+        <th style="background-color: #46D900">Title</th>
+        <th style="background-color: #46D900">Authors</th>
+        <th style="background-color: #46D900">Description</th>
+    </tr>
+    <?php
+    if ($results == 0) {
+    } else {
+        foreach ($papers as $b) {
+            echo "<tr>
+                      <td>" . $b->getId() . "</td>
+                      <td>" . $b->getTitle() . "</td>
+                      <td>" . $b->getAuthors() . "</td>
+                      <td>" . utf8_decode($b->getDescription()) . "</td>
+                 </tr>";
+    ?>
+
+
+    <?php
+        }
+        echo '<tr><td colspan="4" style="text-align:right;background-color: #46D900;">Total: '.count($papers).'</td></tr>';
+    }
+    ?>
+</table>
+<table>
+    <caption style="background-color: #3C3C3C; color:white;">List of Science Articles</caption>
+    <tr>
+        <th style="background-color: #46D900">ID</th>
+        <th style="background-color: #46D900">Title</th>
+        <th style="background-color: #46D900">Authors</th>
+        <th style="background-color: #46D900">Description</th>
+    </tr>
+    <?php
+    if ($results == 0) {
+    } else {
+        foreach ($articles as $b) {
+            echo "<tr>
+                      <td>" . $b->getId() . "</td>
+                      <td>" . $b->getTitle() . "</td>
+                      <td>" . $b->getAuthors() . "</td>
+                      <td>" . utf8_decode($b->getDescription()) . "</td>
+                 </tr>";
+    ?>
+
+
+    <?php
+        }
+        echo '<tr><td colspan="4" style="text-align:right;background-color: #46D900;">Total: '.count($articles).'</td></tr>';
+    }
+    ?>
+</table>
