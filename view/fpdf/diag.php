@@ -1,16 +1,38 @@
 <?php
 require('sector.php');
 
-class PDF_Diag extends PDF_Sector {
+class PDF_Diag extends PDF_Sector
+{
 	var $legends;
 	var $wLegend;
 	var $sum;
 	var $NbVal;
 
-	function PieChart($w, $h, $data, $format, $colors=null)
+	// Cabecera de página
+	function Header()
+	{
+		// Logo
+		$this->SetFillColor(60, 60, 60);
+	 	$this->Sector(0, 26, 400, 0, 90);
+		$this->Image('images/logov1.png', 90, -2, 28);
+		$this->Ln(20);
+	}
+
+	// Pie de página
+	function Footer()
+	{
+		// Posición: a 1,5 cm del final
+		$this->SetY(-15);
+		// Arial italic 8
+		$this->SetFont('Arial', 'I', 8);
+		// Número de página
+		$this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+	}
+
+	function PieChart($w, $h, $data, $format, $colors = null)
 	{
 		$this->SetFont('Courier', '', 10);
-		$this->SetLegends($data,$format);
+		$this->SetLegends($data, $format);
 
 		$XPage = $this->GetX();
 		$YPage = $this->GetY();
@@ -20,10 +42,10 @@ class PDF_Diag extends PDF_Sector {
 		$radius = floor($radius / 2);
 		$XDiag = $XPage + $margin + $radius;
 		$YDiag = $YPage + $margin + $radius;
-		if($colors == null) {
-			for($i = 0; $i < $this->NbVal; $i++) {
+		if ($colors == null) {
+			for ($i = 0; $i < $this->NbVal; $i++) {
 				$gray = $i * intval(255 / $this->NbVal);
-				$colors[$i] = array($gray,$gray,$gray);
+				$colors[$i] = array($gray, $gray, $gray);
 			}
 		}
 
@@ -32,11 +54,11 @@ class PDF_Diag extends PDF_Sector {
 		$angleStart = 0;
 		$angleEnd = 0;
 		$i = 0;
-		foreach($data as $val) {
+		foreach ($data as $val) {
 			$angle = ($val * 360) / doubleval($this->sum);
 			if ($angle != 0) {
 				$angleEnd = $angleStart + $angle;
-				$this->SetFillColor($colors[$i][0],$colors[$i][1],$colors[$i][2]);
+				$this->SetFillColor($colors[$i][0], $colors[$i][1], $colors[$i][2]);
 				$this->Sector($XDiag, $YDiag, $radius, $angleStart, $angleEnd);
 				$angleStart += $angle;
 			}
@@ -47,20 +69,20 @@ class PDF_Diag extends PDF_Sector {
 		$this->SetFont('Courier', '', 10);
 		$x1 = $XPage + 2 * $radius + 4 * $margin;
 		$x2 = $x1 + $hLegend + $margin;
-		$y1 = $YDiag - $radius + (2 * $radius - $this->NbVal*($hLegend + $margin)) / 2;
-		for($i=0; $i<$this->NbVal; $i++) {
-			$this->SetFillColor($colors[$i][0],$colors[$i][1],$colors[$i][2]);
+		$y1 = $YDiag - $radius + (2 * $radius - $this->NbVal * ($hLegend + $margin)) / 2;
+		for ($i = 0; $i < $this->NbVal; $i++) {
+			$this->SetFillColor($colors[$i][0], $colors[$i][1], $colors[$i][2]);
 			$this->Rect($x1, $y1, $hLegend, $hLegend, 'DF');
-			$this->SetXY($x2,$y1);
-			$this->Cell(0,$hLegend,$this->legends[$i]);
-			$y1+=$hLegend + $margin;
+			$this->SetXY($x2, $y1);
+			$this->Cell(0, $hLegend, $this->legends[$i]);
+			$y1 += $hLegend + $margin;
 		}
 	}
 
-	function BarDiagram($w, $h, $data, $format, $color=null, $maxVal=0, $nbDiv=4)
+	function BarDiagram($w, $h, $data, $format, $color = null, $maxVal = 0, $nbDiv = 4)
 	{
 		$this->SetFont('Courier', '', 10);
-		$this->SetLegends($data,$format);
+		$this->SetLegends($data, $format);
 
 		$XPage = $this->GetX();
 		$YPage = $this->GetY();
@@ -69,8 +91,8 @@ class PDF_Diag extends PDF_Sector {
 		$hDiag = floor($h - $margin * 2);
 		$XDiag = $XPage + $margin * 2 + $this->wLegend;
 		$lDiag = floor($w - $margin * 3 - $this->wLegend);
-		if($color == null)
-			$color=array(155,155,155);
+		if ($color == null)
+			$color = array(155, 155, 155);
 		if ($maxVal == 0) {
 			$maxVal = max($data);
 		}
@@ -87,9 +109,9 @@ class PDF_Diag extends PDF_Sector {
 		$this->Rect($XDiag, $YDiag, $lDiag, $hDiag);
 
 		$this->SetFont('Courier', '', 10);
-		$this->SetFillColor($color[0],$color[1],$color[2]);
-		$i=0;
-		foreach($data as $val) {
+		$this->SetFillColor($color[0], $color[1], $color[2]);
+		$i = 0;
+		foreach ($data as $val) {
 			//Bar
 			$xval = $XDiag;
 			$lval = (int)($val * $unit);
@@ -98,7 +120,7 @@ class PDF_Diag extends PDF_Sector {
 			$this->Rect($xval, $yval, $lval, $hval, 'DF');
 			//Legend
 			$this->SetXY(0, $yval);
-			$this->Cell($xval - $margin, $hval, $this->legends[$i],0,0,'R');
+			$this->Cell($xval - $margin, $hval, $this->legends[$i], 0, 0, 'R');
 			$i++;
 		}
 
@@ -115,17 +137,15 @@ class PDF_Diag extends PDF_Sector {
 
 	function SetLegends($data, $format)
 	{
-		$this->legends=array();
-		$this->wLegend=0;
-		$this->sum=array_sum($data);
-		$this->NbVal=count($data);
-		foreach($data as $l=>$val)
-		{
-			$p=sprintf('%.2f',$val/$this->sum*100).'%';
-			$legend=str_replace(array('%l','%v','%p'),array($l,$val,$p),$format);
-			$this->legends[]=$legend;
-			$this->wLegend=max($this->GetStringWidth($legend),$this->wLegend);
+		$this->legends = array();
+		$this->wLegend = 0;
+		$this->sum = array_sum($data);
+		$this->NbVal = count($data);
+		foreach ($data as $l => $val) {
+			$p = sprintf('%.2f', $val / $this->sum * 100) . '%';
+			$legend = str_replace(array('%l', '%v', '%p'), array($l, $val, $p), $format);
+			$this->legends[] = $legend;
+			$this->wLegend = max($this->GetStringWidth($legend), $this->wLegend);
 		}
 	}
 }
-?>
