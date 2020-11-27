@@ -80,7 +80,11 @@
             $scienceArticleDAO->modify($scienceArticle);
         }
 
-
+        public  static function lastInsert(){
+            $scienceArticleDAO=ScienceArticleDAO::getScienceArticleDAO(self::$connection);
+            $li=$scienceArticleDAO->lastInsert();
+            return $li;
+        }
 
         /**
          * Cambia la conexión

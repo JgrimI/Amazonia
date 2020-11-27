@@ -59,7 +59,6 @@
             return $bookings;
         }
 
-
         /**
          * Modifica un bookistrador
          * @return void

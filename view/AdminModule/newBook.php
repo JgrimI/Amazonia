@@ -195,7 +195,7 @@ if (isset($_POST['upload'])) {
                                                         <label style="color:grey;">
                                                             Quantity
                                                         </label>
-                                                        <input type="number" id="quantity" name="quantity" class="input-text" required>
+                                                        <input type="number" id="quantity" name="quantity" class="input-text" required min="1" max="100">
 
                                                         <label style="color:grey;">
                                                             Date published

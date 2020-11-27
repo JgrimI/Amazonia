@@ -2,6 +2,8 @@
 if (isset($_POST['upload'])) {
     $document = $_POST['dc'];
     require_once('../persistence/util/Connection.php');
+    require_once('../business/ManageAudit.php');
+    require_once('../business/Audit.php');
     require_once('util.php');
 
     $con = new Connection;
@@ -10,6 +12,12 @@ if (isset($_POST['upload'])) {
     if ($_FILES["logo"]["tmp_name"]) {
         $url = saveImage($_POST["title"], $_FILES["logo"]["tmp_name"]);
     }
+    ManageAudit::setConnectionBD($connection);
+    $fecha_ini = date('Y-m-d H:i:s');
+    $audit= new Audit();
+    $audit->setCod_user($_SESSION['cod_user']);
+    $audit->setAudit_date($fecha_ini);
+    $audit->setAction('Insert');
     switch ($document) {
         case 'book':
             require_once('../business/ManageBook.php');
@@ -29,6 +37,12 @@ if (isset($_POST['upload'])) {
             $book->setNumPages($_POST["numPages"]);
             $book->setQuantity($_POST["quantity"]);
             ManageBook::create($book);
+
+            $cod=ManageBook::lastInsert();
+            $audit->setCod_affected($cod);
+            $audit->setTable_affected('book');
+            ManageAudit::create($audit);
+
             echo printMessage("Congratulations!!", "Your book was uploaded to the platform, now it is waiting for an administrator to validate it", "success");
             break;
         case 'sa':
@@ -48,6 +62,12 @@ if (isset($_POST['upload'])) {
             $scienceArticle->setIdUser(1);
             $scienceArticle->setQuantity($_POST['quantity']);
             ManageScienceArticle::create($scienceArticle);
+
+            $cod=ManageScienceArticle::lastInsert();
+            $audit->setCod_affected($cod);;
+            $audit->setTable_affected('sciencearticle');
+            ManageAudit::create($audit);
+
             echo printMessage("Congratulations!!", "Your article was uploaded to the platform, now it is waiting for an administrator to validate it", "success");
             break;
         case 'presentation':
@@ -68,6 +88,12 @@ if (isset($_POST['upload'])) {
             $presentation->setCongressName($_POST["congressName"]);
             $presentation->setQuantity($_POST["quantity"]);
             ManagePresentation::create($presentation);
+
+            $cod=ManagePresentation::lastInsert();
+            $audit->setCod_affected($cod);;
+            $audit->setTable_affected('presentation');
+            ManageAudit::create($audit);
+
             echo printMessage("Congratulations!!", "Your presentation was uploaded to the platform, now it is waiting for an administrator to validate it", "success");
             break;
     }
@@ -193,7 +219,7 @@ if (isset($_POST['upload'])) {
                                                         <label style="color:grey;">
                                                             Quantity
                                                         </label>
-                                                        <input type="number" id="quantity" name="quantity" class="input-text" required>
+                                                        <input type="number" id="quantity" name="quantity" class="input-text" required min="1" max="100">
 
                                                         <label style="color:grey;">
                                                             Date published

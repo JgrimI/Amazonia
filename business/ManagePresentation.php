@@ -81,6 +81,12 @@
             $presentationDAO->modify($presentation);
         }
 
+        public  static function lastInsert(){
+            $presentationDAO=presentationDAO::getPresentationDAO(self::$connection);
+            $li=$presentationDAO->lastInsert();
+            return $li;
+        }
+
 
 
         /**
