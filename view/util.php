@@ -68,7 +68,6 @@ function strtotitle($title)
 
 function sendMail($mail, $name,$id)
 {
-    echo 'entra sendmail';
     $PHPmail=new PHPMailer();
     $PHPmail->CharSet = 'UTF-8';
     $PHPmail->IsSMTP();
