@@ -39,11 +39,15 @@ $results = count($books) + count($papers) + count($articles);
     if ($results == 0) {
     } else {
         foreach ($books as $b) {
+            $des=str_replace('\r','',utf8_decode($b->getDescription()));
+            $des=str_replace('\n','',$des);
+            $des=str_replace('<i>','',$des);
+
             echo "<tr>
-                      <td>" . $b->getId() . "</td>
-                      <td>" . $b->getTitle() . "</td>
-                      <td>" . $b->getAuthors() . "</td>
-                      <td>" . utf8_decode($b->getDescription()) . "</td>
+                      <td>" . utf8_decode($b->getId()) . "</td>
+                      <td>" . utf8_decode($b->getTitle()) . "</td>
+                      <td>" . utf8_decode($b->getAuthors()) . "</td>
+                      <td>" . $des . "</td>
                  </tr>";
     ?>
 
@@ -66,11 +70,16 @@ $results = count($books) + count($papers) + count($articles);
     if ($results == 0) {
     } else {
         foreach ($papers as $b) {
+            $des=str_replace('\r','',utf8_decode($b->getDescription()));
+            $des=str_replace('\n','',$des);
+            $des=str_replace('<i>','',$des);
+
+
             echo "<tr>
-                      <td>" . $b->getId() . "</td>
-                      <td>" . $b->getTitle() . "</td>
-                      <td>" . $b->getAuthors() . "</td>
-                      <td>" . utf8_decode($b->getDescription()) . "</td>
+                      <td>" . utf8_decode($b->getId()) . "</td>
+                      <td>" . utf8_decode($b->getTitle()) . "</td>
+                      <td>" . utf8_decode($b->getAuthors()) . "</td>
+                      <td>" . $des . "</td>
                  </tr>";
     ?>
 
@@ -93,11 +102,15 @@ $results = count($books) + count($papers) + count($articles);
     if ($results == 0) {
     } else {
         foreach ($articles as $b) {
+            $des=str_replace('\r','',utf8_decode($b->getDescription()));
+            $des=str_replace('\n','',$des);
+            $des=str_replace('<i>','',$des);
+
             echo "<tr>
-                      <td>" . $b->getId() . "</td>
-                      <td>" . $b->getTitle() . "</td>
-                      <td>" . $b->getAuthors() . "</td>
-                      <td>" . utf8_decode($b->getDescription()) . "</td>
+                      <td>" . utf8_decode($b->getId()) . "</td>
+                      <td>" . utf8_decode($b->getTitle()) . "</td>
+                      <td>" . utf8_decode($b->getAuthors()) . "</td>
+                      <td>" . $des . "</td>
                  </tr>";
     ?>
 
