@@ -28,7 +28,7 @@ $results = count($books) + count($papers) + count($articles);
 ?>
 
 <table>
-    <caption>List of Books</caption>
+    <caption style="background-color: #3C3C3C; color:white;">List of Books</caption>
     <tr>
         <th style="background-color: #46D900">ID</th>
         <th style="background-color: #46D900">Title</th>
@@ -50,6 +50,10 @@ $results = count($books) + count($papers) + count($articles);
 
     <?php
         }
+        echo '<tr><td colspan="4" style="text-align:right;border:7% solid;background-color: #46D900;">Total: '.count($books).'</td></tr>';
     }
     ?>
 </table>
+<br>
+<?php
+?>
