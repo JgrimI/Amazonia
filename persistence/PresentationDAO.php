@@ -193,7 +193,17 @@ class PresentationDAO implements DAO
 		}
 		return $presentations;
 	}
-
+	public function lastInsert(){
+		$query="SELECT id_presentation from presentation order by id_presentation DESC limit 1";
+		$rs = pg_query( $this->connection, $query );
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+				$obj = pg_fetch_object($rs, 0);
+				$id=$obj->id_presentation;
+			}
+		}
+		return $id;
+	}
 	/*
 	*Obtiene el objeto de esta clase
 	*

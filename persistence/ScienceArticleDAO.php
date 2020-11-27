@@ -186,6 +186,18 @@ class ScienceArticleDAO implements DAO
 		return $articles;
 	}
 
+	public function lastInsert(){
+		$query="SELECT id_sa from sciencearticle order by id_sa DESC limit 1";
+		$rs = pg_query( $this->connection, $query );
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+				$obj = pg_fetch_object($rs, 0);
+				$id=$obj->id_sa;
+			}
+		}
+		return $id;
+	}
+
 
 	/*
 	*Obtiene el objeto de esta clase

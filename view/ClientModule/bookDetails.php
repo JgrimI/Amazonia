@@ -97,6 +97,7 @@ if(isset($_POST['del'])){
     $con = new Connection();
     $connection = $con->conectBD();
     ManageBooking::setConnectionBD($connection);
+    $fecha_ini = date('Y-m-d H:i:s');
     if($type==0){
         $type='book';
     }else if($type==1){

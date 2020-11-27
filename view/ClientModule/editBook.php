@@ -19,6 +19,9 @@ require_once('../business/ManagePresentation.php');
 require_once('../business/Presentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../business/ScienceArticle.php');
+require_once('../business/ManageAudit.php');
+require_once('../business/Audit.php');
+
 
 $con = new Connection;
 $connection = $con->conectBD();
@@ -31,6 +34,14 @@ if (isset($_POST['upload'])) {
     } else {
         $url = $_POST['url'];
     }
+    $fecha_ini = date('Y-m-d H:i:s');
+    ManageAudit::setConnectionBD($connection);
+    $audit= new Audit();
+    $audit->setCod_user($_SESSION['cod_user']);
+    $audit->setAudit_date($fecha_ini);
+    $audit->setCod_affected($cod);
+    $audit->setAction('Update');
+
     switch ($document) {
         case 0:
             ManageBook::setConnectionBD($connection);
@@ -48,6 +59,10 @@ if (isset($_POST['upload'])) {
             $book->setNumPages($_POST["numPages"]);
             $book->setQuantity($_POST["quantity"]);
             ManageBook::modify($book);
+
+            $audit->setTable_affected('book');
+            ManageAudit::create($audit);
+
             echo printMessageWithRedirect("Congratulations!!", "Your book was uploaded to the platform, now it is waiting for an administrator to validate it", "success", "user.php?menu=myBooks");
             break;
         case 2:
@@ -65,6 +80,10 @@ if (isset($_POST['upload'])) {
             $scienceArticle->setIdUser(1);
             $scienceArticle->setQuantity($_POST['quantity']);
             ManageScienceArticle::modify($scienceArticle);
+
+            $audit->setTable_affected('sciencearticle');
+            ManageAudit::create($audit);
+
             echo printMessageWithRedirect("Congratulations!!", "Your article was uploaded to the platform, now it is waiting for an administrator to validate it", "success", "user.php?menu=myBooks");
             break;
         case 1:
@@ -83,6 +102,10 @@ if (isset($_POST['upload'])) {
             $presentation->setCongressName($_POST["congressName"]);
             $presentation->setQuantity($_POST["quantity"]);
             ManagePresentation::modify($presentation);
+
+            $audit->setTable_affected('presentation');
+            ManageAudit::create($audit);
+
             echo printMessageWithRedirect("Congratulations!!", "Your presentation was uploaded to the platform, now it is waiting for an administrator to validate it", "success", "user.php?menu=myBooks");
             break;
     }

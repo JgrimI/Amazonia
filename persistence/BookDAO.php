@@ -192,6 +192,17 @@ class BookDAO implements DAO
 		return $books;
 	}
 
+	public function lastInsert(){
+		$query="SELECT id_book from book order by id_book DESC limit 1";
+		$rs = pg_query( $this->connection, $query );
+		if( $rs ){
+			if( pg_num_rows($rs) > 0 ){
+				$obj = pg_fetch_object($rs, 0);
+				$id=$obj->id_book;
+			}
+		}
+		return $id;
+	}
 	/*
 	*Obtiene el objeto de esta clase
 	*

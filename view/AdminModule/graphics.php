@@ -154,11 +154,11 @@ $audits = ManageAudit::listAll();
       $numArticles = 0;
 
       foreach ($bookings as $booking) {
-        if ($booking->getType_document() == 'book') {
+        if ($booking->getType_document() == 'book' && $booking->getAvailable()=='Y' ) {
           $numBooks += 1;
-        } else if ($booking->getType_document() == 'papers') {
+        } else if ($booking->getType_document() == 'presentation'&& $booking->getAvailable()=='Y') {
           $numPapers += 1;
-        } else {
+        } else if($booking->getType_document() == 'sciencearticle'&& $booking->getAvailable()=='Y'){
           $numArticles += 1;
         }
       }
@@ -192,9 +192,9 @@ $audits = ManageAudit::listAll();
       $delete = 0;
 
       foreach ($audits as $audit) {
-        if ($audit->getAction() == 'insert') {
+        if ($audit->getAction() == 'Insert') {
           $insert += 1;
-        } else if ($audit->getAction() == 'update') {
+        } else if ($audit->getAction() == 'Update') {
           $update += 1;
         } else {
           $delete += 1;
@@ -210,7 +210,7 @@ $audits = ManageAudit::listAll();
           data: [<?php echo $insert ?>, <?php echo $update ?>, <?php echo $delete ?>],
           backgroundColor: chartColors[2],
           borderColor: chartColors[2],
-          borderWidth: 0
+          borderWidth: 3
         }]
       };
 
