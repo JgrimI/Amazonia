@@ -33,13 +33,26 @@
     </div>
     <div class="item">
       <figure>
-        <img alt="Home Slide" src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f83251a75f09041fa31badbdf2cab8d4/photo-1604213410393-89f141bb96b8.jpg" />
+        <img alt="Home Slide" src="images/books-scroll/2.jpg" />
       </figure>
       <div class="container">
         <div class="carousel-caption">
           <h3>Amazonia</h3>
-          <h2>Libraries and bookstores:</h2>
-          <p>Between inheritances and future</p>
+          <h2>bookstores:</h2>
+          <p>When in doubt, go to the library</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <figure>
+        <img alt="Home Slide" src="images/books-scroll/3.jpg" />
+      </figure>
+      <div class="container">
+        <div class="carousel-caption">
+          <h3>Amazonia</h3>
+          <h2>Refutation of geniuses</h2>
+          <p>A library is not a set of books read, but a company, 
+          a refuge and a life project.</p>
 
         </div>
       </div>
