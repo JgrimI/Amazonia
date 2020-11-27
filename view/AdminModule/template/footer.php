@@ -32,11 +32,8 @@
                     <h3 class="footer-widget-title">Schedule</h3>
                     <span class="underline left"></span>
                     <div class="timming-text-widget">
-                        <time datetime="2017-02-13">Mon - Thu: 9 am - 9 pm</time>
-                        <time datetime="2017-02-13">Fri: 9 am - 6 pm</time>
-                        <time datetime="2017-02-13">Sat: 9 am - 5 pm</time>
-                        <time datetime="2017-02-13">Sun: 1 pm - 6 pm</time>
-
+                        <time datetime="2017-02-13">Mon - Fri: 10 am - 8 pm</time>
+                        <time datetime="2017-02-13">Sat: 8 am - 12 pm</time>
                     </div>
                 </div>
             </div>
@@ -46,12 +43,10 @@
 <div class="sub-footer">
     <div class="container">
         <div class="row">
-
             <div class="col-md-9 pull-right">
                 <ul>
                     <li><a href="?menu=home">Home</a></li>
-                    <li><a href="books-media-list-view.html">Books &amp; Media</a></li>
-
+                    <li><a href="?menu=books">Documents &amp; Media</a></li>
                 </ul>
             </div>
         </div>
