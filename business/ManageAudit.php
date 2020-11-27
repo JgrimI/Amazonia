@@ -31,7 +31,7 @@
         /**
          * Crea un nuevo useristrador
          */
-        public static function createAudit($audit){
+        public static function create($audit){
             $auditDAO=AuditDAO::getAuditDAO(self::$connection);
             $auditDAO->create($audit);
 

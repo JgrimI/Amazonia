@@ -1,21 +1,31 @@
 <?php
+date_default_timezone_set("America/Bogota");
 require_once('../business/ManageBook.php');
 require_once('../business/ManageBooking.php');
+require_once('../business/ManageAudit.php');
 require_once('../business/ManagePresentation.php');
 require_once('../business/ManageScienceArticle.php');
 require_once('../business/Booking.php');
+require_once('../business/Audit.php');
 require_once('../persistence/util/Connection.php');
 require_once('util.php');
-
 
 if (isset($_POST['operation'])) {
     $cod = $_POST["mess"];
     $type = $_POST["type"];
     $con = new Connection();
     $connection = $con->conectBD();
+    $fecha_ini = date('Y-m-d H:i:s');
+
+    ManageAudit::setConnectionBD($connection);
+    $audit= new Audit();
+    $audit->setCod_user($_SESSION['cod_user']);
+    $audit->setAudit_date($fecha_ini);
+    $audit->setCod_affected($cod);
     switch ($type) {
         case 0:
             ManageBooking::setConnectionBD($connection);
+            $audit->setTable_affected('book');
             if ($_POST['operation'] == 'Y') {
                 $booking = new Booking();
                 $booking->setCod_booking(0);
@@ -24,17 +34,20 @@ if (isset($_POST['operation'])) {
                 $booking->setAvailable('Y');
                 $booking->setCod_user($_SESSION['cod_user']);
                 ManageBooking::create($booking);
+                $audit->setAction('Insert');
                 echo printMessage("Congratulations " . $_SESSION['name_user'], "Your book was booked successfully", "success");
             } else {
                 $return = ManageBooking::consultByUser($cod, 'book', $_SESSION['cod_user']);
                 $return->setAvailable('N');
                 ManageBooking::modify($return);
                 echo printMessage("Congratulations " . $_SESSION['name_user'], "Your book was returned successfully", "success");
+                $audit->setAction('Update');
             }
-
+            ManageAudit::create($audit);
             break;
         case 1:
             ManageBooking::setConnectionBD($connection);
+            $audit->setTable_affected('presentation');
             if ($_POST['operation'] == 'Y') {
                 $booking = new Booking();
                 $booking->setCod_booking(0);
@@ -43,16 +56,20 @@ if (isset($_POST['operation'])) {
                 $booking->setAvailable('Y');
                 $booking->setCod_user($_SESSION['cod_user']);
                 ManageBooking::create($booking);
+                $audit->setAction('Insert');
                 echo printMessage("Congratulations " . $_SESSION['name_user'], "Your paper was booked successfully", "success");
             } else {
                 $return = ManageBooking::consultByUser($cod, 'presentation', $_SESSION['cod_user']);
                 $return->setAvailable('N');
                 ManageBooking::modify($return);
+                $audit->setAction('Update');
                 echo printMessage("Congratulations " . $_SESSION['name_user'], "Your paper was returned successfully", "success");
             }
+            ManageAudit::create($audit);
             break;
         case 2:
             ManageBooking::setConnectionBD($connection);
+            $audit->setTable_affected('sciencearticle');
             if ($_POST['operation'] == 'Y') {
                 $booking = new Booking();
                 $booking->setCod_booking(0);
@@ -61,14 +78,16 @@ if (isset($_POST['operation'])) {
                 $booking->setAvailable('Y');
                 $booking->setCod_user($_SESSION['cod_user']);
                 ManageBooking::create($booking);
+                $audit->setAction('Insert');
                 echo printMessage("Congratulations " . $_SESSION['name_user'], "Your article was booked successfully", "success");
             } else {
                 $return = ManageBooking::consultByUser($cod, 'sciencearticle', $_SESSION['cod_user']);
                 $return->setAvailable('N');
                 ManageBooking::modify($return);
+                $audit->setAction('Update');
                 echo printMessage("Congratulations " . $_SESSION['name_user'], "Your article was returned successfully", "success");
             }
-
+            ManageAudit::create($audit);
             break;
     }
 }
@@ -85,6 +104,15 @@ if(isset($_POST['del'])){
     }else if ($type==2){
         $type='sciencearticle';
     }
+    ManageAudit::setConnectionBD($connection);
+    $audit= new Audit();
+    $audit->setCod_user($_SESSION['cod_user']);
+    $audit->setAudit_date($fecha_ini);
+    $audit->setCod_affected($cod);
+    $audit->setTable_affected($type);
+    $audit->setAction('Delete');
+    ManageAudit::create($audit);
+
     $reserves=ManageBooking::listByDoc($cod,$type);
     if(count($reserves)==0){
         switch($type){

@@ -57,7 +57,7 @@ class AuditDAO implements DAO
 				$audit->setCod_audit($obj->cod_audit);
 				$audit->setCod_user($obj->cod_user);
 				$audit->setAudit_date($obj->audit_date);
-				$audit->setAction($obj->action);
+				$audit->setAction($obj->accion);
                 $audit->setTable_affected($obj->table_affected);
                 $audit->setCod_affected($obj->cod_affected);
 
@@ -71,7 +71,7 @@ class AuditDAO implements DAO
 	 * @param  audit $newAudit
 	 * @return void
 	 */
-	public function create ($newAudit){
+	public function create($newAudit){
 
 		$query="INSERT INTO audit(cod_user,audit_date,accion,table_affected,cod_affected) VALUES('".$newAudit->getCod_user()."','".$newAudit->getAudit_date()."','".$newAudit->getAction()."','".$newAudit->getTable_affected()."','".$newAudit->getCod_affected()."');";
 		pg_query($this->connection, $query);
@@ -82,7 +82,7 @@ class AuditDAO implements DAO
 	 * Modifica una user ingresado por parámetro
 	 * @return void
 	 */
-	public function modify ($audit){
+	public function modify($audit){
 		$query="UPDATE audit SET cod_user='".$audit->getCod_user()."', audit_date ='".$audit->getAudit_date()."', accion ='".$audit->getAction()."', table_affected='".$audit->getTable_affected()."', cod_affected='".$audit->getCod_affected()."' WHERE cod_audit= ".$audit->getCod_audit();
 		pg_query($this->connection,$query);
 	}
@@ -103,7 +103,7 @@ class AuditDAO implements DAO
                     $audit->setCod_audit($obj->cod_audit);
 				    $audit->setCod_user($obj->cod_user);
 				    $audit->setAudit_date($obj->audit_date);
-				    $audit->setAction($obj->action);
+				    $audit->setAction($obj->accion);
                     $audit->setTable_affected($obj->table_affected);
                     $audit->setCod_affected($obj->cod_affected);
 
