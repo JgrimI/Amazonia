@@ -17,7 +17,11 @@
                     <!-- Header Topbar -->
                     <div class="header-topbar hidden-sm hidden-xs">
                         <div class="row">
+<<<<<<< Updated upstream
                         <div class="col-sm-8">
+=======
+                            <div class="col-sm-8">
+>>>>>>> Stashed changes
                                 <div class="topbar-info">
                                     <a href="tel:(571) 648 9000"><i class="fa fa-phone"></i>(571) 648 9000</a>
                                     <span>/</span>

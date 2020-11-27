@@ -16,7 +16,11 @@
                         </div>
                         <div class="info">
                             <i class="fa fa-envelope"></i>
+<<<<<<< Updated upstream
                             <span><a href="mailto:support@amazonia.com">atencionalusuario@unbosque.edu.co</a></span>
+=======
+                            <span><a href="mailto:atencionalusuario@unbosque.edu.co">atencionalusuario@unbosque.edu.co</a></span>
+>>>>>>> Stashed changes
                         </div>
                         <div class="info">
                             <i class="fa fa-phone"></i>
@@ -29,7 +33,7 @@
             <div class="clearfix hidden-lg hidden-md hidden-xs tablet-margin-bottom"></div>
             <div class="col-md-2 col-sm-6 widget-container">
                 <div id="text-4" class="widget widget_text">
-                    <h3 class="footer-widget-title">Timing</h3>
+                    <h3 class="footer-widget-title">Schedule</h3>
                     <span class="underline left"></span>
                     <div class="timming-text-widget">
                         <time datetime="2017-02-13">Mon - Fri: 10 am - 8 pm</time>
@@ -47,7 +51,10 @@
                 <ul>
                     <li><a href="?menu=home">Home</a></li>
                     <li><a href="books-media-list-view.html">Books &amp; Media</a></li>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                 </ul>
             </div>
         </div>
