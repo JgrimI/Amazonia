@@ -24,6 +24,9 @@
 		if ($_GET['menu']=='audit'){
 			include_once('AdminModule/audits.php');
 		}
+		if ($_GET['menu']=='booking'){
+			include_once('AdminModule/booking.php');
+		}
 	} else {
 		include_once('AdminModule/home.php');
 	}
