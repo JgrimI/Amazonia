@@ -28,7 +28,9 @@ $results = count($books) + count($papers) + count($articles);
 ?>
 
 <table>
-    <caption style="background-color: #3C3C3C; color:white;">List of Books</caption>
+    <tr>
+        <td colspan="4" style="border:1px solid;background-color: #3c3c3c;color:white;text-align:center;">List of Books</td>
+    </tr>
     <tr>
         <th style="background-color: #46D900">ID</th>
         <th style="background-color: #46D900">Title</th>
@@ -39,27 +41,29 @@ $results = count($books) + count($papers) + count($articles);
     if ($results == 0) {
     } else {
         foreach ($books as $b) {
-            $des=str_replace('\r','',utf8_decode($b->getDescription()));
-            $des=str_replace('\n','',$des);
-            $des=str_replace('<i>','',$des);
+            $des = str_replace('\r', '', utf8_decode($b->getDescription()));
+            $des = str_replace('\n', '', $des);
+            $des = str_replace('<i>', '', $des);
 
             echo "<tr>
-                      <td>" . utf8_decode($b->getId()) . "</td>
-                      <td>" . utf8_decode($b->getTitle()) . "</td>
-                      <td>" . utf8_decode($b->getAuthors()) . "</td>
-                      <td>" . $des . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getId()) . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getTitle()) . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getAuthors()) . "</td>
+                      <td style='border:1px solid;'>" . $des . "</td>
                  </tr>";
     ?>
 
 
     <?php
         }
-        echo '<tr><td colspan="4" style="text-align:right;background-color: #46D900;">Total: '.count($books).'</td></tr>';
+        echo '<tr><td colspan="4" style="text-align:center;background-color: #CCCCCC;font-size:30px">Total: ' . count($books) . '</td></tr>';
     }
     ?>
 </table>
 <table>
-    <caption style="background-color: #3C3C3C; color:white;">List of Papers</caption>
+    <tr>
+        <td colspan="4" style="border:1px solid;background-color: #3c3c3c;color:white;text-align:center;">List of Papers</td>
+    </tr>
     <tr>
         <th style="background-color: #46D900">ID</th>
         <th style="background-color: #46D900">Title</th>
@@ -70,28 +74,30 @@ $results = count($books) + count($papers) + count($articles);
     if ($results == 0) {
     } else {
         foreach ($papers as $b) {
-            $des=str_replace('\r','',utf8_decode($b->getDescription()));
-            $des=str_replace('\n','',$des);
-            $des=str_replace('<i>','',$des);
+            $des = str_replace('\r', '', utf8_decode($b->getDescription()));
+            $des = str_replace('\n', '', $des);
+            $des = str_replace('<i>', '', $des);
 
 
             echo "<tr>
-                      <td>" . utf8_decode($b->getId()) . "</td>
-                      <td>" . utf8_decode($b->getTitle()) . "</td>
-                      <td>" . utf8_decode($b->getAuthors()) . "</td>
-                      <td>" . $des . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getId()) . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getTitle()) . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getAuthors()) . "</td>
+                      <td style='border:1px solid;'>" . $des . "</td>
                  </tr>";
     ?>
 
 
     <?php
         }
-        echo '<tr><td colspan="4" style="text-align:right;background-color: #46D900;">Total: '.count($papers).'</td></tr>';
+        echo '<tr><td colspan="4" style="text-align:center;background-color: #CCCCCC;font-size:30px">Total: ' . count($papers) . '</td></tr>';
     }
     ?>
 </table>
 <table>
-    <caption style="background-color: #3C3C3C; color:white;">List of Science Articles</caption>
+    <tr>
+        <td colspan="4" style="border:1px solid;background-color: #3c3c3c;color:white;text-align:center;">List of Science Articles</td>
+    </tr>
     <tr>
         <th style="background-color: #46D900">ID</th>
         <th style="background-color: #46D900">Title</th>
@@ -102,22 +108,22 @@ $results = count($books) + count($papers) + count($articles);
     if ($results == 0) {
     } else {
         foreach ($articles as $b) {
-            $des=str_replace('\r','',utf8_decode($b->getDescription()));
-            $des=str_replace('\n','',$des);
-            $des=str_replace('<i>','',$des);
+            $des = str_replace('\r', '', utf8_decode($b->getDescription()));
+            $des = str_replace('\n', '', $des);
+            $des = str_replace('<i>', '', $des);
 
             echo "<tr>
-                      <td>" . utf8_decode($b->getId()) . "</td>
-                      <td>" . utf8_decode($b->getTitle()) . "</td>
-                      <td>" . utf8_decode($b->getAuthors()) . "</td>
-                      <td>" . $des . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getId()) . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getTitle()) . "</td>
+                      <td style='border:1px solid;'>" . utf8_decode($b->getAuthors()) . "</td>
+                      <td style='border:1px solid;'>" . $des . "</td>
                  </tr>";
     ?>
 
 
     <?php
         }
-        echo '<tr><td colspan="4" style="text-align:right;background-color: #46D900;">Total: '.count($articles).'</td></tr>';
+        echo '<tr><td colspan="4" style="text-align:center;background-color: #CCCCCC;font-size:30px">Total: ' . count($articles) . '</td></tr>';
     }
     ?>
 </table>
