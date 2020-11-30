@@ -99,7 +99,7 @@
             <div class="col-md-6">
               <div class="grid">
                 <div class="grid-body">
-                  <h3>Documents Number</h3><br>
+                  <h3>Number of Documents</h3><br>
                   <div class="item-wrapper">
                     <canvas id="bar-graphic1" width="600" height="400"></canvas>
                   </div>

@@ -154,11 +154,11 @@ $audits = ManageAudit::listAll();
       $numArticles = 0;
 
       foreach ($bookings as $booking) {
-        if ($booking->getType_document() == 'book' && $booking->getAvailable()=='Y' ) {
+        if ($booking->getType_document() == 'book' && $booking->getAvailable() == 'Y') {
           $numBooks += 1;
-        } else if ($booking->getType_document() == 'presentation'&& $booking->getAvailable()=='Y') {
+        } else if ($booking->getType_document() == 'presentation' && $booking->getAvailable() == 'Y') {
           $numPapers += 1;
-        } else if($booking->getType_document() == 'sciencearticle'&& $booking->getAvailable()=='Y'){
+        } else if ($booking->getType_document() == 'sciencearticle' && $booking->getAvailable() == 'Y') {
           $numArticles += 1;
         }
       }
@@ -179,6 +179,16 @@ $audits = ManageAudit::listAll();
         type: 'bar',
         data: BarData,
         options: {
+          scales: {
+            yAxes: [{
+              display: true,
+              ticks: {
+                suggestedMin: 0,
+                beginAtZero: true
+              }
+            }]
+          },
+          fill: false,
           legend: false
         }
       });
