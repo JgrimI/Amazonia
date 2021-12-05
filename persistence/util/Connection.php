@@ -23,7 +23,7 @@
 		 * @return boolean $cerrar Devuelve true en caso de éxito y false en caso de error
 		 */
 		public function turnOffBD($connection){
-
+ 
 			$close = pg_close($connection);
 			return $close;
 		}
