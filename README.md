@@ -2,4 +2,8 @@
 
 Proyecto de la materia Ingeniería de Software
 
-El objetivo del proyecto es realizar una plataforma web llamada Amazonia, la cual es una tienda de libros en linea.
+Un proyecto de Ingeniería de Software para la creación de una librería de documentos
+en donde diferentes usuarios pueden introducir documentos, consultarlos o modificar los datos de los
+existentes. Se plantea esta herramienta como un sistema de información web. Los datos que se
+guardarán sobre los documentos serán su título, fecha de publicación, autores, ISBN, mes de
+publicación, día y editorial.
